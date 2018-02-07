@@ -1,0 +1,1 @@
+insert into yl_role(r_name,r_describe,r_root) values ('超级管理员','管理整个后台系统，可以对用户管理、审核管理、新闻管理、信息管理、意见管理进行操作',0);

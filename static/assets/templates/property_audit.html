@@ -1,0 +1,78 @@
+﻿	<script src="../../static/assets/js/jquery.pagination.js"></script>
+
+	<link href="../../static/assets/css/jquery-ui.min.css" rel="stylesheet"/>
+	<link href="../../static/assets/css/pagination.css" rel="stylesheet"/>
+	<script src="../../static/assets/js/jquery-ui.min.js"></script>
+    <script src="../../static/assets/js/admin/property_list.js" ></script>
+	<style>
+
+.ui-widget-header { border: 0px solid #aaaaaa; background-color:red; color: #222222; font-weight: bold; }
+</style>
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+			try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+		</script>
+
+		<ul class="breadcrumb">
+			<li>
+				<i class="icon-home home-icon"></i>
+				<a href="#">审核管理</a>
+			</li>
+			<li class="active">物业管理员审核</li>
+		</ul><!-- .breadcrumb -->
+	</div>
+
+<div class="page-content">
+		<div class="page-header">
+			<h1>
+				已审物业管理员
+				<small>
+				列表
+				</small><!-- <div class="pull-right"><a href="#" class="btn btn-success btn-sm" onclick="audit('管理员审核')">管理员审核</a></div> -->
+				<div class="pull-right"><a href="#" class="btn btn-success btn-sm" id="showDialog">管理员审核</a></div>
+			</h1>
+		</div><!-- /.page-header -->
+		<table class="table table-striped table-bordered table-condensed" id="audit">
+			<thead>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<div id="Pagination" class="pagination" ></div>
+</div><!-- /.page-content -->
+					
+    <!--弹出审核-->
+    <div class="hide">
+        <form class="form-horizontal " id="property-form" method="post" enctype="multipart/form-data"> 
+
+          <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="phoneCode" >城市:</label>
+            <div class="col-xs-12 col-sm-9">
+              <div class="clearfix">
+                      <select name="city_id" id="city_id" class="form-control" onChange="getCommunityOptions(this.value);"></select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="space-2"></div>
+          <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="index" >小区:</label>
+            <div class="col-xs-12 col-sm-9">
+              <div class="clearfix">
+              		<select class="form-control" name="community_id" id="community_id" onChange="getUserOptions(this.value);"></select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="space-2"></div>
+          <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="index" >待选物业管理员:</label>
+            <div class="col-xs-12 col-sm-9">
+              <div class="clearfix">
+                	  <select class="form-control" name="user_id" id="user_id" ></select>
+              </div>
+            </div>
+          </div>
+
+        </form>
+	</div>

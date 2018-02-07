@@ -1,0 +1,315 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+   <!--  <meta name=”viewport” content=”width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=1.0, user-scalable=no” /> -->
+    <title>优邻</title>
+    <link href="{{STATIC_URL}}assets/css/jquery-ui.min.css" rel="stylesheet"media="screen"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <link rel="shortcut icon" href="{{STATIC_URL}}assets/images/favicon.ico" type="image/x-icon"/>
+    <!-- Bootstrp -->
+
+    <link href="{{STATIC_URL}}assets/css/jquery.gritter.css" rel="stylesheet"/>
+    <link href="{{STATIC_URL}}assets/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    <link href="{{STATIC_URL}}assets/css/font-awesome.min.css" rel="stylesheet" media="screen"/>
+    
+    
+<!-- 	    样式-->
+	<!-- <link href="{{STATIC_URL}}assets/css/jquery-ui.min.css" rel="stylesheet"/> -->
+
+
+    <!--[if IE 7]>
+    <link href="{{STATIC_URL}}assets/css/font-awesome-ie7.min.css" rel="stylesheet" media="screen"/>
+    <![endif]-->
+
+    <!-- ace styles -->
+    <link href="{{STATIC_URL}}assets/css/ace.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}assets/css/ace-rtl.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}assets/css/ace-skins.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}assets/css/loader/main.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}assets/css/loader/load4.css" rel="stylesheet" />
+     <link href="{{STATIC_URL}}assets/css/style2.css" rel="stylesheet" media="screen"/>
+<!--		 <link href="${resource(dir:'page/css', file:'datepicker.css')}" rel="stylesheet" />-->
+
+    <!--[if lte IE 8]>
+    <link href="{{STATIC_URL}}assets/css/ace-ie.min.css" rel="stylesheet" />
+    <link href="{{STATIC_URL}}assets/css/font-awesome-ie7.css" rel="stylesheet" media="screen"/>
+    
+    <![endif]-->
+    <!-- inline styles related to this page -->
+
+    <!-- ace settings handler -->
+    <!--[if lt IE 9]>
+    <script src="{{STATIC_URL}}assets/js/html5.js"></script>
+  <![endif]-->
+    <script src="{{STATIC_URL}}assets/js/ace-extra.min.js"></script>
+    <script src="{{STATIC_URL}}assets/js/admin/common.js"></script>
+    
+    <script src="{{STATIC_URL}}assets/js/jquery-1.11.1.min.js"></script>
+    
+    	
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+    <script src="{{STATIC_URL}}assets/js/html5shiv.js"></script>
+    <script src="{{STATIC_URL}}assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+  {% include 'admin/navbar.html'%}
+  <input type="hidden" id="menu_param" />
+  <!--main container-->
+  <div class="main-container" id="main-container">
+  
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <div class="main-container-inner">
+
+    {% include 'admin/left.html' %}
+      <div class="main-content">
+        			<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home home-icon"></i>
+								<a href="#">首页</a>
+							</li>
+							<li class="active">控制台</li>
+						</ul><!-- .breadcrumb -->
+					</div>
+
+					<div class="page-content">
+						<div class="page-header">
+							<h1>
+								优邻后台管理系统控制台
+							</h1>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+
+								<div class="alert alert-block alert-success">
+									<button type="button" class="close" data-dismiss="alert">
+										<i class="icon-remove"></i>
+									</button>
+
+									<i class="icon-ok green"></i>
+
+									欢迎使用
+									<strong class="green">
+										优邻后台管理系统
+									<small>(v1.0)</small>
+									</strong>
+							  </div>
+							  
+							  <style>
+							   .style1 {width:20%;  float:left;margin:1% 1.5%;}
+							/*   @media (max-width:370px) and (max-width:415px) {
+							  	  .style1 {width:10%;  float:left;;margin:10px 20px;}
+							  	/*   .dashboard-stat .visual {width: 100px;height:10px;display: block; float: left;padding-top: 2px;padding-left: 3px;} */
+							  } */
+							  </style>
+							  	<div class="style1">
+							  	<div class="dashboard-stat yellow" >
+										<div class="visual">
+												<i class="icon-bar-chart"></i>
+										</div>
+										<div class="details">
+												<div class="number"id="cvbl_gift"></div>
+												<div class="desc">上架礼品数</div>
+										</div>
+										<a class="more " href="#"onClick="Page_Jump('gift')">
+											总礼品数：<span id="total_gift"></span>个<!--  <i class="m-icon-swapright m-icon-white"></i> -->
+										</a>      
+										</div> 
+							  	</div>
+							  	
+							  	<div class="style1">
+							  	<div class="dashboard-stat blue">
+											<div class="visual">
+												<i class="icon-comments"></i>
+											</div>
+											<div class="details">
+												<div class="number"id="un_address"></div>
+												<div class="desc"> 待审核地址</div>
+											</div>
+											<a class="more" href="#"onClick="Page_Jump('address_audit')">
+											申请审核地址总数：<span id="total_address"></span>条<!--  <i class="m-icon-swapright m-icon-white"></i> -->
+											</a>                 
+										</div>
+							  	</div>
+							  	
+							  	<div class="style1">
+							  	<div class="dashboard-stat red">
+											<div class="visual">
+												<i class="icon-globe"></i>
+											</div>
+											<div class="details">
+												<div class="number"id="un_exchange"></div>
+												<div class="desc"> 兑换中的礼品</div>
+											</div>
+											<a class="more" href="#"onClick="Page_Jump('exchange')">
+											总兑换记录：<span id="total_exchange"></span>条<!--  <i class="m-icon-swapright m-icon-white"></i> -->
+											</a>                 
+										</div>
+							  	</div>
+										
+										
+								<div class="style1">
+							  	<div class="dashboard-stat purple">
+											<div class="visual">
+												<i class="icon-shopping-cart"></i>
+											</div>
+											<div class="details">
+												<div class="number"id="su_count"></div>
+												<div class="desc"> 一周意见数</div>
+											</div>
+											<a class="more" href="#"onClick="Page_Jump('suggest')">
+											总意见记录：<span id="total_suggest"></span>条<!--  <i class="m-icon-swapright m-icon-white"></i> -->
+											</a>                 
+										</div>
+							  	</div>
+							  
+							  
+	<!-- 						  <div>
+								  <canvas id="canvas1" height="300" width="300"></canvas>
+								  <canvas id="canvas2" height="300" width="300"></canvas>
+							  </div> -->
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+		  </div>
+          <!--[if IE]>
+              <script src="{{STATIC_URL}}assets/js/jquery-1.10.2.min.js"></script>
+
+          <![endif]-->
+
+          <!--[if !IE]> -->
+
+          <script type="text/javascript">
+                  window.jQuery || document.write("<script src='{{STATIC_URL}}assets/js/jquery-2.0.3.min.js'>"+"<"+"script>");
+          </script>
+          
+
+          <!-- <![endif]-->
+
+          <!--[if IE]>
+          <script type="text/javascript">
+          window.jQuery || document.write("<script src='{{STATIC_URL}}assets/js/jquery-1.10.2.min.js'>"+"<"+"script>");
+          </script>
+          <![endif]-->
+
+          <script type="text/javascript">
+                  if("ontouchend" in document) document.write("<script src='{{STATIC_URL}}assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
+          </script>
+          <script src="{{STATIC_URL}}assets/js/bootstrap.min.js"></script>
+          <script src="{{STATIC_URL}}assets/js/jquery.bootstrap.min.js"></script>
+
+          <script src="{{STATIC_URL}}assets/js/typeahead-bs2.min.js"></script>
+          <script src="{{STATIC_URL}}assets/js/jquery.gritter.min.js"></script>
+          <!-- page specific plugin scripts -->
+
+          <!--[if lte IE 8]>
+            <script src="{{STATIC_URL}}assets/js/excanvas.min.js"></script>
+          <![endif]-->
+
+          <script src="{{STATIC_URL}}assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+          <script src="{{STATIC_URL}}assets/js/jquery.ui.touch-punch.min.js"></script>
+          <script src="{{STATIC_URL}}assets/js/jquery.slimscroll.min.js"></script>
+          <script src="{{STATIC_URL}}assets/js/jquery.easy-pie-chart.min.js"></script>
+          <script src="{{STATIC_URL}}assets/js/jquery.sparkline.min.js"></script>
+          <script src="{{STATIC_URL}}assets/js/flot/jquery.flot.min.js"></script>
+          <script src="{{STATIC_URL}}assets/js/flot/jquery.flot.pie.min.js"></script>
+          <script src="{{STATIC_URL}}assets/js/flot/jquery.flot.resize.min.js"></script>
+          <script src="{{STATIC_URL}}assets/js/jquery.validate.min.js"></script>
+          <script src="{{STATIC_URL}}assets/js/jquery.form.js"></script>
+          <script src="{{STATIC_URL}}assets/js/additional-methods.min.js"></script>
+<!--                 <script src="${resource(dir:'page/js/date-time', file:'bootstrap-datepicker.min.js')}"></script>-->
+
+
+          <!-- ace scripts -->
+          <script src="{{STATIC_URL}}assets/js/ace-elements.min.js"></script>
+          <script src="{{STATIC_URL}}assets/js/ace.min.js"></script>
+          <script src="{{STATIC_URL}}assets/js/loader.js"></script>
+          <script src="{{STATIC_URL}}assets/js/bootstrap_v2/js/bootstrap-modal.js"></script>
+          <script src="{{STATIC_URL}}assets/js/bootstrap_v2/js/bootstrap-transition.js"></script>
+          <script language="javascript" type="text/javascript" src="{{STATIC_URL}}assets/js/My97DatePicker/WdatePicker.js"></script>
+<!--          <script type="text/javascript" src="http://www.see-source.com/bootstrap/js/bootstrap-collapse.js"></script>
+          <script type="text/javascript" src="http://www.see-source.com/bootstrap/js/bootstrap-transition.js"></script>-->
+	    <script src="{{STATIC_URL}}assets/js/jquery-ui.min.js"></script>  
+      </div>
+    </div>
+
+ 
+  <div  id="load-wrapper" class="load-wrapper hide">
+    <div  id="load-container" class="load-container load4">
+      <div id="loader" class="loader">Loading...</div>
+      <a href="#" class="load-message" id="load-message">努力处理中，请耐心等待...</a>
+    </div>
+  </div> 
+
+  <div class="hide">
+  </div>
+  
+  
+
+<script src="{{STATIC_URL}}assets/js/navbar.js"></script>
+ <script src="../../static/assets/js/admin/control.js" ></script>  
+
+
+ <script type="text/javascript">
+	 $(document).ready(function(){
+		 $('#menulist li a').click(function(){
+		        $('#menulist li').removeClass('active');
+		        $(this).parent().addClass('active');
+		        var temp = $(this).attr("id");
+				$.ajax({     
+				        type: "GET",     
+				        url: "index?random=" + Math.random(),     
+				        dataType: "html",  
+				        data:{"action":temp},
+				        success: function(data){  
+				        	$(".main-content").html(data);
+				        },
+				});
+
+		   });
+		 
+		 var time=1000*60*60*2;
+		 var B = setInterval(function(){
+			 $.ajax({
+					type: "GET",   
+					url: "ajax_Session_term?random=" + Math.random(),
+					dataType:   "json", 
+					success: function(data){ 
+						if (data.code==1){
+							alert(data.desc);
+							}
+						else{
+							alert(data.desc);
+         	        		self.location=data.data.website;
+							}
+						},
+						})
+						clearInterval(B);
+			 
+		 },
+		time);
+		
+		}); 
+
+	
+</script>
+</body>
+
+</html>

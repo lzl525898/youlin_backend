@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>订单支付</title>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylbootstrap.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylfont-awesome.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylweui.min.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/yljquery-weui.css" />
+<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yldevice-toucher.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylhammer.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yljquery-weui.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylfastclick.js"></script>
+<style type="text/css">
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft YaheiUI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+	background-color:#f3f3ee;
+	padding-top:48px;
+}
+</style>
+</head>
+<body>
+	<div class="navbar-fixed-top" style="background-color: #ffba02;height: 48px;">
+		<div class="row" style="margin:0; padding:0; height:48px;" onclick="javascript:history.go(-1)">
+			<a href="javascript:;" class="pull-left">
+				<i class="fa fa-angle-left" style="margin-left:10px;color:#ffffff;font-size:32px; margin-top:7px;"></i>
+			</a>
+			<div class="pull-left" style="height:48px;">
+				<span style="margin-left:7px;height: 48px;line-height:49px;font-size: 16px;color: #fff;">订单支付</span>
+			</div>
+		</div>
+	</div>
+	<div style="background-color: #fff;padding-left: 13px;padding-right: 13px;height: 50px;line-height: 51px;">
+		<div style="float: left;font-size: 14px;color: #323232;">订单金额</div>
+		<div style="float: right;font-size: 16px;color: red;">
+			<span>￥</span><span id="id_price"></span><span>元</span>
+		</div>
+	</div>
+	<div style="background-color: #fff;padding-left: 13px;padding-right: 13px;height: 50px;line-height: 51px;margin-top: 10px;">
+		<div style="float: left;font-size: 14px;color: #323232;"><img src="{{STATIC_URL}}square/img/alipay.png" alt="" style="width: 30px;height: 30px;margin-right: 13px;" />支付宝支付</div>
+		<div style="float: right;padding-top: 18px;">
+			<img src="{{STATIC_URL}}square/img/submit_order_jiantou.png" alt="" style="width: 8px;height: 14px;"/>
+		</div>
+	</div>
+	<div style="background-color: #fff;padding-left: 13px;padding-right: 13px;height: 50px;line-height: 51px;margin-top: 1px;">
+		<div style="float: left;font-size: 14px;color: #323232;"><img src="{{STATIC_URL}}square/img/weixin.png" alt="" style="width: 30px;height: 27px;margin-right: 13px;"/>微信支付</div>
+		<div style="float: right;padding-top: 18px;">
+			<img src="{{STATIC_URL}}square/img/submit_order_jiantou.png" alt="" style="width: 8px;height: 14px;"/>
+		</div>
+	</div>
+	<div style="background-color: #fff;padding-left: 13px;padding-right: 13px;height: 50px;line-height: 51px;margin-top: 1px;">
+		<div style="float: left;font-size: 14px;color: #323232;"><img src="{{STATIC_URL}}square/img/bank.png" alt="" style="width: 27px;height: 22px;margin-right: 16px;"/>银行卡支付</div>
+		<div style="float: right;padding-top: 18px;">
+			<img src="{{STATIC_URL}}square/img/submit_order_jiantou.png" alt="" style="width: 8px;height: 14px;"/>
+		</div>
+	</div>
+<script type="text/javascript">
+$(function() {
+	FastClick.attach(document.body);
+});
+var price = {{res_data.price}};
+$('#id_price').html(price);
+</script>
+</body>
+</html>

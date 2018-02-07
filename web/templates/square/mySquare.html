@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>广场</title>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylbootstrap.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/yldropload.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylfont-awesome.min.css"/>
+<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-dropload.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-getUrlParam.js"></script>
+<script src="{{STATIC_URL}}assets/js/yldevice-toucher.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylhammer.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylfastclick.js"></script>
+<style type="text/css">
+
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft YaheiUI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+	background-color:#fff;
+}
+.goods-detail-content{
+	margin:0;
+	background-color:#FFFFFF;
+	height:143px;
+	position:relative;
+}
+
+.div-shadow-shaoer {
+	-webkit-box-shadow: 0px 4px 8px -2px #21a97b;
+	-moz-box-shadow: 0px 4px 8px -2px #21a97b;
+	box-shadow: 0px 4px 8px -2px #21a97b;
+}
+
+.div-shadow-jiuwu {
+	-webkit-box-shadow: 0px 4px 8px -2px #d65d22;
+	-moz-box-shadow: 0px 4px 8px -2px #d65d22;
+	box-shadow: 0px 4px 8px -2px #d65d22;
+}
+
+.div-shadow-baokuan {
+	-webkit-box-shadow: 0px 4px 8px -2px #0e69c2;
+	-moz-box-shadow: 0px 4px 8px -2px #0e69c2;
+	box-shadow: 0px 4px 8px -2px #0e69c2;
+}
+
+</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="goods-detail-content">
+			<div
+				style="position: absolute; width: 100%; border: none; padding: 0px; margin: 0px;">
+				<div class="row" id="goods-detail-carousel">
+					<div id="square-carousel" class="carousel slide">
+						<ol class="carousel-indicators" id="id_img_ol"></ol>
+						<div class="carousel-inner" id="id_img_div"></div>
+						<a href="#square-carousel" data-slide="prev" class="carousel-control left" id="carleft" style="display:none">&lsaquo;</a>
+						<a href="#square-carousel" data-slide="next" class="carousel-control right" id="carright" style="display:none">&rsaquo;</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="padding: 10px; margin: 0px;">
+		<div
+			style="background-color: #ffba02; width: 3px; height: 20px; float: left;"></div>
+		<span
+			style="color: #808080; font-size: 14px; float: left; margin-left: 10px;">精品推荐</span>
+		<div
+			id="id_training" style="background-color: #5dd7ae; width: 100%; height: 87px; margin-top: 30px;border-radius:4px" class="div-shadow-shaoer">
+			<img src="{{STATIC_URL}}square/img/computer.png" style="width: 56px;height: 48px;margin-left: 22px;margin-top: 20px;float: left;" />
+			<div style="float: right;margin-top: 20px;text-align: right;padding-right: 20px;">
+				<p style="font-size: 16px;color: #fff;">少儿培训</p>
+				<p style="font-size: 12px;color: #fff;">全面培养少儿智力逻辑</p>
+			</div>
+		</div>
+		<div
+			id="id_change" style="background-color: #ff8e57; width: 100%; height: 87px; margin-top: 10px;border-radius:4px" class="div-shadow-jiuwu">
+			<img src="{{STATIC_URL}}square/img/change.png" style="width: 76px;height: 35px;margin-left: 13px;margin-top: 26px;float: left;" />
+			<div style="float: right;margin-top: 20px;text-align: right;padding-right: 20px;">
+				<p style="font-size: 16px;color: #fff;">旧物置换</p>
+				<p style="font-size: 12px;color: #fff;">让身边的废品成为别人的宝贝</p>
+			</div>
+		</div>
+		<div
+			id="id_goods" style="background-color: #4ca6fd; width: 100%; height: 87px; margin-top: 10px;border-radius:4px" class="div-shadow-baokuan">
+			<img src="{{STATIC_URL}}square/img/goods.png" style="width: 56px;height: 48px;margin-left: 22px;margin-top: 20px;float: left;" />
+			<div style="float: right;margin-top: 20px;text-align: right;padding-right: 20px;">
+				<p style="font-size: 16px;color: #fff;">爆款推荐</p>
+				<p style="font-size: 12px;color: #fff;">为您提供最火热的产品</p>
+			</div>
+		</div>
+		
+	</div>
+<script type="text/javascript">
+var imgArray=new Array();
+var communityId={{res_data.communityId}};
+$(function(){
+	FastClick.attach(document.body);
+	//初始化界面
+	$.ajax({
+			type:"GET",
+			url:"https://www.youlinzj.cn/youlin/api1.0/",
+			cache:false,
+			data:{
+				apitype : "square",
+				tag : "getsquare",
+				community_id : communityId,
+				access : 9527
+			},
+			dataType : "json",
+			success:function(data){
+				for (var i = 0; i < data.carousel_info.length; i++) {
+					if(i==0){
+						$('#id_img_ol').append("<li data-target='#square-carousel' data-slide-to="+"0"+" class='active'></li>");
+					}else{
+						$('#id_img_ol').append("<li data-target='#square-carousel' data-slide-to="+i+"></li>");
+					}
+				}
+				for (var i = 0; i < data.carousel_info.length; i++) {
+					if(i==0){
+						$('#id_img_div').append("<div class='item active' onclick='clickImg("+i+")'>"
+													+"<img src='"+data.carousel_info[0].img+"' style='width:100%; height:143px;' onerror='this.src="+'"{{STATIC_URL}}square/img/bg_error.png"'+"'/>"
+													+"</div>"
+												);
+					}else{
+						$('#id_img_div').append("<div class='item' onclick='clickImg("+i+")'>"
+								+"<img src='"+data.carousel_info[i].img+"' style='width:100%; height:143px;' onerror='this.src="+'"{{STATIC_URL}}square/img/bg_error.png"'+"'/>"
+								+"</div>"
+							);
+					}
+					imgArray.push(data.carousel_info[i].img);
+				}
+				$('#square-carousel').carousel({
+					interval : 4000,
+				});
+				$('.carousel-control').css('line-height',$('.carousel-inner img').height() + 'px');
+				$('.carousel-control').css('font-size',$('.carousel-inner img').height()/2 + 'px');
+				$('.carousel-control').css('display','block');
+
+				var goodsDetailTouch = document.getElementById('square-carousel');
+				var hm = new Hammer(goodsDetailTouch);
+				hm.on("swipeleft",function(){
+					$('#square-carousel').carousel('next')
+					$('#square-carousel').carousel('pause')
+					$('#square-carousel').carousel({
+						interval : 4000,
+					});
+				});
+				hm.on("swiperight",function(){
+					$('#square-carousel').carousel('prev')
+					$('#square-carousel').carousel('pause')
+					$('#square-carousel').carousel({
+						interval : 4000,
+					});
+				});
+			},
+			error:function(xhr,type){
+				console.log(xhr);
+			}
+	});
+	
+});
+$('#id_training').click(function(){
+	myObj.mStartActivity(0);//0培训 1旧物置换 2爆款详情
+});
+$('#id_change').click(function(){
+	myObj.mStartActivity(1);//0培训 1旧物置换 2爆款详情
+});
+$('#id_goods').click(function(){
+	myObj.mStartActivity(2);//0培训 1旧物置换 2爆款详情
+});
+</script>
+</body>
+</html>

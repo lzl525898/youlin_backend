@@ -1,0 +1,10 @@
+		#selectecity{background: rgba(165,165,165,0.3)}
+
+		html{background-color: #ccc}
+		.ui-header, .ui-footer{border:0;}
+		.ui-page-theme-a .ui-bar-inherit{background-color: #FFC107;color: #fff;text-shadow: 0 0 0 #eee}
+		.ui-btn-left, .ui-btn-right{top: 0.4em;}
+		#header .ui-btn{background-color:transparent;border:0;box-shadow: none;text-shadow: 0 0 0 #eee;color: #fff}
+		.ui-btn-icon-left:after, .ui-btn-icon-right:after, .ui-btn-icon-top:after, .ui-btn-icon-bottom:after, .ui-btn-icon-notext:after{background-color: #FFC107}
+		.ui-input-text input, .ui-input-search input{margin: 5px 0;}
+		.ui-input-text, .ui-input-search{margin: 1% 0;}

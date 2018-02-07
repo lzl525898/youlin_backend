@@ -1,0 +1,2 @@
+{{ object.bc_name }}
+{{ object.bc_describe }}

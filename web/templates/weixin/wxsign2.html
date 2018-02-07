@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>签到</title>
+    <link rel="stylesheet" href="{{STATIC_URL}}assets/wxsign2/css/qiandao_style.css">
+    <script src="{{STATIC_URL}}assets/js/jquery-1.10.2.min.js"></script>
+    <script src="{{STATIC_URL}}assets/wxsign2/js/qiandao_js.js"></script>
+        <script>
+			$(function() {
+				wx_sign({{res_data.sign_list|safe}})
+			})
+		</script>
+</head>
+
+<body>
+	<div class="qiandao-upp">
+					<a href="#" data-icon="back" class="qiandao-up"onclick="r_neighbor()">返回</a>
+	</div>
+	
+    <div class="qiandao-warp"> 
+        <div class="qiandap-box">
+            <div class="qiandao-banner">
+                <!-- <img src="{{STATIC_URL}}assets/wxsign2/images/qiandao_banner.jpg" height="551" width="1120" alt=""> -->
+                <img src="{{STATIC_URL}}assets/wxsign2/images/qiandao_banner1.jpg" height=30% width=100% alt="">
+            </div>
+            <div class="qiandao-con clear">
+                <div class="qiandao-left">
+                    <div class="qiandao-left-top ">
+                        <div class="current-date">2016年1月6日</div>
+                    </div>
+                    <div class="qiandao-main" id="js-qiandao-main">
+                        <ul class="qiandao-list" id="js-qiandao-list">
+                        </ul>
+                    </div>
+                </div>
+                <div class="qiandao-right">
+                    <div class="qiandao-top">
+                        <p class="qiandao-notic">{{res_data.reason}}</p>
+                        <ul class="qiandao-history-inf clear">
+				                <li>
+				                    <p>本月签到</p>
+				                    <h4>{{res_data.user_month_title}}</h4>
+				                </li>
+				                <li>
+				                    <p>签到总数</p>
+				                    <h4>{{res_data.user_sign_title}}</h4>
+				                </li>
+				                <li>
+				                    <p>签到积分</p>
+				                    <h4>{{res_data.userCredit}}</h4>
+				                </li>
+				       </ul>
+                    </div>
+                    <div class="qiandao-bottom">
+                        <div class="qiandao-rule-list">
+                            <h4>签到规则</h4>
+                            <p>.每天只可签到一次；</p>
+                            <p>.每次签到可增加3积分；</p>
+                            <p>.对不正当手段参与活动的用户，我们有权禁止其参加其他活动，并取消其活动资格。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="qiandao-test">
+        		<h4>优邻～只为方便您的生活！</h4>
+        		<h5>北京有凡科技有限公司版权所有</h5>
+        </div>
+    </div>
+    <script type="text/javascript">
+	 function r_neighbor(){
+			window.location.href="/yl/wx/goback";	
+		}
+	 </script>
+ 
+    
+</body>
+
+</html>

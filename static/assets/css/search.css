@@ -1,0 +1,33 @@
+.ui-page-theme-a a{text-decoration: none;color: #FFC107}
+html{background-color: #ccc}
+td{width: 20%;padding: 5% 0}
+table{border-collapse:collapse;width: 100%;text-align: center;background-color: #fff}
+ul{list-style: none;padding: 0;padding-right: 6%;padding-left: 5%;background-color: #fff;margin-top: 0;padding-top: 5%;}
+li{margin-bottom: 5%;border-bottom: 1px solid #ccc}
+li a{display: block;width: 100%;}
+li h5{font-size:1rem;color: #666;margin: 0}
+li p{font-size: 0.7rem;color: #ccc}
+.ui-btn-left, .ui-btn-right{top: 0.4em;}
+.city table,.city  td,.city  th{border:1px solid #ccc;border-bottom:0;}
+.ui-header, .ui-footer{border:0;}
+.ui-page-theme-a .ui-bar-inherit{background-color: #FFC107;color: #fff;text-shadow: 0 0 0 #eee}
+#header .ui-btn{background-color:transparent;border:0;box-shadow: none;text-shadow: 0 0 0 #eee;color: #fff}
+.ui-btn-icon-left:after, .ui-btn-icon-right:after, .ui-btn-icon-top:after, .ui-btn-icon-bottom:after, .ui-btn-icon-notext:after{background-color: #FFC107}
+caption{padding: 5% 0 5% 5%;color: #ccc;text-align: left;font-size: 1rem}
+#name.ui-group-theme-a a:active{color: #FFC107}
+#name a:visited, html .ui-bar-a a:visited, html .ui-body-a a:visited, html body .ui-group-theme-a a:visited{color: #FFC107}
+.ui-page-theme-a a:visited, html .ui-bar-a a:visited, html .ui-body-a a:visited, html body .ui-group-theme-a a:visited{color: #ccc}
+.city a{color: #ccc}
+#currentcity .right{height: 1rem;width: 1rem;}
+#currentcity td{text-align:left;padding-left:5%;}
+#currentcity a{color: #FFC107;display: block;width:100%}
+#currentcity span{float:right;padding-right:5%;color: #ccc}
+#searchform{background-color: #fff;padding-left: 5%;margin-top: 2%;}
+#searchform .ui-body-inherit{display: inline-block;background-color: #f9f9f9;padding-right: 0;width: 75%;text-shadow:none;}
+#searchform .ui-shadow-inset{box-shadow:none}
+#searchform .ui-btn{display: inline-block;border:none;box-shadow: none;background-color: transparent;color:#FFC107;padding: 0;margin: 0;width: 20%;vertical-align: middle}
+#searchform .ui-input-search{margin: 0;}
+#searchform .ui-btn-icon-notext:after,#searchform .ui-btn-icon-top:after, .ui-btn-icon-bottom:after{content:none;}
+#back{position: fixed;top:80%;right: 15%;background-color: #FFC107;width: 50px;height: 50px;border-radius: 100%}
+#hotcity td{text-align:left;padding-left:5%;}
+#hotcity a{display: block;width:100%;color: #FFC107}

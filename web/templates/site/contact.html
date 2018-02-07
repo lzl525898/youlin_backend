@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<title>优邻</title>
+	<link rel="stylesheet" href="../../../static/assets/css/common.css">
+	<script>
+		$(window).scroll(function(event){  //滚动条监听
+				var oS = $(document).scrollTop(); 
+    	});
+	</script>
+	<style>
+		body{background: #f2f2f2;font-size: 12px;}
+		
+		
+		.main{max-width: 1000px;margin: 0 auto;}
+
+		.contact{background: rgba(0,0,0,0.5);padding-top: 3%;
+			overflow: hidden;margin-bottom: 3%;position: relative;}
+		.blur{background: url(../../../static/assets/css/images/background.jpg) no-repeat;background-size:100% 100%;z-index:-1;width: 100%;height: 100%;position: absolute;top:0;
+			-webkit-filter:blur(5px);}
+		.main .code{margin: 0 auto;}
+		.guanzhu{font-size: 3rem;color: #fff;margin: 0;margin-bottom: 2%;}
+		table{color: #fff;font-size: 1rem;margin: 0 auto;margin-top: 5%;width: 70%;}
+		table caption{text-align: left;font-size: 2rem}
+		table .td1{width: 50%;}
+		.contact p{width: 80%;color: #fff;font-size: 1.5rem;line-height: 2rem;margin: 0 auto;margin-top: 2%;}
+		.logo2{padding: 5%}
+
+		.footer{text-align: center;font-size: 12px;color: #646464;border-top: 1px solid #ccc}
+
+		@media screen and (min-width: 1200px){
+		
+		}
+		@media (max-width: 1199px) and (min-width: 993px){
+		
+		}
+		@media (max-width: 992px) and (min-width: 769px){
+	
+		}
+		@media (max-width: 768px) and (min-width: 415px){
+	
+		}
+		@media (max-width: 414px) and (min-width: 376px){
+			
+		
+		}
+		@media (max-width: 375px) and (min-width: 321px){
+		
+
+		
+		}
+		@media (max-width: 320px) and (min-width: 1px){
+		
+		}
+
+	</style>
+</head>
+<body>
+	{% include 'site/top.html'%}
+	<div class="main contact clearfix">
+		<div class="blur">
+			
+		</div>
+		<h1 class="text-center guanzhu">关注优邻</h1>	
+		<div class="code text-center">
+			<img src="../../../static/assets/css/images/code.jpg" width="10%" style="margin-right: 2%">
+			<img src="../../../static/assets/css/images/wechat.png" width="10%" style="margin-left: 2%">
+		</div>
+		<table>
+			<caption>商务合作：</caption>
+			<tr>
+				<td>邮箱：</td>
+				<td class="td1">zhognkefangde-youlinapp.com</td>
+				<td>地址：</td>
+				<td class="td2">北京海淀区中关村南大街乙中国科学软件园</td>
+			</tr>
+			<tr>
+				<td>电话：</td>
+				<td class="td1">010-12345678</td>
+				<td>邮编：</td>
+				<td class="td2">100000</td>
+			</tr>
+		</table>
+		<p style="text-indent: 2em"> 中科方德软件有限公司是基础软件国家工程研究中心的项目法人单位。基础软件国家工程研究中心（以下简称“工程中心”）是国家发展改革委员会批复（发改高技[2005]425号）由中国科学院软件研究所负责组建的基础软件领域唯一国家级工程技术研究中心。中科方德总部设在北京，并先后在无锡、重庆、哈尔滨等地设立有分公司，公司总部及其投资控股的注册总资金近2亿元人民币，现有员工1000余人，形成了一支以科技专家为骨干、年轻的博士硕士为主要一线研发人员的基础软件高端软件研发的工程技术研发队伍。</p>
+		<p style="text-indent: 2em">   人怀壮志江山秀，蛇报新春世纪新！ 2013年1月6日，中科方德软件有限公司2012年年会在中科院中关村软件园区5号楼大报告厅隆重举行。年会上王继喆总裁对2012年的工作进行了总结，在2012年在公司同仁的共同努力下，公司在新产品研发、行业领域应用、市场开拓等方面都取得了可喜的发展，取得了满意的经营业绩；同时对公司2013年的经营目标规划得任务。</p>
+		<div class="logo2 pull-right">
+			<img src="../../../static/assets/css/images/logo2.png" alt="">
+		</div>
+		<div class="foot_contact" style="margin-bottom: -7%;margin-left: 2%">
+			<img src="../../../static/assets/css/images/footer_contact.png" alt="" width="100%">
+		</div>
+	</div>
+{% include 'site/footer.html'%}
+<script>
+
+
+</script>
+</body>
+</html>

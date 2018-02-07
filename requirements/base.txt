@@ -1,0 +1,16 @@
+django==1.5.5
+git+https://github.com/tschellenbach/Stream-Framework.git#egg=stream_framework
+redis
+south
+pillow
+django-celery
+django_compressor
+djangorestframework==2.3.5
+xlwt
+django-ckeditor
+jpush
+whoosh
+django-haystack
+jieba
+beautifulsoup4
+

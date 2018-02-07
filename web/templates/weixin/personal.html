@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>优邻~只为方便您的生活</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+	<link href="{{STATIC_URL}}assets/css/jquery.mobile-1.4.5.min.css" rel="stylesheet">
+	<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+	<script>
+	$(function(){
+		$(":jqmData(role='page')").attr("data-title", document.title);
+	})
+	</script>
+	<script src="{{STATIC_URL}}assets/js/jquery.mobile-1.4.5.min.js"></script>
+
+</head>
+<body>
+	<div data-role="page" id="selectecity">
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}assets/css/personal.css">
+		<div data-role="header" id="header">
+			<h1>个人信息</h1>
+			<a href="/yl/wx/neighbor" data-role="button" data-icon="home" class="ui-btn-right"data-ajax="false">邻居圈</a>
+		</div>
+		<div role="main" data-role="content" class="personal">
+			<div class="ui-grid-a">
+				<div class="ui-block-a" style="-webkit-transform:translate3d(0,150%,0)">头像</div>
+				<!-- <div class="ui-block-b"><img src="{{STATIC_URL}}assets/css/images/logo.png" alt="">{{res_data.user_portrait}}</div> -->
+				<div class="ui-block-b"><img src="{{res_data.user_portrait}}" alt=""  width="30%"></div>
+			</div>
+
+			<div class="ui-grid-a">
+				<div class="ui-block-a">昵称</div>
+				<div class="ui-block-b">{{res_data.user_nick}}</div>
+			</div>
+
+			<div class="ui-grid-a">
+				<div class="ui-block-a">生日</div>
+				<div class="ui-block-b">{{res_data.user_birthday}}</div>
+			</div>
+
+			<div class="ui-grid-a">
+				<div class="ui-block-a">性别</div>
+				<div class="ui-block-b">{{res_data.user_gender}}</div>
+			</div>
+
+			<div class="ui-grid-a">
+				<div class="ui-block-a">职业</div>
+				<div class="ui-block-b">{{res_data.user_profession}}</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

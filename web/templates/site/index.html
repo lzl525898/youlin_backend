@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../../../static/assets/css/common.css">
+	<title>优邻首页</title>
+	
+</head>
+<body>
+    {% include 'site/top.html'%}
+	<div class="pic_1">
+		<img src="../../../static/assets/css/images/pic_1.png" alt="" width="100%">
+		<a href="{{ res_data.a_url }}" style="top:51%" class="andriod"><img src="../../../static/assets/css/images/android_nomol.png" alt="" width="100%"></a>
+		<a href="{{ res_data.i_url }}" class="iphone"><img src="../../../static/assets/css/images/iphone_nomol.png" alt="" width="100%"></a>
+	</div>
+	<div class="pic_2">
+		<img src="../../../static/assets/css/images/pic_2.png" alt=""width="100%">
+	</div>
+	<div class="pic_3">
+		<img src="../../../static/assets/css/images/pic_3.png" alt=""width="100%">
+		<div class="pic_3_1">
+			<p class="p1">志同道合，一起玩乐</p><br/>
+			<p class="p2">感受温暖传统的中式邻里文化，<br/><br/>居闻不再陌生</p>
+			<img src="../../../static/assets/css/images/shouji1.png" alt="">
+		</div>
+	</div>
+	<div class="pic_4">
+		<img src="../../../static/assets/css/images/pic_4.png" alt=""width="100%">
+		<div class="pic_4_1 common">
+			<p class="p1">物品闲置，不如置换</p><br/>
+			<p class="p2">家门口轻松置换，<br/><br/>不用包邮&nbsp不用打包&nbsp交个朋友</p>
+			<img src="../../../static/assets/css/images/shouji1.png" alt="">
+		</div>
+	</div>
+	<div class="pic_5">
+		<img src="../../../static/assets/css/images/pic_5.png" alt=""width="100%">
+		<div class="pic_5_1 common">
+			<p class="p1">商圈周围，方便生活</p><br/>
+			<p class="p2">智慧小区到周边生活商业，<br/><br/>让服务更懂你，让数据更接地气</p>
+			<img src="../../../static/assets/css/images/shouji2.png" alt="">
+		</div>
+	</div>
+	<div class="pic_6">
+		<img src="../../../static/assets/css/images/pic_6.png" alt=""width="100%">
+		<div class="pic_6_1 common">
+			<p class="p1">发起活动，告别陌生</p><br/>
+			<p class="p2">随时发起活动，<br/><br/>告别单调，让校区从此不无聊</p>
+			<img src="../../../static/assets/css/images/shouji3.png" alt="">
+		</div>
+	</div>
+	<div class="pic_7">
+		<img src="../../../static/assets/css/images/pic_7.png" alt="" width="100%">
+		<a href="{{ res_data.a_url }}" style="top:42%"><img src="../../../static/assets/css/images/android_nomol.png" alt="" width="100%"></a>
+		<a href="{{ res_data.i_url }}"><img src="../../../static/assets/css/images/iphone_nomol.png" alt="" width="100%"></a>
+	</div>
+	{% include 'site/footer.html'%}
+	<script>
+		
+		$(".andriod").hover(
+			function(){
+				 $(this).find("img").attr("src" ,  "../../../static/assets/css/images/android_dianji.png"); 
+			},
+			function(){
+				 $(this).find("img").attr("src" ,  "../../../static/assets/css/images/android_nomol.png"); 
+			}
+		)
+
+		$(".iphone").hover(
+			function(){
+				 $(this).find("img").attr("src" ,  "../../../static/assets/css/images/iphone_dianji.png"); 
+			},
+			function(){
+				 $(this).find("img").attr("src" ,  "../../../static/assets/css/images/iphone_nomol.png"); 
+			}
+		)
+	</script>
+</body>
+</html>

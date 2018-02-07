@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>培训</title>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylbootstrap.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylfont-awesome.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylactionBar.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylweui.min.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/yljquery-weui.css" />
+<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yldevice-toucher.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylhammer.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yljquery-weui.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylcity-picker.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylfastclick.js"></script>
+<style type="text/css">
+body{
+	font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft YaheiUI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+	margin: 0px;
+	padding: 0px;
+	padding-top: 48px;
+	background-color: #fff;
+}
+</style>
+</head>
+<body >
+	<div class="actionbar navbar-fixed-top">
+		<div style="float: left;" onclick="javascript:history.go(-1)">
+			<i class="fa fa-angle-left" style="margin-left:10px;color:#ffffff;font-size:32px; margin-top:7px;"></i>
+		</div>
+		<div style="float: left;padding-top: 13px;padding-left: 7px;" onclick="javascript:history.go(-1)">
+			<span  onclick="" style="font-size: 16px;color: #fff;">收货地址</span>
+		</div>
+		<div style="float: right;margin-right: 10px;">
+			<span class="actionbarText" onclick="finish()">完成</span>
+		</div>
+	</div>
+	<div style="margin: 0px;padding: 0px;height: 51px;padding-left: 16px;padding-right: 16px;padding-top: 18px;">
+		<a href="#"><label style="color: #323232;font-size: 14px;">收货人:</label></a><input id="id_name_input" style="color: #323232;font-size: 14px;border-style: none;outline: none;height: 20px;width: 80%;" type="text"/>
+	</div>
+	<div style="width: 100%;height: 1px;background-color: #f3f3ee;"></div>
+	
+	<div style="margin: 0px;padding: 0px;height: 51px;padding-left: 16px;padding-right: 16px;padding-top: 18px;">
+		<a href="#"><label style="color: #323232;font-size: 14px;">联系方式:</label></a><input id="id_phone_input" style="color: #323232;font-size: 14px;border-style: none;outline: none;height: 20px;width: 80%;" type="text"/>
+	</div>
+	<div style="width: 100%;height: 1px;background-color: #f3f3ee;"></div>
+	
+	
+	<div style="margin: 0px;padding: 0px;height: 51px;padding-left: 16px;padding-right: 16px;padding-top: 18px;">
+        <a href="#"><label style="color: #323232;font-size: 14px;">所在地区:</label></a><input style="color: #323232;font-size: 14px;border-style: none;outline: none;height: 20px;width: 80%;" type="text" id="start"/>
+	</div>
+	<div style="width: 100%;height: 1px;background-color: #f3f3ee;"></div>
+	
+	<div style="margin: 0px;padding: 0px;height: 51px;padding-left: 16px;padding-right: 16px;padding-top: 18px;">
+		<a href="#"><label style="color: #323232;font-size: 14px;">详细地址:</label></a><input id="id_address_input" style="color: #323232;font-size: 14px;border-style: none;outline: none;height: 20px;width: 80%;" type="text"/>
+	</div>
+	<div style="width: 100%;height: 1px;background-color: #f3f3ee;"></div>
+	
+	<div style="margin: 0px;padding: 0px;padding-left: 16px;padding-right: 16px;padding-top: 18px;" id="id_default_up">
+		<div style="float: left;">
+			<p style="font-size: 14px;color: #323232"><label>设为默认地址</label></p>
+			<p style="font-size: 14px;color: #808080">注:每次下单时会使用该地址</p>
+		</div>
+		<div style="float:right;margin-top: 15px;">
+			<img src="{{STATIC_URL}}square/img/address_default_select2.png" style="width: 40px;height: 20px;" id="id_default"/>
+		</div>
+	</div>
+	<div style="width: 100%;height: 1px;background-color: #f3f3ee;float: left;" id="id_default_down"></div>
+	<div style="height: 35px;text-align: center;font-size: 14px;color: #fff;background-color: #fa5c10;border-radius: 5px;float: left;margin-left: 100px;margin-top: 20px;line-height: 36px;" id="id_delete">
+		删除地址
+	</div>
+<script type="text/javascript">
+	$(function() {
+    	FastClick.attach(document.body);
+  	});
+	$("#id_delete").css("width",($(window).width()-200)+"px");
+	var userId={{res_data.userId}};
+	var addressCount={{res_data.count}};
+	var type={{res_data.type}};
+	var defaultFlag,addressId;
+	var name;
+	var mCount;
+	var reg=/(1[3-9]\d{9}$)/;
+	if(addressCount==0){
+		$('#id_default_up').hide();
+		$('#id_default_down').hide();
+		mCount=0;
+	}else{
+		mCount=1;
+	}
+	if(type==1){
+		defaultFlag={{res_data.defaultFlag}};
+		addressId={{res_data.addressId}};
+		$.ajax({
+			type: 'GET',
+			url: "https://www.youlinzj.cn/youlin/api1.0/",
+			cache: false,
+	        data:{	
+	        		addr_id      : addressId,
+	        		tag          : 'sinra',
+	        		apitype      : 'h5',
+	        		access       : '9527'
+	        },
+			dataType: 'json',
+			success: function(data){
+				$('#id_name_input').val(data.info.consignee);
+				$('#id_phone_input').val(data.info.contactinfo);
+				$('#start').val(data.info.province+" "+data.info.city+" "+data.info.block);
+				$('#id_address_input').val(data.info.detailstreet);
+			},
+			error:function(xhr,data){
+				
+			}
+		});
+		if(defaultFlag==1){
+			$('#id_default').attr('src','{{STATIC_URL}}square/img/address_default_select1.png');
+			mCount=2;
+		}else if(defaultFlag==0){
+			$('#id_default').attr('src','{{STATIC_URL}}square/img/address_default_select2.png');
+			mCount=1;
+		}
+	}else{
+		$("#id_delete").hide();
+	}
+	//alert(type+","+defaultFlag+","+addressId);
+	function myBack(){
+		myObj.mFinish();
+	}
+	 $("#start").cityPicker({
+	     title: "",
+	     onChange: function (picker, values, displayValues) {
+	    	//alert(values+","+displayValues);
+	     }
+	 });
+	 $('#id_default').click(function(){
+		 if(mCount==1){
+			 $('#id_default').attr('src','{{STATIC_URL}}square/img/address_default_select1.png');
+			 mCount=2;
+			 defaultFlag=1;
+		 }else if(mCount==2){
+			 $('#id_default').attr('src','{{STATIC_URL}}square/img/address_default_select2.png');
+			 mCount=1;
+			 defaultFlag=0;
+		 }
+	 });
+	 function finish(){
+		 var nameStr=$('#id_name_input').val().trim();
+		 var phoneStr=$('#id_phone_input').val().trim();
+		 var startStr=$('#start').val().trim();
+		 var addressStr=$('#id_address_input').val().trim();
+		 var mArrayLength=startStr.split(' ').length;
+		 var mProvince=startStr.split(' ')[0];
+		 var mCity=startStr.split(' ')[1];
+		 var mBlock;
+		 if(mArrayLength==3){
+			 mBlock=startStr.split(' ')[2];
+		 }else{
+			 mBlock="";
+		 }
+		 //alert(nameStr+','+phoneStr+','+addressStr+','+mProvince+','+mCity+','+mBlock+','+mCount);
+		 if(nameStr.length>0 && phoneStr.length>0 && startStr.length>0 && addressStr.length>0){
+	     if(reg.test(phoneStr)){
+		 if(type==0){
+		 $.ajax({
+				type: 'GET',
+				url: "https://www.youlinzj.cn/youlin/api1.0/",
+				cache: false,
+		        data:{	
+		        		user         : userId,
+		        		consignee    : nameStr,
+		        		contactinfo  : phoneStr,
+		        		detailaddr   : addressStr,
+		        		province     : mProvince,
+		        		city         : mCity,
+		        		block        : mBlock,
+		        		count        : mCount,
+		        		tag          : 'addra',
+		        		apitype      : 'h5',
+		        		access       : '9527'
+		        },
+				dataType: 'json',
+				success: function(data){
+					if(data.flag=="overflow"){
+						$.toast("收货地址过多","text");
+					}else if(data.flag=="exist"){
+						$.toast("该地址已存在","text");
+					}else if(data.flag=="ok"){
+						window.history.go(-1);
+					}
+				},
+				error:function(xhr,data){
+					alert("222222");
+				}
+			});
+		 }else if(type==1){
+			 //alert(addressId+","+userId+","+consignee+","+contactinfo+","+detailaddr+","+province+","+city+","+block+","+defaultflag);
+			 $.ajax({
+					type: 'GET',
+					url: "https://www.youlinzj.cn/youlin/api1.0/",
+					cache: false,
+			        data:{	
+			        		id           : addressId,
+			        		user         : userId,
+			        		consignee    : nameStr,
+			        		contactinfo  : phoneStr,
+			        		detailaddr   : addressStr,
+			        		province     : mProvince,
+			        		city         : mCity,
+			        		block        : mBlock,
+			        		defaultflag  : defaultFlag,
+			        		tag          : 'editra',
+			        		apitype      : 'h5',
+			        		access       : '9527'
+			        },
+					dataType: 'json',
+					success: function(data){
+						if(data.flag=="exist"){
+								$.toast("该地址已存在","text");
+					 	}else if(data.flag=="ok"){
+					 		window.history.go(-1);
+					 	}
+					},
+					error:function(xhr,data){
+						alert("222222");
+					}
+				});
+		 }
+	     }else{
+	    	 $.toast("手机号格式不正确","text");
+	     }
+		 }else{
+			 $.toast("信息不完善","text");
+		 }
+	 }
+	 $("#id_delete").click(function(){
+			$.ajax({
+				type: 'GET',
+				url: "https://www.youlinzj.cn/youlin/api1.0/",
+				cache: false,
+		        data:{	
+		        		id      : addressId,
+		        		tag          : 'delra',
+		        		apitype      : 'h5',
+		        		access       : '9527'
+		        },
+				dataType: 'json',
+				success: function(data){
+					window.history.go(-1);
+				},
+				error:function(xhr,data){
+					
+				}
+			});
+	});
+	
+</script>
+</body>
+</html>

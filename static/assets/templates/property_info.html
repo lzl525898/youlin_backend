@@ -1,0 +1,108 @@
+<script src="../../static/assets/js/jquery.pagination.js"></script>
+<link href="../../static/assets/css/jquery-ui.min.css" rel="stylesheet"/>
+<link href="../../static/assets/css/pagination.css" rel="stylesheet"/>
+<script src="../../static/assets/js/jquery-ui.min.js"></script>
+<script src="../../static/assets/js/admin/common.js" ></script>
+<script src="../../static/assets/js/admin/property_info.js" ></script>
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+	</script>
+
+	<ul class="breadcrumb">
+		<li>
+			<i class="icon-home home-icon"></i>
+			<a href="#">信息管理</a>
+		</li>
+		<li class="active">物业信息管理</li>
+	</ul><!-- .breadcrumb -->
+</div>
+
+<div class="page-content">
+	<div class="page-header">
+		<h1>
+			物业信息管理
+			<small>
+			列表
+			</small><div class="pull-right"><a href="#" class="btn btn-success btn-sm" onclick="audit()">添加物业信息</a></div>
+		</h1>
+	</div><!-- /.page-header -->
+	<div>
+		<table class="table table-striped table-bordered table-condensed" id="audit">
+				<thead></thead>
+				<tbody></tbody>
+		</table>
+	</div>
+	<div id="Pagination" class="pagination" ></div>
+</div><!-- /.page-content -->
+
+   <!--弹出审核-->
+   <div class="hide">
+       <form class="form-horizontal " id="info-form" method="post" enctype="multipart/form-data"> 
+		<input type="reset" name="reset" style="display: none;"/>
+		<input type="hidden" id="idstr" name="idstr">
+         <div class="form-group">
+           <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="name" >物业名称:</label>
+           <div class="col-xs-12 col-sm-9">
+             <div class="clearfix">
+			    <input type="text" id="name" name="name" class="form-control" value="" placeholder="不能为空，且最多输入20个字符"/>
+             </div>
+           </div>
+         </div>
+         
+         <div class="space-2"></div>
+         <div class="form-group">
+           <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="phone" >联系电话:</label>
+           <div class="col-xs-12 col-sm-9">
+             <div class="clearfix">
+               	<input type="text" id="phone" name="phone" class="form-control" value="" placeholder="不能为空，且最多输入15位"/>
+             </div>
+           </div>
+         </div>
+         
+         <div class="space-2"></div>
+         <div class="form-group">
+           <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="address" >地址:</label>
+           <div class="col-xs-12 col-sm-9">
+             <div class="clearfix">
+               	<input type="text" id="address" name="address" class="form-control" value="" placeholder="不能为空，且最多输入50个字符"/>
+             </div>
+           </div>
+         </div>
+         
+         <div class="space-2"></div>
+         <div class="form-group">
+           <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="office_hours" >办公时间:</label>
+           <div class="col-xs-12 col-sm-9">
+             <div class="clearfix">
+               	<input type="text" id="office_hours" name="office_hours" class="form-control" value="" placeholder="不能为空，且最多输入50个字符"/>
+             </div>
+           </div>
+         </div>
+         
+         <div class="space-2"></div>
+         <div class="form-group">
+           <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="community_id" >所属城市:</label>
+           <div class="col-xs-12 col-sm-9">
+             <div class="clearfix">
+               	<select class="form-control" name="i_city_id" id="i_city_id" onChange="getCommunityOptions(this.value);"></select>
+             </div>
+           </div>
+         </div>
+         
+         <div class="space-2"></div>
+         <div class="form-group">
+           <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="community_id" >所属小区:</label>
+           <div class="col-xs-12 col-sm-9">
+             <div class="clearfix">
+               	<select class="form-control" name="i_community_id" id="i_community_id"></select>
+             </div>
+           </div>
+         </div>
+         
+         <div class="space-2"></div>
+         
+         <p id="tip"><font color="red"></font></p>
+
+       </form>
+</div>

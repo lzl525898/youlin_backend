@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>优邻~只为了方便您的生活</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+	<link href="{{STATIC_URL}}assets/css/jquery.mobile-1.4.5.min.css" rel="stylesheet">
+	<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+	<link href="{{STATIC_URL}}assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}assets/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+    .smart-body {
+	margin-top: 20px;
+	}
+	.btn-my {
+		background:#CCCCCC;
+		
+	}
+	.col-xs-4 a{
+		color:green;
+		font-weight:normal;
+		text-shadow:none;
+	}
+	#devide a{
+		text-decoration:none;
+		color:#ffba02;
+	}
+/* 	.clear{ clear: both; font-size:1px; width:1px; visibility: hidden; } */
+    </style>
+	<script>
+	$(function(){
+		$(":jqmData(role='page')").attr("data-title", document.title);
+	})
+	</script>
+	<script src="{{STATIC_URL}}assets/js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="{{STATIC_URL}}assets/js/drag.js"></script>
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$("#select").on("click",function(){
+			$("#devide").toggle();
+		});
+		$("#topic,#header").on("click",function(){
+			$("#devide").hide();
+		});
+		 $('#devide').find('li').each(function(){
+			 $(this).click(function(){
+				location.href = "/yl/wx/categType?type = "+$(this).index()+"&community_id = "+$("#community_id").val();
+			 });
+		 });
+	}); 
+
+	
+	</script>
+</head>
+<body>
+    <input type="hidden" id="community_id"  value="{{res_data.community_id}}"/>
+	<div data-role="page" id="selectecity">
+	    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}assets/css/index.css">
+		<div data-role="header" id="header">
+		{%if res_data.bool %}
+			<a href="javascript:void(0)" data-role="button" data-icon="user" class="ui-btn-left" data-ajax="false" id="user" onclick="check()">登录</a>
+		{% else %}
+			<a href="##" data-role="button" data-icon="user" class="ui-btn-left" data-ajax="false" id="user"  onclick="check()" data-ajax="false">{{res_data.user_nick}}</a>
+			<a href="/yl/wx/personal"  class="ui-btn-left logout personal"data-icon="user" data-ajax="false">个人信息</a>
+			<a href="/yl/wx/unbind"  class="ui-btn-left logout"data-icon="back" data-ajax="false">解除绑定</a>
+		{% endif %}
+			<h1>优邻</h1>
+			<a href="city.html" data-role="button" data-icon="location" class="ui-btn-right" data-ajax="false" id="city">哈尔滨科方的@@@..</a>
+		</div>
+		<div role="main" class="main">
+			<div class="checkin" id="checkin">
+				<p class="checkinP">+1</p>
+				<a href="#" onclick="test();">签到</a>
+			</div>
+			<div id="select">
+				<a href="javascript:void(0)" data-role="button" data-icon="arrow-d" data-iconpos="right" style="margin:0;border:none;border-radius:0;text-align: left;color: #FFC107;box-shadow: none;background-color: #fff" id="all">{{res_data.category}}</a>
+				<div class="xian "style="width:100%;margin:0 auto;padding:0 200px; border-top:1px solid #ddd" ></div>
+				<ul id="devide">
+					<li><a href="javascript:void(0)" >全部</a></li>
+					<li><a href="javascript:void(0)" >话题</a></li>
+					<li><a href="javascript:void(0)" >活动</a></li>
+					<li><a href="javascript:void(0)" >公告</a></li>
+					<li><a href="javascript:void(0)" >闲品会</a></li>
+					<li><a href="javascript:void(0)" >建议</a></li>
+				</ul>
+			</div>
+			
+			<div id="topic">
+			{% for topic in res_data.topList2 %}
+				<div id="topic_1"class="topic">
+					<div class="ui-grid-b" >
+						<div class="ui-block-a head">
+							<img src="{{topic.topicObj.sender_portrait}}" width="20%"></div>
+						<div class="ui-block-b" style="width: 45%;">
+							<h4>欢迎使用优邻app</h4>
+							<small class="name">
+							{{topic.topicObj.sender_name}}@
+								<span class="location">{{res_data.community_name}}</span>
+							</small>
+						</div>
+						<div class="ui-block-c" style="width: 35%;">
+							<div class="ui-grid-a" >
+							   	{%if topic.outtimetag %}
+											<div class="ui-block-a" style="width: 65%;">
+												<img src="{{STATIC_URL}}assets/css/images/overline.png" style="width:100%">
+											</div>
+								{% endif %}
+								<div class="ui-block-b" style="font-size: 12px;width: 35%;">
+									<span>{{topic.timespan}}</span>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					<h4 class="title">{{topic.topicObj.topic_title}}</h4>
+					<p class="content">{{topic.topicObj.topic_content|safe}}</p>
+					<div class="img ui-grid-b">
+						{% for k,v in topic.medialist %}	
+							         <div class="{{k}}"><img src="{{v}}" style="padding-bottom: 4px;width:100%;"></div>		       
+						{% endfor %}
+					</div> 
+				
+
+					<div class="smart-body">
+					<!-- colors -->
+						<div class="row">
+						   	{%if topic.activitytag %}
+									<div class="col-xs-4">
+									  <a href="#" class="btn btn-block btn-my">{{topic.activitymessage}}&nbsp;&nbsp;<font color="#bbbbbb">|</font>&nbsp;&nbsp;{{topic.applynum}}</a>
+									</div>
+							{% endif %}
+							{%if topic.SecondHandtag %}
+									<div class="col-xs-4">
+									  <a href="#" class="btn btn-block btn-my">{{topic.secondlabel}}&nbsp;&nbsp;<font color="#bbbbbb"></a>
+									</div>			
+									<div class="col-xs-4">
+									</div>			
+									<div class="col-xs-4">
+									  <a href="#" class="btn btn-block btn-my">{{topic.secondprice}}&nbsp;&nbsp;<font color="#bbbbbb"></a>
+									</div>	
+							{% endif %}								        		       
+						</div>
+					</div>
+					
+					<div class="ui-grid-b handle ">
+						<div class="ui-block-a reply">
+							<a href="#" class="ui-btn"><img src="{{STATIC_URL}}assets/css/images/comment.png">{{topic.topicObj.comment_num}}</a>
+						</div>
+						<div class="ui-block-b like">
+							<a href="#" class="ui-btn"><img src="{{STATIC_URL}}assets/css/images/dianzan.png">{{topic.topicObj.like_num}}</a>
+						</div>
+						<div class="ui-block-c view">
+							<a href="#" class="ui-btn"><img src="{{STATIC_URL}}assets/css/images/browse.png">{{topic.topicObj.view_num}}</a>
+						</div>
+					</div>
+				</div>	
+			{% endfor %}			
+			</div>
+	
+		</div>
+	</div>
+
+<script src="{{STATIC_URL}}assets/js/common.js"></script>
+<!-- <script src="{{STATIC_URL}}assets/js/web_sign.js"></script> -->
+<!-- <div id="pop" style="position: fixed;top:30%;padding:5%;font-size: 1.5rem;border:1px solid #FFC107;border-radius: 7px;left: 50%;-webkit-transform:translate3d(-50%,0,0);color: #FFC107;display: none;width: 50%;background-color: #fff;text-align: center;z-index: 9999">
+	<p>您已经连续签到<br/><span>01</span>天</p>
+</div> -->
+<script type="text/javascript">
+
+
+function test(){
+	window.location.href="/yl/wx/sign/";
+		
+}
+/* $("#topic,#header,#pop,#select").on("click",function(){
+		$("#pop").css("display","none");
+}) */
+</script>
+</body>
+</html>

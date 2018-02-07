@@ -1,0 +1,86 @@
+<script src="../../static/assets/js/jquery.pagination.js"></script>
+
+<link href="../../static/assets/css/pagination.css" rel="stylesheet"/>
+<link href="../../static/assets/css/jquery-ui.min.css" rel="stylesheet"/>
+<script src="../../static/assets/js/jquery-ui.min.js"></script> 
+<script src="../../static/assets/js/admin/common.js" ></script>
+<script src="../../static/assets/js/admin/exchange.js" ></script>
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+	</script>
+
+	<ul class="breadcrumb">
+		<li>
+			<i class="icon-home home-icon"></i>
+			<a href="#">兑换管理</a>
+		</li>
+		<li class="active">兑换记录</li>
+	</ul><!-- .breadcrumb -->
+</div>
+
+<div class="page-content">
+	<div class="page-header">
+		<h1>
+			礼品
+			<small>
+			兑换记录
+			</small><div class="pull-right"><a href="#" class="btn btn-success btn-sm" id="showDialog">导出</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="btn btn-success btn-sm" id="change">更改兑换状态</a></div>
+		</h1>
+	</div><!-- /.page-header -->
+	<div>
+		<table class="table table-striped table-bordered table-condensed" id="audit">
+				<thead>
+				</thead>
+				<tbody></tbody>
+		</table>
+	</div>
+	<div id="Pagination" class="pagination" ></div>
+</div><!-- /.page-content -->
+
+   <!--弹出审核-->
+   <div class="hide">
+       <form class="form-horizontal" id="exchangeForm" method="POST" action="ajax_export_submit/"> 
+		<input type="reset" name="reset" style="display: none;" />
+		  <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="index" >兑换状态:</label>
+            <div class="col-xs-12 col-sm-9">
+              <div class="clearfix">
+              		<select class="form-control" name="ue_status" id="ue_status"><option value="1">进行中</option><option value="2">已兑换</option></select>
+              </div>
+            </div>
+          </div>
+
+         
+         <div class="space-2"></div>
+		 <div class="form-group">
+           	<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="checkDate">日期范围:</label>
+            <div class="col-xs-12 col-sm-4">
+              <div class="clearfix">
+                <input class="Wdate col-xs-12 col-sm-12" type="text" id="beginDate" name="beginDate" onFocus="WdatePicker({isShowClear:false,readOnly:true,dateFmt: 'yyyy-MM-dd'})"/>
+              </div>
+            </div>
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="endDate">至</label>
+            <div class="col-xs-12 col-sm-4">
+              <div class="clearfix">
+             <input class="Wdate col-xs-12 col-sm-12" type="text" id="endDate" name="endDate" onFocus="WdatePicker({isShowClear:false,readOnly:true,dateFmt: 'yyyy-MM-dd'})"/>
+              </div>
+            </div>
+         </div>
+         
+         <div class="space-2"></div>
+         <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="index" >小区:</label>
+            <div class="col-xs-12 col-sm-9">
+              <div class="clearfix">
+              		<select class="form-control" name="e_community_id" id="e_community_id"></select>
+              </div>
+            </div>
+          </div>
+         
+         <div class="space-2"></div>
+         
+         <p id="tip"><font color="red"></font></p>
+
+       </form>
+</div>

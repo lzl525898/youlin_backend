@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>优邻</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="{{STATIC_URL}}assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{STATIC_URL}}assets/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{STATIC_URL}}assets/css/form-elements.css">
+        <link rel="stylesheet" href="{{STATIC_URL}}assets/css/style.css">
+
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="{{STATIC_URL}}assets/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{STATIC_URL}}assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{STATIC_URL}}assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{STATIC_URL}}assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="{{STATIC_URL}}assets/ico/apple-touch-icon-57-precomposed.png">
+
+    </head>
+
+    <body>
+
+        <!-- Top content -->
+        <div class="top-content">
+        	
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-box" >
+                        	<div class="form-top" style="background:#438EB9;">
+                        		<div class="form-top-left">
+
+                        			<h3><strong><font color="#ffffff">优邻</font></strong></h3>
+                                    <p><font color="#ffffff">欢迎访问优邻后台管理系统</font></p> 
+                        		</div>
+                        		<div class="form-top-right">
+                        			<i class="fa fa-key"></i>
+                        		</div> 
+                            </div>
+                            <div class="form-bottom">
+                            
+			                    <form role="form" action="Verify_userLogin/"id="login_form"method="post" class="login-form" onsubmit = "return checkUser();" >
+			                    <!-- onsubmit = "return checkUser();" -->
+			                   
+			                    	<div class="form-group">
+			                    		<label class="sr-only" for="form-username">用户名</label>
+			                        	<input type="text" name="form-username"  id="form-username"value=""placeholder="用户名..." class="form-username form-control" onblur="V_FName()">
+			                        </div>
+			                        
+			                        <div class="form-group">
+			                        	<label class="sr-only" for="form-password">密码</label>
+			                        	<input type="password" name="form-password" id="form-password"value=""placeholder="密码..." class="form-password form-control" >
+			                        </div>
+			                        <small><p id="tip_login"><font color="red">{{ res_data.reason }}</font></p></small>
+			                        <button type="submit" class="btn">登录</button>
+			                    </form>
+			                    
+		                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <!-- Javascript -->
+        <script src="{{STATIC_URL}}assets/js/jquery-1.11.1.min.js"></script>
+        <script src="{{STATIC_URL}}assets/js/bootstrap.min.js"></script>
+        <script src="{{STATIC_URL}}assets/js/jquery.backstretch.min.js"></script>
+        <script src="{{STATIC_URL}}assets/js/scripts.js"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+
+    </body>
+
+</html>

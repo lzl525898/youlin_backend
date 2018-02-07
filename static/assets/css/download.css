@@ -1,0 +1,16 @@
+		html{background-color: rgba(165,165,165,0.3)}
+
+		.ui-header, .ui-footer{border:0;}
+		.ui-page-theme-a .ui-bar-inherit{background-color: #FFC107;color: #fff;text-shadow: 0 0 0 #eee}
+		.ui-btn-left, .ui-btn-right{top: 0.4em;}
+		#header .ui-btn{background-color:transparent;border:0;box-shadow: none;text-shadow: 0 0 0 #eee;color: #fff}
+		.ui-btn-icon-left:after, .ui-btn-icon-right:after, .ui-btn-icon-top:after, .ui-btn-icon-bottom:after, .ui-btn-icon-notext:after{background-color: #FFC107}
+		
+	
+		.content{width: 90%;margin: 0 auto;text-align: center;position: relative;}
+		.background{width: 100%;-webkit-filter:blur(10px);}
+		.logo{position: absolute;top:40%;left: 50%;opacity: 0;-webkit-animation:logo 2s;-webkit-animation-fill-mode: forwards;-webkit-transform:translate3d(-50%,0,0);}
+		@-webkit-keyframes logo{
+			0%{opacity: 0;}
+			100%{opacity: 1;}
+		}

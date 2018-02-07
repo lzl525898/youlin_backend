@@ -1,0 +1,98 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="stylesheet" href="{{STATIC_URL}}baoxiang/css/reset.css">
+<link rel="stylesheet" href="{{STATIC_URL}}baoxiang/css/atom.css">
+<link rel="stylesheet" href="{{STATIC_URL}}baoxiang/css/global.css">
+<link rel="stylesheet" href="{{STATIC_URL}}baoxiang/css/open.css">
+<title>宝箱打开动画抽奖</title>
+</head>
+<body ontouchstart="" class="open-body">
+  <div class="wrapper">
+    
+    <div class="bg rotate"></div>
+    <div class="open-has ">
+      <h3 class="title-close"><span class="user">小优优</span>给你发了一个宝箱</h3>
+      <h3 class="title-open">恭喜你，</br>成功领取<span class="user">优邻之家</span>发的惠民大宝箱</h3>
+
+      <div class="mod-chest">
+        
+        <div class="chest-close show ">
+          <div class="gift"></div>
+          <div class="tips">
+            <i class="arrow"></i>
+          </div>
+        </div>
+        <div class="chest-open ">
+          <div class="mod-chest-cont open-cont">
+            <div class="content">
+              <div class="gift">
+                <div class="icon"><img src="{{STATIC_URL}}baoxiang/img/chest-icon-zuan.png"></div> x 500 
+              </div>
+              <div class="func">
+                <button id="js2java" class="chest-btn">查看详情并提取</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="open-none" style="display:none">
+      <h3>你来晚啦，下次早点吧！</h3>
+      <div class="mod-chest">
+        <div class="chest-open show"></div>
+      </div>
+      <div class="func">
+        <button class="chest-btn">查看领取详情</button>
+      </div>
+    </div>
+  </div>
+  <input type="hidden" id="js2javawithvalue" value="{{ res_data|safe }}"/>
+  <div id="javascript2java" ></div>
+  
+  <script type="text/javascript" src="{{STATIC_URL}}baoxiang/js/zepto.min.js"></script>
+<script type="text/javascript">
+	var aTag = document.getElementById("js2java");
+	aTag.addEventListener('click', function(){
+        //调用android本地方法
+		var jsonStringFromAndroid = myObj.getAndroid(document.getElementById("js2javawithvalue").value);  
+		try  {
+			var jsonObj = eval("("+jsonStringFromAndroid.replace(/\'/g,"\"")+")");
+			alert("当前手机号:"+jsonObj.phone)
+		}
+		catch(exception) {
+			document.getElementById("javascript2java").innerHTML = exception
+     	}   
+        return false;
+    }, false);
+  $(".chest-close").click(function(){
+    $(this).addClass("shake");
+    var that=this;    
+    this.addEventListener("webkitAnimationEnd", function(){
+      
+      $(that).closest(".open-has").addClass("opened");
+      setTimeout(function(){
+        $(that).removeClass("show");
+        $(that).closest(".mod-chest").find(".chest-open").addClass("show");
+        setTimeout(function(){
+          $(".chest-open").addClass("blur");
+        },500)
+      },200)
+    }, false);
+  })
+</script>
+
+<!--  <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+<p>适用浏览器：仅支持兼容CSS3的现代浏览器，如：chrome、firefox</p>
+<p>来源：<a href="http://www.jiaoben123.com/" target="_blank">脚本特效素材之家</a></p>
+</div>
+-->
+
+</body>
+</html>

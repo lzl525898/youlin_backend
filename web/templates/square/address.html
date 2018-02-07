@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>培训</title>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylbootstrap.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylfont-awesome.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylactionBar.css"/>
+<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yldevice-toucher.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylhammer.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylfastclick.js"></script>
+<style type="text/css">
+body{
+	font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft YaheiUI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+	margin: 0px;
+	padding: 0px;
+	padding-top: 48px;
+	padding-bottom:66px;
+	background-color: #f3f3ee;
+}
+</style>
+</head>
+<body>
+	<div class="actionbar navbar-fixed-top">
+		<div style="float: left;" onclick="mBack()">
+			<i class="fa fa-angle-left" style="margin-left:10px;color:#ffffff;font-size:32px; margin-top:7px;"></i>
+		</div>
+		<div style="float: left;padding-top: 15px;padding-left: 7px;" onclick="mBack()">
+			<span  onclick="" style="font-size: 16px;color: #fff;">收货地址</span>
+		</div>
+	</div>
+	<div class="container" style="margin: 0px;padding: 0px;" id="id_start">
+	</div>
+	<div class="navbar-fixed-bottom" style="height: 66px;background-color: #f3f3ee;padding-top: 13px;">
+		<div style="width: auto;margin-left: 50px;margin-right: 50px;height: 40px;text-align: center;font-size: 16px;color: #fff;background-color: #fa5c10;border-radius: 5px;padding-top: 11px;" onclick="mCreate()">
+			新建地址
+		</div>
+	</div>
+<script type="text/javascript">
+	$(function(){
+		FastClick.attach(document.body);
+	});
+	var userId={{res_data.userId}};
+	var addressId={{res_data.addressId}};
+	var addressCount;
+	var mNormalLength;
+	function mAjax(){
+		 $.ajax({
+				type: 'GET',
+				url: "https://www.youlinzj.cn/youlin/api1.0/",
+				cache: false,
+		        data:{	
+		        		tag          : 'intora',
+		        		apitype      : 'h5',
+		        		access       : '9527',
+		        		user_id      : userId
+		        },
+				dataType: 'json',
+				success: function(data){
+					addressCount=data.count;
+					mNormalLength=data.info.normal_addr.length;
+					if(addressCount!=0){
+						if(data.info.default_addr.consignee!=undefined){
+						$('#id_start').append('<div class="row"  style="height: 82px;margin: 0px;padding:0px;background-color: #fff;margin-bottom: 9px;" id="'+data.info.default_addr.addressid+'">'
+								+'<div class="col-md-1 col-lg-1 col-sm-1 col-xs-1" style="margin: 0px;padding:0px;" onclick="myClick('+0+','+data.info.default_addr.addressid+')">'
+								+'<img src="{{STATIC_URL}}square/img/address_select.png" style="width: 18px;height: 12px;margin-top: 38px;margin-left: 10px;display:none;" id="img0" class="class_img"/>'
+								+'</div>'
+								+'<div class="col-md-9 col-lg-9 col-sm-9 col-xs-9" style="margin: 0px;padding:0px;" onclick="myClick('+0+','+data.info.default_addr.addressid+')">'
+								+'<div style="margin-top: 17px;margin-left: 10px;">'
+								+'<label style="font-size: 14px;color: #323232" id="name0" class="class_name">'+data.info.default_addr.consignee+'</label>'
+							    +'<label style="font-size: 14px;color: #323232;margin-left: 20px;" id="phone0" class="class_phone">'+data.info.default_addr.contactinfo+'</label>'
+							    +'<a href="#"><img src="{{STATIC_URL}}square/img/address_default.png" style="height: 14px;margin-left: 10px;"/></a>'
+							    +'</div>'
+							    +'<div style="margin-right: 10px;margin-left: 10px;">'
+							    +'<span style="font-size: 12px;color: #808080;">'+data.info.default_addr.detailaddr+'</span>'
+							    +'</div>'
+							    +'</div>'
+							    +'<div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" style="margin: 0px;padding:0px;" onclick="mEdit('+data.info.default_addr.addressid+','+data.info.default_addr.defaultflag+','+0+')">'
+							    +'<div style="width:1px;height: 45px;;float: left;background-color: #f3f3ee;margin-top: 18px;"></div>'
+							    +'<img src="{{STATIC_URL}}square/img/address_edit.png" style="margin-left:20px;width: 20px;height: 22px;margin-top: 30px;" />'
+							    +'</div>'
+							    +'</div>');
+						}						
+						for(var i=0;i<data.info.normal_addr.length;i++){
+								$('#id_start').append('<div class="row"  style="height: 82px;margin: 0px;padding:0px;background-color: #fff;margin-top: 1px;" id="'+data.info.normal_addr[i].addressid+'">'
+								+'<div class="col-md-1 col-lg-1 col-sm-1 col-xs-1" style="margin: 0px;padding:0px;"  onclick="myClickNormal('+i+','+data.info.normal_addr[i].addressid+')">'
+								+'<img src="{{STATIC_URL}}square/img/address_select.png" style="width: 18px;height: 12px;margin-top: 38px;margin-left: 10px;display: none;" id="normalImg'+i+'" class="class_img"/>'
+								+'</div>'
+								+'<div class="col-md-9 col-lg-9 col-sm-9 col-xs-9" style="margin: 0px;padding:0px;"  onclick="myClickNormal('+i+','+data.info.normal_addr[i].addressid+')">'
+								+'<div style="margin-top: 17px;margin-left: 10px;">'
+								+'<label style="font-size: 14px;color: #323232" id="normalName'+i+'" class="class_name">'+data.info.normal_addr[i].consignee+'</label>'
+								+'<label style="font-size: 14px;color: #323232;margin-left: 20px;" id="normalPhone'+i+'" class="class_phone">'+data.info.normal_addr[i].contactinfo+'</label>'
+								+'</div>'
+								+'<div style="margin-right: 10px;margin-left: 10px;">'
+								+'<span style="font-size: 12px;color: #808080;">'+data.info.normal_addr[i].detailaddr+'</span>'
+								+'</div>'
+								+'</div>'
+								+'<div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" style="margin: 0px;padding:0px;" onclick="mEdit('+data.info.normal_addr[i].addressid+','+data.info.normal_addr[i].defaultflag+','+(parseInt(i)+1)+')">'
+								+'<div style="width:1px;height: 45px;;float: left;background-color: #f3f3ee;margin-top: 18px;"></div>'
+								+'<img src="{{STATIC_URL}}square/img/address_edit.png" style="margin-left:20px;width: 20px;height: 22px;margin-top: 30px;" />'
+								+'</div>'
+								+'</div>');
+						}
+						$('#'+addressId).find(".class_img").css("display","block");
+						$('#'+addressId).find(".class_name").css("color","#ef3136");
+						$('#'+addressId).find(".class_phone").css("color","#ef3136");
+					}
+				},
+				error:function(xhr,data){
+					alert("1111111111111");
+				}
+			});
+	}
+	mAjax();
+	
+	function mBack(){
+		myObj.mFinish();
+	}
+	function myClick(id,addressId){
+		$('#img0').css("display","block");
+		$('#name0').css("color","#ef3136");
+		$('#phone0').css("color","#ef3136");
+		for(var i=0;i<mNormalLength;i++){
+			$('#normalImg'+i).css("display","none");
+			$('#normalName'+i).css("color","#323232");
+			$('#normalPhone'+i).css("color","#323232");
+		}
+		myObj.mResult(addressId);
+	}
+	function myClickNormal(id,addressId){
+		$('#img0').css("display","none");
+		$('#name0').css("color","#323232");
+		$('#phone0').css("color","#323232");
+		for(var i=0;i<mNormalLength;i++){
+			if(id==i){
+				$('#normalImg'+id).css("display","block");
+				$('#normalName'+id).css("color","#ef3136");
+				$('#normalPhone'+id).css("color","#ef3136");
+			}else{
+				$('#normalImg'+i).css("display","none");
+				$('#normalName'+i).css("color","#323232");
+				$('#normalPhone'+i).css("color","#323232");
+			}
+		}
+		myObj.mResult(addressId);
+	}
+	//type=0创建地址      type=1编辑地址
+	function mEdit(addressId,defaultFlag,id){
+		/*
+		$.ajax(function(){
+			type:"POST",
+			dataType:"json",
+			url:"https://www.youlinzj.cn/yl/web/addressCreate",
+			data:{
+				user_id:userId,
+				count:addressCount,
+				type:1,
+				default_flag:defaultFlag,
+				address_id:addressId,
+				name:mapArray[id]['phone'],
+				phone:mapArray[id]['phone'],
+				address:mapArray[id]['address'],
+				address_detail:mapArray[id]['address_detail']
+			},
+			complete:function(){location.href ="https://www.youlinzj.cn/yl/web/addressCreate"}
+		});
+		*/
+		//var name=mapArray[id]['name'];
+		window.open("https://www.youlinzj.cn/yl/web/addressCreate?user_id="+userId+"&count="+addressCount+"&type=1"+"&default_flag="+defaultFlag+"&address_id="+addressId);
+	}
+	function mCreate(){
+		window.open("https://www.youlinzj.cn/yl/web/addressCreate?user_id="+userId+"&count="+addressCount+"&type=0");
+	}
+	
+</script>
+</body>
+</html>

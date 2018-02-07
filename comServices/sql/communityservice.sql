@@ -1,0 +1,3 @@
+insert into yl_community_services(service_department,service_phone,service_address,service_office_hours,community_id) values ('居委会','86693328','8栋3单元楼下','周一至周日走8:30-晚17:00',1);
+insert into yl_community_services(service_department,service_phone,service_address,service_office_hours,community_id) values ('派出所','86302888','8栋3单元楼下','周一至周日走8:30-晚17:00',1);
+insert into yl_community_services(service_department,service_phone,service_address,service_office_hours,community_id) values ('居委会','51876618','哈尔滨市松北区科技创新城133号','每周一至周五8:00—18:00',2);

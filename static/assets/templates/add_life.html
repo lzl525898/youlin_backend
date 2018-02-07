@@ -1,0 +1,97 @@
+﻿<script type="text/javascript" src="../../static/ckeditor/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="../../static/ckeditor/ckeditor-init.js"></script>
+<script src="../../static/assets/js/admin/add_life.js" ></script>
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+	</script>
+
+	<ul class="breadcrumb">
+		<li>
+			<i class="icon-home home-icon"></i>
+			<a href="#">优邻生活</a>
+		</li>
+		<li class="active">内容列表</li>
+	</ul><!-- .breadcrumb -->
+</div>
+<div class="page-content">
+	   <div class="page-header"></div>
+	   <form action="" enctype="multipart/form-data" method="POST" id="myform">
+			<!-- <input type="hidden" name="csrfmiddlewaretoken" value="" id="csrftoken1"> -->
+			<input type="hidden" name="idstr" value="" id="idstr">
+			<table class="table">
+			<tbody>
+				<tr>
+					<td>标题</td>
+					<td><input class="input-xlarge" type="text" id="title" name="title"  /></td>
+					<td><p id="tip"><font color="red"></font></p></td>
+				</tr>
+				<tr>
+					<td>正文</td>
+					<td><textarea name="content" id="content" cols="20" rows="2" class="ckeditor"></textarea></td>
+					<td><p id="tip"><font color="red"></font></p></td>
+				</tr>
+				<tr>
+					<td>作者</td>
+					<td><input class="input-xlarge" type="text" id="author" name="author" /></td>
+					<td><p id="tip"><font color="red"></font></p></td>
+				</tr>
+				<tr>
+					<td>头像</td>
+					<td><input type="file" name="avatar" id="avatar"/></td>
+					<td><p id="tip"><font color="red"></font></p></td>
+					
+				</tr>
+				
+				<tr>
+					<td>添加时间</td>
+					<td><input class="Wdate input-xlarge" type="text" id="date" name="date" onFocus="WdatePicker({isShowClear:false,readOnly:true,dateFmt: 'yyyy-MM-dd'})"/></td>
+					<td><p id="tip"><font color="red"></font></p></td>
+				</tr>
+				<tr>
+					<td><input type="submit" class="btn btn-success btn-large" value="保存" id="btn_submit" /></td>
+					<td><input type="submit" class="btn btn-success btn-large" value="预览" id="btn_view" /></td>
+					
+				</tr>
+			</tbody></table>
+			
+		</form>
+</div><!-- /.page-content -->
+
+<script type="text/javascript">
+　　CKEDITOR.replace('content',{
+    language: 'zh-cn',
+    width:600,
+    height:180,
+    //uiColor: '#9AB8F3',
+    toolbar :
+        [
+　　　　  //加粗     斜体，     下划线      穿过线      下标字        上标字
+           ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
+　　　　  //数字列表          实体列表            减小缩进    增大缩进
+           ['NumberedList','BulletedList','-','Outdent','Indent'],
+　　　　  //左对齐             居中对齐          右对齐          两端对齐
+           ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+　　　　  //超链接 取消超链接 锚点
+           ['Link','Unlink','Anchor'],
+　　　　  //图片   flash    表格       水平线            表情       特殊字符        分页符
+           ['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+'/',
+　　　　　//样式       格式      字体    字体大小
+           ['Styles','Format','Font','FontSize'],
+　　　　  //文本颜色     背景颜色
+           ['TextColor','BGColor'],
+　　　　　//全屏           显示区块
+           ['Maximize', 'ShowBlocks','-']
+         ],
+      filebrowserImageUploadUrl:'/yl/web/ajax_upload_life/',   //图片上传
+      image_previewText:' ',//预览区域显示内容
+}); 
+function getContext(){	
+	return content = CKEDITOR.instances.content.getData();
+}
+function setContext(data){	
+	return content = CKEDITOR.instances.content.setData(data);
+}
+
+</script>			

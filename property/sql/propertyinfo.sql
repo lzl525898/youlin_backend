@@ -1,0 +1,2 @@
+insert into yl_property_info(name,phone,address,office_hours,sender_id,community_id) values ('保利物业','87065667','哈尔滨市松北区科技创新城133号','周一至周日走8:30-晚17:00',1,1);
+insert into yl_property_info(name,phone,address,office_hours,sender_id,community_id) values ('保利物业','55189000','哈尔滨市松北区科技创新城133号','周一至周日走8:30-晚17:00',1,2);

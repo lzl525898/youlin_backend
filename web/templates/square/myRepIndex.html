@@ -1,0 +1,920 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0">
+<title>旧物置换</title>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylbootstrap.min.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylfont-awesome.min.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylweui.min.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/yljquery-weui.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/yldemos.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/yldropload.css" />
+<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yljquery-weui.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylfastclick.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-dropload.min.js"></script>
+<style type="text/css">
+#replace-actionbar {
+	background-color: #ffba02;
+	height: 48px;
+}
+
+.vertical-center {
+	display: table;
+	margin-top: 6px;
+	margin-bottom: 12px;
+	padding-left: 12px;
+}
+
+.vertical-center p {
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 15px;
+	padding-right: 12px;
+}
+
+#nav-btn-group {
+	margin-top: 11px;
+}
+
+#nav-btn-wode {
+	padding: 1px 10px;
+	font-size: 16px;
+	border: 1px solid #FFFFFF;
+}
+
+#nav-btn-wupin {
+	padding: 1px 10px;
+	font-size: 16px;
+	border: 1px solid #FFFFFF;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus,
+	.btn.active.focus {
+	outline: none;
+}
+
+.replace-select-item {
+	height: 54px;
+	padding: 0;
+	margin: 0;
+	background-color: #ffffff;
+}
+
+.replace-select-item div img {
+	margin-top: 16px;
+	margin-left: 15px;
+	width: 24px;
+	height: 24px;
+}
+
+.replace-select-item div p {
+	margin-top: 16px;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.replace-select-item div span {
+	line-height: 58px;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.img-avatar-setting {
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+.media-heading-h4 {
+	padding-top: 14px;
+	font-weight: 600;
+	font-size: 16px;
+	color: #323232;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.media-heading-p {
+	font-size: 12px;
+	color: #808080;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.media-heading-time-p {
+	font-size: 12px;
+	color: #808080;
+	padding-top: 12px;
+	margin-right: 10px;
+}
+
+.media-body-content-p {
+	font-size: 14px;
+	overflow: hidden;
+	color: #323232;
+	font-weight: 500;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+}
+
+.my-good-single-item {
+	-webkit-box-shadow: 0px 2px 5px -2px #999999;
+	-moz-box-shadow: 0px 2px 5px -2px #999999;
+	box-shadow: 0px 2px 5px -2px #999999;
+}
+
+.my-goods-neworold-level-span {
+	margin-left: 10px;
+	background-color: #e6e6e6;
+	font-size: 14px;
+	color: #999999;
+	font-weight: 600;
+	border-radius: 15px;
+	padding: 6px 10px;
+}
+
+.my-goods-prices-head-span {
+	font-weight: 800;
+	font-size: 16px;
+	color: #fa5b11;
+}
+
+.my-goods-prices-content-span {
+	margin-left: 2px;
+	margin-right: 10px;
+	font-size: 24px;
+	font-weight: 800;
+	color: #fa5b11;
+}
+
+.my-goods-browse-span {
+	margin-left: 10px;
+	color: #999999;
+	font-size: 14px;
+}
+
+.my-goods-praise-img {
+	width: 15px;
+	height: 15px;
+}
+
+.my-goods-praise-span {
+	color: #999999;
+	font-size: 14px;
+}
+
+.my-goods-comment-img {
+	width: 17px;
+	height: 15px;
+}
+
+.my-goods-comment-span {
+	color: #999999;
+	font-size: 14px;
+}
+
+.my-goods-browse-div {
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+
+.my-goods-praise-div {
+	width: 30%;
+	margin-top: 6px;
+}
+
+.my-goods-comment-div {
+	margin-right: 10px;
+}
+
+.opacity {
+	-webkit-animation: opacity 0.3s linear;
+	animation: opacity 0.3s linear;
+}
+
+@media ( min-width : 768px) {
+	.vertical-center p {
+		font-size: 16px;
+	}
+}
+
+@media ( min-width : 992px) {
+	.vertical-center p {
+		font-size: 17px;
+	}
+}
+
+@media ( min-width : 1200px) {
+	.vertical-center p {
+		font-size: 18px;
+	}
+} 
+</style>
+</head>
+
+<body style="background-color: #f3f3ee">
+	<div class="container-fluid">
+		<div class="navbar-fixed-top" style="border: none;"
+			id="replace-all-actionbar">
+			<div class="row" id="replace-actionbar">
+				<div class="col-md-3 col-lg-3 col-sm-3 col-xs-3"
+					style="padding-left: 0px;">
+					<div class="vertical-center"
+						style="margin-top: 12px; margin-left: 15px;">
+						<img src="{{STATIC_URL}}square/img/fenlei.png"
+							style="width: 24px; height: 24px;"
+							id="replace-actionbar-category" />
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"
+					style="padding: 0; margin: 0;">
+					<div class="vertical-center center-block"
+						style="padding-left: 0; margin-top: 11px;" id="nav-btn-group">
+						<div class="btn-group">
+							<button type="button" class="btn btn-default" id="nav-btn-wupin">物品</button>
+							<button type="button" class="btn btn-default" id="nav-btn-wode">我的</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-lg-3 col-sm-3 col-xs-3"
+					style="padding-right: 0px;">
+					<div class="vertical-center pull-right" id="send"
+						style="margin-top: 18px; margin-right: 15px;">
+						<p>发布</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="square-my-info">
+			<a style="display: block; color: #323232" class="row" id="my-release-item">
+				<div class="col-md-8 col-lg-8 col-sm-8 col-xs-8 replace-select-item" >
+					<div class="pull-left">
+						<img src="{{STATIC_URL}}square/img/fabu.png" />
+					</div>
+					<div class="pull-left">
+						<p style="margin-left: 22px;">我发布的</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 replace-select-item" >
+					<div class="pull-right">
+						<i class="fa fa-angle-right"
+							style="margin-right: 14px; color: #e6e6e6; font-size: 36px; margin-top: 8px;"></i>
+					</div>
+				</div>
+			</a>
+			<div style="border-bottom: 1px solid #f3f3ee;width: 100%;height: 0px;"></div>
+			<a style="display: block; color: #323232" class="row" id="negotiating-item">
+				<div class="col-md-8 col-lg-8 col-sm-8 col-xs-8 replace-select-item" >
+					<div class="pull-left">
+						<img src="{{STATIC_URL}}square/img/qiatanzhong.png" />
+					</div>
+					<div class="pull-left">
+						<p style="margin-left: 22px;">洽谈中的</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 replace-select-item" >
+					<div class="pull-right">
+						<i class="fa fa-angle-right"
+							style="margin-right: 14px; color: #e6e6e6; font-size: 36px; margin-top: 8px;"></i>
+					</div>
+				</div>
+			</a>
+			<div style="border-bottom: 1px solid #f3f3ee;width: 100%;height: 0px;"></div>
+			<a style="display: block; color: #323232" class="row" id="set-out-item">
+				<div class="col-md-8 col-lg-8 col-sm-8 col-xs-8 replace-select-item" >
+					<div class="pull-left">
+						<img src="{{STATIC_URL}}square/img/maichude.png" />
+					</div>
+					<div class="pull-left">
+						<p style="margin-left: 22px;">我卖出的</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 replace-select-item" >
+					<div class="pull-right">
+						<i class="fa fa-angle-right"
+							style="margin-right: 14px; color: #e6e6e6; font-size: 36px; margin-top: 8px;"></i>
+					</div>
+				</div>
+			</a>
+			<div style="border-bottom: 1px solid #f3f3ee;width: 100%;height: 0px;"></div>
+			<a style="display: block; color: #323232" class="row" id="buy-item">
+				<div class="col-md-8 col-lg-8 col-sm-8 col-xs-8 replace-select-item" style="border-bottom: 1px solid #FFFFFF">
+					<div class="pull-left">
+						<img src="{{STATIC_URL}}square/img/maidaode.png" />
+					</div>
+					<div class="pull-left">
+						<p style="margin-left: 22px;">我买到的</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 replace-select-item" style="border-bottom: 1px solid #FFFFFF">
+					<div class="pull-right">
+						<i class="fa fa-angle-right"
+							style="margin-right: 14px; color: #e6e6e6; font-size: 36px; margin-top: 8px;"></i>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div id="goods-search-item" style="height: 44px;width: 100%;position:relative;margin-top: 48px;">
+			<div id="goods-search-touchend" style="margin: 0; padding: 0; padding-top: 7px;">
+					<div style="background-color: #e6e6e6; border-radius: 5px;height: 30px;" id="goods-search-touchend-input">
+						<div class="container-fluid" style="display: table; vertical-align: middle;">
+							<div class="row" id="goods-search-row-touchend" style="padding-top: 7px;">
+								<div class="pull-left">
+									<img src="{{STATIC_URL}}square/img/sousuo.png" style="height: 15px; width: 15px;" />
+								</div>
+								<div class="pull-left">
+									<a id="id_search_href" href="#" style="color: #999999; font-size: 12px; text-decoration: none;">&nbsp;&nbsp;输入您需要物品的关键字</a>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+
+		<div id="square-my-goods">
+			<div class="row" style="background-color: #ffffff;">
+				<div class="my-goods-item">
+					<div class="lists"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade in" id="category-modal">
+		<div class="modal-dialog" style="margin: 0;" id="category-modal-div">
+			<div class="modal-content"
+				style="width: 200px; margin-top: 48px; border-radius: 0; background: rgba(0, 0, 0, 0.8); padding: 0;"
+				id="category-modal-div-div">
+				<div class="modal-body" style="margin: 0; padding: 0;">
+					<div class="container-fluid" style="padding: 0; margin: 0;">
+						<div class="row" style="margin: 0; padding: 0;">
+							<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+								<div class="pull-left"
+									style="margin-left: 20px; margin-top: 20px;">
+									<a href="#" id="category-modal-div-div-item-phone"><img
+										src="{{STATIC_URL}}square/img/shouji.png"
+										style="height: 48px; width: 48px;" /></a>
+									<p
+										style="text-align: center; font-size: 14px; font-weight: 600; color: #ffffff; margin-top: 4px;">手机</p>
+								</div>
+								<div class="pull-right"
+									style="margin-right: 20px; margin-top: 20px;">
+									<a href="#" id="category-modal-div-div-item-digital"><img
+										src="{{STATIC_URL}}square/img/shuma.png"
+										style="height: 48px; width: 48px;" /></a>
+									<p
+										style="text-align: center; font-size: 14px; font-weight: 600; color: #ffffff; margin-top: 4px;">数码</p>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="margin: 0; padding: 0;">
+							<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+								<div class="pull-left" style="margin-left: 20px;">
+									<a href="#" id="category-modal-div-div-item-appliances"><img
+										src="{{STATIC_URL}}square/img/jiayongdianqi.png"
+										style="height: 48px; width: 48px;" /></a>
+									<p
+										style="font-size: 14px; font-weight: 600; color: #ffffff; margin-top: 4px; margin-left: -4px;">家用电器</p>
+								</div>
+								<div class="pull-right" style="margin-right: 15px;">
+									<a href="#" id="category-modal-div-div-item-traveltools"><img
+										src="{{STATIC_URL}}square/img/daibugongju.png"
+										style="height: 48px; width: 48px;" /></a>
+									<p
+										style="font-size: 14px; font-weight: 600; color: #ffffff; margin-top: 4px; margin-left: -4px;">代步工具</p>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="margin: 0; padding: 0;">
+							<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+								<div class="pull-left" style="margin-left: 20px;">
+									<a href="#" id="category-modal-div-div-item-baby"><img
+										src="{{STATIC_URL}}square/img/muyingyongpin.png"
+										style="height: 48px; width: 48px;" /></a>
+									<p
+										style="font-size: 14px; font-weight: 600; color: #ffffff; margin-top: 4px; margin-left: -4px;">母婴用品</p>
+								</div>
+								<div class="pull-right" style="margin-right: 15px;">
+									<a href="#" id="category-modal-div-div-item-clothes"><img
+										src="{{STATIC_URL}}square/img/fuzhuangxiemao.png"
+										style="height: 48px; width: 48px;" /></a>
+									<p
+										style="font-size: 14px; font-weight: 600; color: #ffffff; margin-top: 4px; margin-left: -4px;">服装鞋帽</p>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="margin: 0; padding: 0;">
+							<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+								<div class="pull-left" style="margin-left: 20px;">
+									<a href="#" id="category-modal-div-div-item-furniture"><img
+										src="{{STATIC_URL}}square/img/jiajujiaju.png"
+										style="height: 48px; width: 48px;" /></a>
+									<p
+										style="font-size: 14px; font-weight: 600; color: #ffffff; margin-top: 4px; margin-left: -4px;">家具家居</p>
+								</div>
+								<div class="pull-right" style="margin-right: 20px;">
+									<a href="#" id="category-modal-div-div-item-computer"><img
+										src="{{STATIC_URL}}square/img/diannao.png"
+										style="height: 48px; width: 48px;" /></a>
+									<p
+										style="text-align: center; font-size: 14px; font-weight: 600; color: #ffffff; margin-top: 4px;">电脑</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+var userId = 0;
+var communityId = 0;
+var topicId = 0;
+var userType = 0;
+var pullDownTopic = 0,pullUpTopic = 0,senderId = 0,wantType = 0;
+var loading = false;
+function sendSuccess(){
+	history.go(0);
+}
+function dispatch(c, b) {  
+    try {  
+        var a = document.createEvent("Event");  
+        a.initEvent(b, true, true);  
+        c.dispatchEvent(a)  
+    } catch (d) {  
+        alert(d)  
+    }  
+}
+var searchHelper = {
+        droploader: null,
+        
+        init: function() {
+            var me = searchHelper;
+            me.droploader = $('.my-goods-item').dropload({
+                scrollArea : window,
+                loadUpFn: function(me) {
+                	$.ajax({
+    					type: 'GET',
+    					url: "https://www.youlinzj.cn/youlin/api1.0/",
+    					cache: false,
+    		            data:{	
+    		            		community_id : communityId,
+    		            		topic_id     : pullDownTopic,
+    		            		user_id      : userId,
+    		            		type         : userType,
+    		            		tag          : 'oldreplace',
+    		            		apitype      : 'h5',
+    		            		access       : '9527'
+    		            },
+    					dataType: 'json',
+    					success: function(data){
+    						// 每次数据加载完，必须重置
+    						me.resetload();
+    						var result = '';
+    						for(var i = 0; i < data.lists.length; i++){
+    							pullUpTopic = data.lists[i].topicInfo.topicId;
+    							senderId = data.lists[i].topicInfo.senderId;
+    							wantType = data.lists[i].likeType;
+    							if(wantType==0){
+    								wantImgSrc="{{STATIC_URL}}square/img/dianzan2.png";
+    							}else{
+    								wantImgSrc="{{STATIC_URL}}square/img/dianzan1.png";
+    							}
+    							result +=     '<div class="container opacity" style="margin:0; padding:0;" onClick="myClick('+pullUpTopic+','+senderId+')" id="'+pullUpTopic+'">' 
+    							             +'<div class="col-md-10 col-lg-10 col-sm-10 col-xs-10" style="margin:0; padding:0; " id="my-goods-item-media-left">'
+    										     +'<div class="media pull-left">'
+    											     +'<div class="media-left">'
+    										 		     +'<img src="'+data.lists[i].senderPortrait+'" alt="" class="media-object img-circle img-avatar-size img-avatar-setting"/>'
+    												 +'</div>'
+    												 +'<div class="media-body">'
+    												       +'<h4 class="media-heading media-heading-h4">'+data.lists[i].topicTitle+'</h4>'
+    													   +'<p class="media-heading-p">'+data.lists[i].displayName+'</p>'
+    												  +'</div>'
+    											 +'</div>'
+    									    +'</div>'
+    										+'<div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" style="margin:0; padding:0; margin-top:-4px;">'
+    										+'<div class="pull-right">'
+    											+'<p class="media-heading-time-p">'+data.lists[i].sendData+'</p>'
+    										+'</div>'
+    										+'</div>'
+    										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">'
+    											+'<p class="media-body-content-p">'+data.lists[i].topicContent+'</p>'
+    										+'</div>'
+    										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding:0; margin:0;">'
+    											+'<div class="row" style="margin:0; padding:0; margin-left:10px; margin-right:5px; font-size:0;" id="img-goods-container">';
+    							for(var j = 0; j < data.lists[i].mediaList.length; j++){
+    								result += '<img src="'+data.lists[i].mediaList[j].resPath+'" class="img-goods-container-img" onerror="this.src='+"'{{STATIC_URL}}square/img/bg_error.png'"+'"/>';
+    							}
+    							result +=   '</div>'
+    										+'</div>'
+    										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding:0; margin:0;">'
+    											+'<div class="pull-left" style="margin-top:6px;">'
+    												+'<span class="my-goods-neworold-level-span">'+data.lists[i].qualityGrade+'</span>'
+    											+'</div>'
+    											+'<div class="pull-right">'
+    												+'<span class="my-goods-prices-head-span">￥</span><span class="my-goods-prices-content-span">'+data.lists[i].price+'</span>'
+    											+'</div>'
+    										+'</div>'
+    										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 my-good-single-item" style="padding:0; margin:0;">'
+    											+'<div class="pull-left my-goods-browse-div">'
+    												+'<span class="my-goods-browse-span">浏览&nbsp;'+data.lists[i].viewNum+'&nbsp;次</span>'
+    											+'</div>'
+    											+'<div class="pull-right my-goods-praise-div">'
+    												+'<div class="pull-left">'
+    													+'<img src="'+wantImgSrc+'"'+'class="my-goods-praise-img"/>'
+    													+'<span class="my-goods-praise-span">&nbsp;'+data.lists[i].likeNum+'</span>'
+    												+'</div>'
+    												+'<div class="pull-right my-goods-comment-div">'
+    													+'<img src="{{STATIC_URL}}square/img/pinglun.png" class="my-goods-comment-img"/>'
+    													+'<span class="my-goods-comment-span">&nbsp;'+data.lists[i].commentNum+'</span>'
+    												+'</div>'
+    											+'</div>'
+    										+'</div>'
+    										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 " style="margin:0; padding:0;background-color:#f3f3ee; height:5px; margin-top:2px;"></div></div>';	
+    						}
+    						$('.lists').html(result);
+    						$('.img-avatar-size').css('height','44px');
+    						$('.img-avatar-size').css('width','44px');
+    						$('.media-heading-h4').css('width',parseInt($('#my-goods-item-media-left').width()-10-10-44)+'px');
+    						$('.media-heading-p').css('width',parseInt($('#my-goods-item-media-left').width()-10-10-44)+'px');
+    						$('.img-goods-container-img').css('height',(parseInt($('#img-goods-container').css('width'))-15)/3+'px');
+    						$('.img-goods-container-img').css('width',(parseInt($('#img-goods-container').css('width'))-15)/3+'px');
+    						for(var i=0;i<=$('.img-goods-container-img').length;i++){
+    							$('.img-goods-container-img').eq(i).css('margin-right','5px');
+    							$('.img-goods-container-img').eq(i).css('margin-bottom','5px');
+    						}
+ 
+    						if(data.lists.length != 0){
+    							// 有数据
+    							me.noData(false);
+    						}else{
+    							// 无数据
+    							me.noData();
+    						}
+    						// 解锁
+    						me.unlock();
+    					},
+    					error: function(xhr, type){
+    						alert('Ajax error!');
+    						/// 即使加载出错，也得重置
+    						me.resetload();
+    					}
+    				});
+                },
+                loadDownFn: function(me) {
+                	$.ajax({
+    					type: 'GET',
+    					url: "https://www.youlinzj.cn/youlin/api1.0/",
+    					cache: false,
+    		            data:{	
+    		            		community_id : communityId,
+    		            		topic_id     : pullUpTopic,
+    		            		user_id      : userId,
+    		            		type         : userType,
+    		            		tag          : 'oldreplace',
+    		            		apitype      : 'h5',
+    		            		access       : '9527'
+    		            },
+    					dataType: 'json',
+    					success: function(data){
+    						var result = '';			
+    						for(var i = 0; i < data.lists.length; i++){
+    							pullUpTopic = data.lists[i].topicInfo.topicId;
+    							senderId = data.lists[i].topicInfo.senderId;
+    							wantType = data.lists[i].likeType;
+    							if(wantType==0){
+    								wantImgSrc="{{STATIC_URL}}square/img/dianzan2.png";
+    							}else{
+    								wantImgSrc="{{STATIC_URL}}square/img/dianzan1.png";
+    							}
+    							
+    							result += '<div class="container opacity" style="margin:0; padding:0;" onClick="myClick('+pullUpTopic+','+senderId+')" id="'+pullUpTopic+'">' 
+    							             +'<div class="col-md-10 col-lg-10 col-sm-10 col-xs-10" style="margin:0; padding:0; " id="my-goods-item-media-left">'
+    										     +'<div class="media pull-left">'
+    											     +'<div class="media-left">'
+    										 		     +'<img src="'+data.lists[i].senderPortrait+'" alt="" class="media-object img-circle img-avatar-size img-avatar-setting"/>'
+    												 +'</div>'
+    												 +'<div class="media-body">'
+    												       +'<h4 class="media-heading media-heading-h4">'+data.lists[i].topicTitle+'</h4>'
+    													   +'<p class="media-heading-p">'+data.lists[i].displayName+'</p>'
+    												  +'</div>'
+    											 +'</div>'
+    									    +'</div>'
+    										+'<div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" style="margin:0; padding:0; margin-top:-4px;">'
+    										+'<div class="pull-right">'
+    											+'<p class="media-heading-time-p">'+data.lists[i].sendData+'</p>'
+    										+'</div>'
+    										+'</div>'
+    										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">'
+    											+'<p class="media-body-content-p">'+data.lists[i].topicContent+'</p>'
+    										+'</div>'
+    										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding:0; margin:0;">'
+    											+'<div class="row" style="margin:0; padding:0; margin-left:10px; margin-right:5px; font-size:0;" id="img-goods-container">';
+    							for(var j = 0; j < data.lists[i].mediaList.length; j++){
+    								result += '<img src="'+data.lists[i].mediaList[j].resPath+'" class="img-goods-container-img" onerror="this.src='+"'{{STATIC_URL}}square/img/bg_error.png'"+'"/>';
+    							}
+    							result +=   '</div>'
+    										+'</div>'
+    										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding:0; margin:0;">'
+    											+'<div class="pull-left" style="margin-top:6px;">'
+    												+'<span class="my-goods-neworold-level-span">'+data.lists[i].qualityGrade+'</span>'
+    											+'</div>'
+    											+'<div class="pull-right">'
+    												+'<span class="my-goods-prices-head-span">￥</span><span class="my-goods-prices-content-span">'+data.lists[i].price+'</span>'
+    											+'</div>'
+    										+'</div>'
+    										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 my-good-single-item" style="padding:0; margin:0;">'
+    											+'<div class="pull-left my-goods-browse-div">'
+    												+'<span class="my-goods-browse-span">浏览&nbsp;'+data.lists[i].viewNum+'&nbsp;次</span>'
+    											+'</div>'
+    											+'<div class="pull-right my-goods-praise-div">'
+    												+'<div class="pull-left">'
+    													+'<img src="'+wantImgSrc+'"'+'class="my-goods-praise-img"/>'
+    													+'<span class="my-goods-praise-span">&nbsp;'+data.lists[i].likeNum+'</span>'
+    												+'</div>'
+    												+'<div class="pull-right my-goods-comment-div">'
+    													+'<img src="{{STATIC_URL}}square/img/pinglun.png" class="my-goods-comment-img"/>'
+    													+'<span class="my-goods-comment-span">&nbsp;'+data.lists[i].commentNum+'</span>'
+    												+'</div>'
+    											+'</div>'
+    										+'</div>'
+    										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 " style="margin:0; padding:0;background-color:#f3f3ee; height:5px; margin-top:2px;"></div></div>';	
+    						}
+    						
+    						$('.lists').append(result);	
+    						$('.img-avatar-size').css('height','44px');
+    						$('.img-avatar-size').css('width','44px');
+    						$('.media-heading-h4').css('width',parseInt($('#my-goods-item-media-left').width()-10-10-44)+'px');
+    						$('.media-heading-p').css('width',parseInt($('#my-goods-item-media-left').width()-10-10-44)+'px');
+    						$('.img-goods-container-img').css('height',(parseInt($('#img-goods-container').css('width'))-15)/3+'px');
+    						$('.img-goods-container-img').css('width',(parseInt($('#img-goods-container').css('width'))-15)/3+'px');
+    						for(var i=0;i<=$('.img-goods-container-img').length;i++){
+    							$('.img-goods-container-img').eq(i).css('margin-right','5px');
+    							$('.img-goods-container-img').eq(i).css('margin-bottom','5px');
+    						}
+    						if(data.lists.length == 0){
+    							// 锁定
+    							me.lock();
+    							// 无数据
+    							me.noData();
+    						}else{
+    							// 有数据
+    							me.noData(false);
+    						}
+    						// 每次数据加载完，必须重置
+    						me.resetload();
+    					},
+    					error: function(xhr, type){
+    						console.log(xhr);
+    						// 即使加载出错，也得重置
+    						me.resetload();
+    					}
+    				}); //ajax-end
+                }
+            });
+        }, 
+};
+$(function(){
+	FastClick.attach(document.body);
+	$('#square-my-info').hide();
+	$('#nav-btn-wupin').click(function(){
+		$('#nav-btn-wupin').css('background-color','#ffffff');
+		$('#nav-btn-wode').css('background-color','#ffba02');
+		$('#nav-btn-wode').css('color','#ffffff');
+		$('#nav-btn-wupin').css('color','#ffba02');
+		$('#square-my-goods').show();
+		$('#square-my-info').hide();
+		$('#goods-search-item').show();
+	});
+	
+	$('#nav-btn-wode').click(function(){
+		$('#nav-btn-wode').css('background-color','#ffffff');
+		$('#nav-btn-wupin').css('background-color','#ffba02');
+		$('#nav-btn-wode').css('color','#ffba02');
+		$('#nav-btn-wupin').css('color','#ffffff');
+		$('#square-my-goods').hide();
+		$('#square-my-info').show();
+		$('#goods-search-item').hide();
+	});
+	
+	//绑定类别点击
+	var goodsSearchInputStatus = false;
+	$('#replace-actionbar-category').click(function(){
+		$('#goods-search-touchend').show();
+		$('#replace-actionbar-category').attr('src','{{STATIC_URL}}square/img/fenlei2.png');
+		$('#category-modal-div-div').css('height',parseInt($(window).height())-48+'px');
+		$('#category-modal').addClass("show");
+	});
+
+	//绑定点击类别空白点击
+	$('#category-modal-div').click(function(){
+		$('#replace-actionbar-category').attr('src','{{STATIC_URL}}square/img/fenlei.png');
+		$('#category-modal').removeClass("show");
+		$('#category-modal').addClass("hide");
+	});
+
+	$(window).load(function() {  
+		//初始化页面 初始化导航栏颜色
+		$('#nav-btn-wode').css('background-color','#ffba02');
+		$('#nav-btn-wupin').css('background-color','#ffffff');
+		$('#nav-btn-wode').css('color','#ffffff');
+		$('#nav-btn-wupin').css('color','#ffba02');
+		$('#square-my-info').hide();
+		$('#square-my-goods').show();
+		$('#goods-searching').hide();
+		$('#goods-search-touchend').show();
+		$('#square-my-info').css('margin-top',parseInt($('#replace-all-actionbar').height())+'px');
+		$('.img-avatar-size').css('height','44px');
+		$('.img-avatar-size').css('width','44px');
+		$('.media-heading-h4').css('width',parseInt($('#my-goods-item-media-left').width()-10-10-44)+'px');
+		$('.media-heading-p').css('width',parseInt($('#my-goods-item-media-left').width()-10-10-44)+'px');
+		$('.img-goods-container-img').css('height',(parseInt($('#img-goods-container').css('width'))-15)/3+'px');
+		$('.img-goods-container-img').css('width',(parseInt($('#img-goods-container').css('width'))-15)/3+'px');
+		for(var i=0;i<=$('.img-goods-container-img').length;i++){
+			$('.img-goods-container-img').eq(i).css('margin-right','5px');
+			$('.img-goods-container-img').eq(i).css('margin-bottom','5px');
+		}
+		
+		//我发布的绑定事件 
+		var replaceSelectObj = document.getElementById('my-release-item'); 
+		//dispatch(document.getElementById("my-release-item"), "click");  
+		//document.getElementById('my-release-item').click();  
+		replaceSelectObj.addEventListener('touchstart', function(event) { 
+			$('#my-release-item div').css('background-color','#eeeeee');
+		}, false);
+		
+		replaceSelectObj.addEventListener('touchmove', function(event) { 
+			$('#my-release-item div').css('background-color','#ffffff');
+		}, false);
+			
+		replaceSelectObj.addEventListener('touchend', function(event) { 
+			$('#my-release-item div').css('background-color','#ffffff');
+		}, false);
+		
+		//洽谈中的绑定事件
+		var negotiatingObj = document.getElementById('negotiating-item'); 
+		negotiatingObj.addEventListener('touchstart', function(event) { 
+			$('#negotiating-item div').css('background-color','#eeeeee');
+		}, false);
+		
+		negotiatingObj.addEventListener('touchmove', function(event) { 
+			$('#negotiating-item div').css('background-color','#ffffff');
+		}, false);
+			
+		negotiatingObj.addEventListener('touchend', function(event) { 
+			$('#negotiating-item div').css('background-color','#ffffff');
+			//alert(event.target.parentNode.id)
+			console.log(event.target.parentNode.id);
+		}, false);
+		//我卖出的绑定事件
+		var setoutObj = document.getElementById('set-out-item'); 
+		setoutObj.addEventListener('touchstart', function(event) { 
+			$('#set-out-item div').css('background-color','#eeeeee');
+		}, false);
+		
+		setoutObj.addEventListener('touchmove', function(event) { 
+			$('#set-out-item div').css('background-color','#ffffff');
+		}, false);
+			
+		setoutObj.addEventListener('touchend', function(event) { 
+			$('#set-out-item div').css('background-color','#ffffff');
+			//alert(event.target.parentNode.id)
+			console.log(event.target.parentNode.id);
+		}, false);
+		//我买到的绑定事件
+		var buyObj = document.getElementById('buy-item'); 
+		buyObj.addEventListener('touchstart', function(event) { 
+			$('#buy-item div').css('background-color','#eeeeee');
+		}, false);
+		
+		buyObj.addEventListener('touchmove', function(event) { 
+			$('#buy-item div').css('background-color','#ffffff');
+		}, false);
+			
+		buyObj.addEventListener('touchend', function(event) { 
+			$('#buy-item div').css('background-color','#ffffff');
+			//alert(event.target.parentNode.id)
+			console.log(event.target.parentNode.id);
+		}, false);
+		
+		userId = {{res_data.userId}};
+		communityId = {{res_data.communityId}};
+		topicId = {{res_data.topicId}};
+		userType = {{res_data.userType}};
+		//type 1:我发布的 2:洽谈中的 3:我卖出的 4:我买到的 5:分类
+		$("#my-release-item").attr('href',"https://www.youlinzj.cn/yl/web/myPush?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&type="+1+"&topic_type="+10086);
+		$("#negotiating-item").attr('href',"https://www.youlinzj.cn/yl/web/myPush?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&type="+2+"&topic_type="+10086);
+		$("#set-out-item").attr('href',"https://www.youlinzj.cn/yl/web/myPush?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&type="+3+"&topic_type="+10086);
+		$("#buy-item").attr('href',"https://www.youlinzj.cn/yl/web/myPush?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&type="+4+"&topic_type="+10086);
+		$("#category-modal-div-div-item-phone").attr('href',"https://www.youlinzj.cn/yl/web/myPush?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&type="+5+"&topic_type="+1);
+		$("#category-modal-div-div-item-digital").attr('href',"https://www.youlinzj.cn/yl/web/myPush?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&type="+5+"&topic_type="+2);
+		$("#category-modal-div-div-item-appliances").attr('href',"https://www.youlinzj.cn/yl/web/myPush?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&type="+5+"&topic_type="+3);
+		$("#category-modal-div-div-item-traveltools").attr('href',"https://www.youlinzj.cn/yl/web/myPush?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&type="+5+"&topic_type="+4);
+		$("#category-modal-div-div-item-baby").attr('href',"https://www.youlinzj.cn/yl/web/myPush?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&type="+5+"&topic_type="+5);
+		$("#category-modal-div-div-item-clothes").attr('href',"https://www.youlinzj.cn/yl/web/myPush?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&type="+5+"&topic_type="+6);
+		$("#category-modal-div-div-item-furniture").attr('href',"https://www.youlinzj.cn/yl/web/myPush?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&type="+5+"&topic_type="+7);
+		$("#category-modal-div-div-item-computer").attr('href',"https://www.youlinzj.cn/yl/web/myPush?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&type="+5+"&topic_type="+8);
+		//绑定搜索点击
+		//type=1 直接进入sou suo
+		$('#id_search_href').attr("href","https://www.youlinzj.cn/yl/web/mySearch?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&topic_type=-1"+"&type="+1);
+		// 下拉刷新的topicID  上拉刷新的topicID...
+		
+		var wantImgSrc;
+		var topDistance;
+		//初始化
+		//mAjax(1);
+		//上拉刷新	
+        //$(document.body).infinite().on("infinite", function() {
+        //	if($('#id_load_status').text()!="暂无数据"){
+        //		if(loading) return;
+       	//		loading = true;
+        //		mAjax(1);
+        //	}
+      	//});
+      	//下拉刷新
+      	//$('#square-my-goods').pullToRefresh().on("pull-to-refresh", function() {
+      	//	mAjax(2);  		
+      	//}); 
+      	
+		searchHelper.init();
+	});//load-end  
+});
+
+//调用android的发布按钮
+$('#send').click(function(){
+	myObj.send();
+});
+
+function myClick(topicId,senderId){
+	//alert(topicId);
+	//window.location.href="https://www.youlinzj.cn/yl/web/replacelistDetailSelf?topic_id="+a+"&community_id="+communityId+"&user_id="+userId+"&user_type="+userType;
+	if(userId!=senderId){
+	$.ajax({
+		type: 'GET',
+		url: "https://www.youlinzj.cn/youlin/api1.0/",
+		cache: false,
+        data:{	
+        		topic_id     : topicId,
+        		tag          : 'checksecond',
+        		apitype      : 'h5',
+        		access       : '9527'
+        },
+		dataType: 'json',
+		success: function(data){
+			var mFlag=data.flag;
+			if(mFlag=="down"){
+				$.toast("该商品已下架", "text");
+				$("#"+topicId).remove();
+				searchHelper.droploader.unlock();
+			    searchHelper.droploader.noData(false);
+			    searchHelper.droploader.resetload();
+			}else if(mFlag=="finish"){
+				$.toast("该商品已经卖出去了", "text");
+				$("#"+topicId).remove();
+				searchHelper.droploader.unlock();
+			    searchHelper.droploader.noData(false);
+			    searchHelper.droploader.resetload();
+			}else{
+				myObj.startDetailWebview(topicId,senderId);
+			}
+			
+		},
+		error:function(xhr,data){
+			
+		}
+	});
+	}else{
+		myObj.startDetailWebview(topicId,senderId);
+	}
+}
+function myRemove(topicId){
+	$("#"+topicId).remove();
+	searchHelper.droploader.unlock();
+    searchHelper.droploader.noData(false);
+    searchHelper.droploader.resetload();
+}
+
+function updateTopic(topicId,browserNum,likeType,likeNum,commentNum){
+	var $browserClass=$('.my-goods-browse-span');
+	var $likeTypeClass=$('.my-goods-praise-img');
+	var $likeNumClass=$('.my-goods-praise-span');
+	var $commentNumClass=$('.my-goods-comment-span');
+	$("#"+topicId).find($browserClass).html("浏览&nbsp;"+browserNum+"&nbsp;次");
+	if(likeType==0){
+		$("#"+topicId).find($likeTypeClass).attr('src','{{STATIC_URL}}square/img/dianzan2.png');
+	}else if(likeType==1){
+		$("#"+topicId).find($likeTypeClass).attr('src','{{STATIC_URL}}square/img/dianzan1.png');
+	}
+	$("#"+topicId).find($likeNumClass).html("&nbsp;"+likeNum);
+	$("#"+topicId).find($commentNumClass).html("&nbsp;"+commentNum);
+}
+
+</script>
+</html>

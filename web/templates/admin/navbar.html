@@ -1,0 +1,157 @@
+<link href="../../static/assets/css/jquery-ui.min.css" rel="stylesheet"/>
+
+
+
+<div class="navbar navbar-default" id="navbar">
+			<script type="text/javascript">
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="navbar-container" id="navbar-container">
+				<div class="navbar-header pull-left">
+					<a href="#" class="navbar-brand">
+						<small>
+							<i class="icon-leaf"></i>
+							优邻后台管理系统
+						</small>
+					</a><!-- /.brand -->
+				</div><!-- /.navbar-header -->
+
+				<div class="navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+	
+
+						<li class="light-blue">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<img class="nav-user-photo" src="../../static/assets/avatars/user.jpg" alt="Jason's Photo" />
+								<span class="user-info">
+									<small >欢迎光临,</small>
+									<span id="rd_username" >{{ res_data.username }}</span>
+								</span>
+
+								<i class="icon-caret-down"></i>
+							</a>
+
+							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<li>
+									<a href="#" id="set_up">
+										<i class="icon-cog"></i>
+										修改密码
+									</a>
+								</li>
+
+								<li>
+									<a href="#"id=person_data>
+										<i class="icon-user"></i>
+										个人资料
+									</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<a href="user_logout">
+										<i class="icon-off"></i>
+										退出
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul><!-- /.ace-nav -->
+				</div><!-- /.navbar-header -->
+			</div><!-- /.container -->
+</div>
+<!--  弹出密码审核窗口-->
+<div class="hide">
+	<form role="form"  class="form-horizontal" id="cpsd_form" method="POST"enctype="multipart/form-data">
+	<input type="reset" name="reset" style="display: none;" />
+       
+         <div class="form-group">
+           <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="old_psd" >原密码：</label>
+           		<div class="col-xs-12 col-sm-9">
+	                	<input class="input-xlarge" type="text" id="old_psd" name="old_psd" value=""placeholder="不能为空"/> 
+	                	<small id="t_old_psd1"><font color="red"></font></small>
+	                	<small id="t_old_psd2"><font color="red"></font></small>
+	            </div>
+         </div>
+         
+        <div class="form-group">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="new_psd">修改密码：</label>
+				<div class="col-xs-12 col-sm-9">
+					<input type="password" class="input-xlarge" id="new_psd"  name="new_psd" value=""placeholder="不能为空"/>
+					<small id="t_new_psd1"><font color="red"></font></small>
+					<small id="t_new_psd2"><font color="red"></font></small>
+				</div>
+			</div>
+			
+			 <div class="form-group">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="rnew_psd">确认密码：</label>
+				<div class="col-xs-12 col-sm-9">
+					<input type="password" class="input-xlarge" id="rnew_psd" name="rnew_psd"placeholder="输入相同密码" />
+					<small id="t_rnew_psd1"><font color="red"></font></small>
+					<small id="t_rnew_psd2"><font color="red"></font></small>
+				</div>
+			</div>
+
+<p id="tip_pspswd"><font color="red"></font></p>
+</form>
+</div>
+
+<!-- 弹出个人资料 -->
+<div class="hide">
+	<form class="form-horizontal" id="person_form" method="POST"enctype="multipart/form-data">
+	<input type="reset" name="reset" style="display: none;" />
+     
+       
+         <div class="form-group">
+           <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="name" >用户名：</label>
+           		<div class="col-xs-12 col-sm-9">
+           		<span id="person_name" >{{ res_data.username }}</span>
+	            </div>
+         </div>
+			
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="email">邮箱：</label>
+				<div class="col-xs-12 col-sm-9">
+					<input type="text" class="input-xlarge" id="person_email" name="person_email"value=""/>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="pnohe">手机号码：</label>
+				<div class="col-xs-12 col-sm-9">
+					<input type="text" class="input-xlarge" id="person_phone" name="person_phone" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right"  for="city">所在城市：</label>
+				<div class="col-xs-12 col-sm-9">
+					<select id="person_city"name="person_city" >
+		   	 	 		<option value="-1">请选择城市</option> 
+					</select>
+				</div>
+			</div>	
+			
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right"  for="community">所在小区：</label>
+				<div class="col-xs-12 col-sm-9">
+					<select id="person_com" name="person_com">
+		   	 	  		<option value="-1">请选择小区</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right"  for="role">设置角色：</label>
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="name" id="rd_user_role">{{ res_data.user_role }}</label>  
+			</div>	
+			
+		<div class="form-group">
+           <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="name" >状态：</label>
+           <label class="control-label col-xs-12 col-sm-2 " for="name"  id="rd_user_state">{{ res_data.user_state }}</label>  
+         </div>
+         
+<p id="tip_person"><font color="red"></font></p>
+</form>
+</div>

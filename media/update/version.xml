@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<info>
+    <version>1.3</version>
+    <url>http://172.16.50.197/media/update/youlin.apk</url>
+    <force>no</force>
+    <description>检测到最新版优邻，请及时更新！</description>
+    <url_server>http://172.16.50.197/media/update/version.xml</url_server>
+</info>

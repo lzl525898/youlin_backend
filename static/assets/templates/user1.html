@@ -1,0 +1,151 @@
+<script src="../../static/assets/js/jquery.pagination.js"></script>
+<link href="../../static/assets/css/pagination.css" rel="stylesheet"/>
+<link href="../../static/assets/css/jquery-ui.min.css" rel="stylesheet"/>
+<script src="../../static/assets/js/jquery-ui.min.js"></script> 
+<script src="../../static/assets/js/admin/common.js" ></script>
+ <script src="../../static/assets/js/admin/user.js" ></script>
+ 
+ 
+ <div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+	</script>
+
+	<ul class="breadcrumb">
+		<li>
+			<i class="icon-home home-icon"></i>
+			<a href="#">用户管理</a>
+		</li>
+		<li class="active">用户列表</li>
+	</ul><!-- .breadcrumb -->
+</div>
+
+<div class="page-content">
+	<div class="page-header">
+		<h1>用户<small>列表</small>
+		<div class="pull-right"><a href="#" class="btn btn-success btn-sm"id="showDialog">添加用户</a></div>
+		</h1>
+	</div>
+	
+	<table class="table table-striped table-bordered table-condensed"id="audit">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>名字</th>
+						<th>邮箱</th>
+						<th>手机号码</th>
+						<th>所在城市</th>
+	                    <th>所属小区</th>
+						<th>角色</th>
+						<th>用户状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			
+			<div id="Pagination" class="pagination" ></div>	 	
+</div>
+
+
+
+
+<!-- 弹出审核 -->
+<div class="hide">
+	<form class="form-horizontal" id="user_form" method="POST"enctype="multipart/form-data">
+	<input type="hidden" id="idstr" name="idstr" value="-1"/>
+	<input type="reset" name="reset" style="display: none;" />
+     <!--   <input type="button" value="Click me" onclick="msg()" /> -->
+       
+         <div class="form-group">
+           <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="name" >用户名</label>
+           		<div class="col-xs-12 col-sm-9">
+           		<!-- <textarea name="name" id="name" cols="15" rows="1"  value=""placeholder="不能为空"></textarea> -->
+	                	<input class="input-xlarge" type="text" id="name" name="name" value=""placeholder="不能为空"onblur="V_Name()"/> 
+	                	<small id="t_name1"><font color="red"></font></small>
+	                	<small id="t_name2"><font color="red"></font></small>
+	            </div>
+         </div>
+         
+        <div class="form-group"id="psd">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="email">密码</label>
+				<div class="col-xs-12 col-sm-9">
+					<input type="password" class="input-xlarge" id="password"  name="password" value=""placeholder="不能为空"onblur="Password()"/>
+					<small id="t_password1"><font color="red"></font></small>
+					<small id="t_password2"><font color="red"></font></small>
+				</div>
+			</div>
+			
+			 <div class="form-group"id="rpsd">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="email">确认密码</label>
+				<div class="col-xs-12 col-sm-9">
+					<input type="password" class="input-xlarge" id="repassword" name="repassword"placeholder="输入相同密码" onblur="V_Password()"/>
+					<small id="t_repassword1"><font color="red"></font></small>
+					<small id="t_repassword2"><font color="red"></font></small>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="email">邮箱</label>
+				<div class="col-xs-12 col-sm-9">
+					<input type="text" class="input-xlarge" id="email" name="email"value=""onblur="V_email()"/>
+					<small id="t_email1"><font color="red"></font></small>
+					<small id="t_email2"><font color="red"></font></small>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="pnohe">手机号码</label>
+				<div class="col-xs-12 col-sm-9">
+					<input type="text" class="input-xlarge" id="phone" name="phone" onblur="V_Phone()"/>
+					<small id="t_phone1"><font color="red"></font></small>
+					<small id="t_phone2"><font color="red"></font></small>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right"  for="city">所在城市</label>
+				<div class="col-xs-12 col-sm-9">
+					<select id="city_id"name="city_id" onblur="V_city()">
+		   	 	 		<option value="-1">请选择城市</option> 
+					</select>
+					<small id="t_city1"><font color="red"></font></small>
+					<small id="t_city2"><font color="red"></font></small>
+				</div>
+			</div>	
+			
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right"  for="community">所在小区</label>
+				<div class="col-xs-12 col-sm-9">
+					<select id="com_id" name="com_id"onblur="V_community()">
+		   	 	  		<option value="-1">请选择小区</option>
+					</select>
+					<small id="t_com1"><font color="red"></font></small>
+					<small id="t_com2"><font color="red"></font></small>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right"  for="role">设置角色</label>
+					<div class="col-xs-12 col-sm-9">
+						<select id="role_id"name="role_id" onblur="V_role()">
+		   	 	 			<option value="-1">请选择角色</option> 
+						</select>
+					<small id="t_role1"><font color="red"></font></small>
+					<small id="t_role2"><font color="red"></font></small>
+				</div>
+			</div>	
+			
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-2 no-padding-right"  for="active">激活用户?</label>
+				<div class="col-xs-12 col-sm-9">
+					<input type="checkbox" id="active" name="active"value="0" onclick="check_box()"/>
+				</div>
+			</div> 
+
+<p id="tip"><font color="red"></font></p>
+</form>
+</div>
+
+
+

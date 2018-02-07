@@ -1,0 +1,14 @@
+#selectecity{background: rgba(165,165,165,0.3)}
+
+html{background-color: #ccc}
+.ui-header, .ui-footer{border:0;}
+.ui-page-theme-a .ui-bar-inherit{background-color: #FFC107;color: #fff;text-shadow: 0 0 0 #eee}
+.ui-btn-left, .ui-btn-right{top: 0.4em;}
+#header .ui-btn{background-color:transparent;border:0;box-shadow: none;text-shadow: 0 0 0 #eee;color: #fff}
+.ui-btn-icon-left:after, .ui-btn-icon-right:after, .ui-btn-icon-top:after, .ui-btn-icon-bottom:after, .ui-btn-icon-notext:after{background-color: #FFC107}
+.personal{font-size: .7rem;}
+.personal .ui-grid-a{border-bottom: 1px solid #C7C1C1;background-color: #fff;padding:5%;}
+.personal .ui-block-a{text-align: left;color: #908E8E}
+.personal .ui-block-b{text-align: right}
+.personal .ui-block-b img{border-radius: 100%;height: 25%;vertical-align: middle}
+.ui-content{padding: 0;}

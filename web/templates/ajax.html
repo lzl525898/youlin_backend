@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>TEXT-AJAX</title>
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<link href="{{STATIC_URL}}assets/css/jquery.mobile-1.4.5.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<button class="btn default-btn" id="test-ajax">123</button>
+
+<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#test-ajax').click(function(){
+		$.ajax({
+			type: 'GET',
+			url: "https://123.57.9.62/youlin/api1.0/",
+			cache: false,
+            data:{a: '123',b: '234',tag:'ajax',apitype:'jpush',access:'9527'},
+			dataType: 'json',
+			success: function(data){
+				console.log(data.value2);
+				alert(data.value1);
+			},
+			error: function(xhr, type){
+				console.log(eval(xhr));
+				alert(type);
+			}
+		});
+	});
+});
+</script>
+</body>
+</html>

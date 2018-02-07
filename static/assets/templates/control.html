@@ -1,0 +1,135 @@
+ <link href="../../static/assets/css/style2.css" rel="stylesheet" media="screen"/> 
+<link href="../../static/assets/css/jquery-ui.min.css" rel="stylesheet"/>
+<script src="../../static/assets/js/jquery-ui.min.js"></script>  
+<script src="../../static/assets/js/admin/common.js" ></script>
+ <script src="../../static/assets/js/admin/control.js" ></script> 
+<!-- <script src="../../static/assets/js/Chart.js"></script>
+<script src="../../static/assets/js/Chart.min.js"></script> -->
+
+
+
+<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home home-icon"></i>
+								<a href="#">首页</a>
+							</li>
+							<li class="active">控制台</li>
+						</ul><!-- .breadcrumb -->
+					</div>
+
+					<div class="page-content">
+						<div class="page-header">
+							<h1>
+								优邻后台管理系统控制台
+							</h1>
+						</div><!-- /.page-header -->
+						
+					
+						
+					
+						
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<div class="alert alert-block alert-success">
+									<button type="button" class="close" data-dismiss="alert">
+										<i class="icon-remove"></i>
+									</button>
+
+									<i class="icon-ok green"></i>
+
+									欢迎使用
+									<strong class="green">
+										优邻后台管理系统
+									<small>(v1.0)</small>
+									</strong>				
+							  </div>		
+							  
+							  
+							  <style>
+							   .style1 {width:20%;  float:left;margin:1% 1.5%;}
+							/*   @media (max-width:370px) and (max-width:415px) {
+							  	  .style1 {width:10%;  float:left;;margin:10px 20px;}
+							  	/*   .dashboard-stat .visual {width: 100px;height:10px;display: block; float: left;padding-top: 2px;padding-left: 3px;} */
+							  } */
+							  </style>
+							  	<div class="style1">
+							  	<div class="dashboard-stat yellow" >
+										<div class="visual">
+												<i class="icon-bar-chart"></i>
+										</div>
+										<div class="details">
+												<div class="number"id="cvbl_gift"></div>
+												<div class="desc">上架礼品数</div>
+										</div>
+										<a class="more " href="#"onClick="Page_Jump('gift')">
+											总礼品数：<span id="total_gift"></span>个<!--  <i class="m-icon-swapright m-icon-white"></i> -->
+										</a>      
+										</div> 
+							  	</div>
+							  	
+							  	<div class="style1">
+							  	<div class="dashboard-stat blue">
+											<div class="visual">
+												<i class="icon-comments"></i>
+											</div>
+											<div class="details">
+												<div class="number"id="un_address"></div>
+												<div class="desc"> 待审核地址</div>
+											</div>
+											<a class="more" href="#"onClick="Page_Jump('address_audit')">
+											申请审核地址总数：<span id="total_address"></span>条<!--  <i class="m-icon-swapright m-icon-white"></i> -->
+											</a>                 
+										</div>
+							  	</div>
+							  	
+							  	<div class="style1">
+							  	<div class="dashboard-stat red">
+											<div class="visual">
+												<i class="icon-globe"></i>
+											</div>
+											<div class="details">
+												<div class="number"id="un_exchange"></div>
+												<div class="desc"> 兑换中的礼品</div>
+											</div>
+											<a class="more" href="#"onClick="Page_Jump('exchange')">
+											总兑换记录：<span id="total_exchange"></span>条<!--  <i class="m-icon-swapright m-icon-white"></i> -->
+											</a>                 
+										</div>
+							  	</div>
+										
+										
+								<div class="style1">
+							  	<div class="dashboard-stat purple">
+											<div class="visual">
+												<i class="icon-shopping-cart"></i>
+											</div>
+											<div class="details">
+												<div class="number"id="su_count"></div>
+												<div class="desc"> 一周意见数</div>
+											</div>
+											<a class="more" href="#"onClick="Page_Jump('suggest')">
+											总意见记录：<span id="total_suggest"></span>条<!--  <i class="m-icon-swapright m-icon-white"></i> -->
+											</a>                 
+										</div>
+							  	</div>
+								
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+							
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+	<!-- 盘型图-->								 						  
+	<!-- 						  <div>
+								  <canvas id="canvas1" height="300" width="300"></canvas>
+								  <canvas id="canvas2" height="300" width="300"></canvas>
+							  </div> -->			
+					
+					

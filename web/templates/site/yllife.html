@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<title>优邻</title>
+	<link rel="stylesheet" href="../../../static/assets/css/common.css">
+	<script>
+		$(window).scroll(function(event){  //滚动条监听
+				var oS = $(document).scrollTop(); 
+    	});
+	</script>
+	<style>
+		.b1{max-width: 723px;padding: 1% 1%;margin:0 auto;border:1px solid #dadada;margin-top:2%;margin-bottom: 4%;position: relative;}
+		.main .content .imgDiv{position: relative;overflow: hidden;height: 18%;margin:0 auto;}
+		.main .content img{width: 100%;}
+
+		h1{font-size: 2.5rem;color: #323232}
+		p{font-size: 1.2rem;color: #808080;}
+		a{color: #808080;}
+		a:hover{text-decoration: none}
+		.step{position: absolute;right:3%;top: 93%;}
+		
+
+		@media screen and (min-width: 1200px){
+	
+		
+		small{height: 40px;line-height: 71px;color: #bebebe}
+		p{letter-spacing: 2px;}
+
+
+		}
+		@media (max-width: 1199px) and (min-width: 993px){
+	
+
+		small{height: 40px;line-height: 71px;color: #bebebe}
+		p{letter-spacing: 1px;}
+
+
+		}
+		@media (max-width: 992px) and (min-width: 769px){
+	
+
+		small{height: 40px;line-height: 71px;color: #bebebe}
+		p{letter-spacing: 1px;}
+
+
+	
+		}
+		@media (max-width: 768px) and (min-width: 415px){
+	
+
+		small{height: 40px;line-height: 71px;color: #bebebe}
+		p{letter-spacing: 1px;}
+
+
+	
+		}
+		@media (max-width: 414px) and (min-width: 376px){
+		
+		
+		small{height: 40px;line-height: 71px;color: #bebebe}
+		p{letter-spacing: 1px;}
+
+
+	
+		
+		}
+		@media (max-width: 375px) and (min-width: 321px){
+		
+		
+		h1{font-size: 2rem;color: #323232}
+		p{font-size: 1rem;color: #808080;}	
+		small{height: 40px;line-height: 71px;color: #bebebe}
+		p{letter-spacing: 1px;}
+
+
+
+		
+		}
+		@media (max-width: 320px) and (min-width: 1px){
+	
+			
+		
+		h1{font-size: 2rem;color: #323232;margin-top: 10px}
+		p{font-size: 1rem;color: #808080;}	
+		small{height: 40px;line-height: 71px;color: #bebebe}
+		p{letter-spacing: 1px;}
+		.step{position: absolute;right:3%;top: 95%;}
+
+		}
+
+	</style>
+</head>
+<body>
+{% include 'site/top.html'%}
+	<div class="main container">
+		<div class="content">
+		
+		{% if res_data%}
+			{% for a in res_data%}
+				<div class="b1 clearfix">
+					<div class="imgDiv">
+						<img src="{{ a.yl_pic }}" alt="" width="100%">
+					</div>
+					<h1 class="pull-left">{{ a.yl_title}}</h1>
+					<small class="pull-right">{{ a.yl_author}}/<span>{{ a.yl_date}}</span></small>
+					<div class="clearfix"></div>
+					<p class="p1">{{ a.yl_bc}}</p>
+					<div class="step">
+						<a href="/yl/content?id={{a.yl_id}}">阅读原文》</a>
+					</div>
+				</div>
+			{% endfor %}
+		{% endif %}
+		</div>
+		
+	</div>
+{% include 'site/footer.html'%}
+<script>
+
+ 	var oW = $(window).width();
+	if(oW>768){
+	  $(".p1").each(function(){
+		  var text = $(this).text().substring(0,120) + "...";
+		  $(this).text(text);
+	  });
+	}else{
+		 $(".p1").each(function(){
+		  var text = $(this).text().substring(0,20) + "...";
+			  $(this).text(text);
+		  });
+	}
+
+	var a = oW * 0.40;
+	$(".imgDiv img").css("margin-top", -oW * 0.1); 
+</script>
+</body>
+</html>

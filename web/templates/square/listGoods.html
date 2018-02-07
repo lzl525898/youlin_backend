@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>爆款列表</title>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylbootstrap.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylfont-awesome.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylactionBar.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylweui.min.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/yljquery-weui.css" />
+<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yldevice-toucher.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylhammer.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yljquery-weui.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylfastclick.js"></script>
+<style type="text/css">
+	body {
+		font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft YaheiUI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+  		padding-top: 50px;/*有顶部固定导航条时设置*/
+  		padding-bottom: 50px;/*有底部固定导航条时设置*/
+	}
+	
+	.btn:focus,
+	.btn:active:focus,
+	.btn.active:focus,
+	.btn.focus,
+	.btn:active.focus,
+	.btn.active.focus {
+		outline: none;          
+	}
+	
+	.goods-describe-info-div{
+		 margin-left:0px;
+		 margin-right:12px; 
+		 padding-top:5px;
+	}
+	
+	.goods-describe-info-p{
+		color:#323232;
+		font-size: 16px; 
+		font-weight: 600;
+		display: -webkit-box !important;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		word-break: break-all; 
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2; 
+	}
+	
+	#goods-describe-price-div{
+		text-overflow:ellipsis; 
+		white-space:nowrap; 
+		overflow:hidden;
+	}
+	
+	.goods-describe-buy-btn{
+		border-radius:1px;
+		font-weight:500;
+		color:#ffffff; 
+		background-color:#ef2f35; 
+		margin-right:13px;
+		font-size: 16px;
+	}
+	
+	.my-goods-prices-head-span{
+		margin-left:-2px;
+		font-weight:800;
+		font-size:12px;
+		color:#ef2f35;
+	}
+
+	.my-goods-prices-content-span{
+		font-size:16px;
+		font-weight:800;
+		color:#ef2f35;
+	}
+	.my-goods-comment-span{
+		color:#808080;
+		font-size:12px;
+	}
+	
+</style>
+</head>
+<body>
+	<div class="actionbar navbar-fixed-top">
+		<div class="row" style="margin:0; padding:0; height:48px;" onclick="mBack()">
+			<a href="javascript:;" class="pull-left">
+				<i class="fa fa-angle-left" style="margin-left:10px;color:#ffffff;font-size:32px; margin-top:7px;"></i>
+			</a>
+			<div class="pull-left" style="height:48px;">
+				<span class="actionbarText" style="margin-left:7px;">爆款商品</span>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" id="id_goods">
+		
+	</div>
+<script type="text/javascript">
+var communityId={{res_data.communityId}};
+$(function(){
+	FastClick.attach(document.body);
+	$(window).load(function() { 
+		//请求物品列表
+		 $.ajax({
+				type: 'GET',
+				url: "https://www.youlinzj.cn/youlin/api1.0/",
+				cache: false,
+		        data:{	
+		        		tag          : 'getgoodslist',
+		        		goods_id     : 0,
+		        		sg_type      : -1,
+		        		community_id : communityId,
+		        		apitype      : 'h5',
+		        		access       : '9527'
+		        },
+				dataType: 'json',
+				success: function(data){
+					var len=data.lists.length;
+					for(var i=0;i<len;i++){
+					$('#id_goods').append(
+						'<div class="row" style="padding-top:6px; padding-bottom:6px;background-color:#ffffff; border-bottom:1px solid #f3f3ee" '+'onclick="myClick('+data.lists[i].sgID+')"'+'>'
+							+'<div class="media">'
+								+'<a class="media-left media-middle" href="#">'
+									+'<img src="'+data.lists[i].sgImgurl+'" alt="" style="width:100px; height:100px;margin-left:13px;">'
+								+'</a>'
+								+'<div class="media-body" style="position:relative;width:100%;">'
+									+'<div class="row goods-describe-info-div">'
+										+'<p class="goods-describe-info-p">'+data.lists[i].sgDescribe+'</p>'
+									+'</div>'
+								+'<div class="row" style="margin:0; padding:0; position:absolute; bottom:0; width:100%;" >'
+									+'<div class="pull-left" style="position:absolute; bottom:0;">'
+										+'<div>'
+											+'<div id="goods-describe-price-div">'
+											+'<span class="my-goods-prices-head-span">￥</span><span class="my-goods-prices-content-span">'+data.lists[i].sgPrice+'</span>'
+											+'</div>'
+										+'</div>'
+										+'<div>'
+											+'<span class="my-goods-comment-span">'+data.lists[i].sgComment+'</span><span class="my-goods-comment-span">条评价</span>'
+										+'</div>' 
+									+'</div>'
+									+'<div class="pull-right">'
+										+'<button class="btn goods-describe-buy-btn">立即购买</button>'
+									+'</div>'
+								+'</div>'
+							+'</div>'
+						+'</div>'
+						+'</div>'
+					);
+				}
+				},
+				error:function(xhr,data){
+					alert("222222");
+				}
+			});
+	});
+	
+});
+function myClick(sgId){
+	//alert(sgId);
+	myObj.mStartActivity(sgId);
+}
+function mBack(){
+	myObj.mFinish();
+}
+</script>
+</body>
+</html>

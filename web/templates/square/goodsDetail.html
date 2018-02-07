@@ -1,0 +1,802 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>爆款详情</title>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylbootstrap.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylfont-awesome.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylactionBar.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylweui.min.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/yljquery-weui.css" />
+<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yldevice-toucher.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylhammer.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yljquery-weui.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylfastclick.js"></script>
+<style type="text/css">
+	body {
+		font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft YaheiUI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+  		padding-top: 48px;/*有顶部固定导航条时设置*/
+  		padding-bottom: 50px;/*有底部固定导航条时设置*/
+		background-color:#f3f3ee;
+		height: 100%;
+		width: 100%;
+	}
+	
+	.action-title-p{
+		font-size:16px;
+		color: #fff;
+	}
+	
+	.goods-detail-content{
+		background-color:#FFFFFF;
+		height:260px;
+		position:relative;
+	}
+	.goods-carousel-index{
+		position:absolute;
+		z-index:5;
+		width:40px;
+		height:24px;
+		border-radius:120px;
+		background:rgba(0,0,0,0.4);
+		top:225px;
+		right:13px; 
+	}
+	.goods-carousel-left{
+		font-size:16px;
+		font-weight:600;
+		color:#fa5b11;
+	}
+	
+	.goods-carousel-center{
+		font-size:16px;
+		font-weight:600;
+		color:#ffffff;
+	}
+	
+	.goods-carousel-right{
+		font-size:16px;
+		font-weight:600;
+		color:#ffffff;
+	}
+	
+	.my-goods-prices-head-span{
+		margin-left:-2px;
+		font-weight:800;
+		font-size:16px;
+		color:#ef2f35;
+	}
+
+	.my-goods-prices-content-span{
+		font-size:24px;
+		font-weight:800;
+		color:#ef2f35;
+	}
+		
+	#goods-div-content-dizhi{
+		text-overflow:ellipsis; 
+		white-space:nowrap; 
+		overflow:hidden;
+	}
+	
+	.detail-goodscomment-nav{
+		text-align:center;
+		height:100%;
+		font-size:12px;
+		color:#323232;
+		font-weight:500;
+	}
+
+	.detail-goodscomment-nav span{
+		line-height:30px;
+	}
+	
+	.detail-goodscomment-nav div{
+		margin-top:-5px;
+	}
+	
+	.goods-detail-comment-div{
+		margin-top:10px;
+	}
+	
+	.goods-comment-user-info{
+		height:48px; 
+		border-top:1px solid #CCCCCC; 
+		background-color:#FFFFFF;
+	}
+	
+	.goods-comment-avatar-img-info{
+		width:28px; 
+		height:28px; 
+		margin-left:10px; 
+		margin-top:10px;
+	}
+	
+	.goods-comment-nick-info{
+		height:48px;
+		line-height:48px;
+		margin-left:7px; 
+		font-size:12px;
+		color:#323232;
+		font-weight:500;
+	}
+	
+	.goods-comment-evaluate-info{
+		height:48px;
+		line-height:48px;
+		margin-left:12px;
+	}
+	
+	.goods-comment-release-time{
+		height:48px;
+		line-height:48px;
+		margin-right:13px;
+		font-size:12px;
+		color:#808080;
+		font-weight:500;
+	}
+	
+	.goods-comment-star-info{
+		margin-left:2px; 
+		margin-top:18px;
+		font-size:0; 
+		width:12px; 
+		height:12px;
+	}
+	
+	.goods-comment-comment-info{
+		background-color:#ffffff;
+		padding-top:10px;
+		padding-left:10px;
+		padding-right:10px;
+		margin-bottom:13px;
+	}
+	.goods-comment-comment-info p{
+		font-size:12px;
+		color:#323232;
+		font-weight:500;
+		line-height:20px;
+	}
+	.black_over{
+		display: none;
+ 		position: absolute;
+ 		top: 0%;
+ 		left: 0%;
+ 		width: 100%;
+ 		height: 25%;
+ 		background-color:#000;
+ 		z-index:1031;
+ 		-moz-opacity: 0.3;
+ 		opacity:.30;
+ 		filter: alpha(opacity=30);
+	}
+	.white_content{
+		display: none;
+ 		position: absolute;
+ 		top: 25%;
+ 		width: 100%;
+ 		height:75%;
+ 		background-color:#fff;
+ 		z-index:1031;
+	}
+	
+</style>
+</head>
+
+<body>
+<div >
+	<div class="actionbar navbar-fixed-top">
+		<div class="row" style="margin:0; padding:0; height:48px;">
+			<div class="col-md-1 col-lg-1 col-sm-2 col-xs-2" style="margin:0; padding:0;">
+				<a href="javascript:;" class="pull-left" onclick="mBack()">
+					<i class="fa fa-angle-left" style="margin-left:16px;color:#ffffff;font-size:32px; margin-top:7px;"></i>
+				</a>
+			</div>
+			
+			<div class="col-md-10 col-lg-10 col-sm-8 col-xs-8 center-block" style="margin:0; padding:0; height:48px;left: 50%;position: relative;" id="action-title-nav-div">
+				<div class="pull-left" style="left: -50%;position: relative;">
+					<div class="pull-left" style="margin-top:11px;border-bottom:4px solid #805f00;" id="goods-detail-div-goods">
+						<p class="action-title-p" style="color: #805f00">商品</p>
+					</div>
+					<div class="pull-left" style="margin-left:22px;margin-top:11px;" id="goods-detail-div-detail">
+						<p class="action-title-p">详情</p>
+					</div>
+					<div class="pull-left" style="margin-left:22px;margin-top:11px;" id="goods-detail-div-evaluate">
+						<p class="action-title-p">评价</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="goods-detail-goodscontent">
+		<div class="goods-detail-content">
+		<div style="position:absolute;z-index:2; width:100%; border:none; padding:0px; margin:0px;">
+			<div id="goods-detail-carousel">
+				<div class="carousel slide">
+					<ol class="carousel-indicators hide" id="id_img_ol">
+					</ol>
+					<div class="carousel-inner" id="id_img_div">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="goods-carousel-index">
+			<div class="pull-left goods-carousel-left">
+				<p>&nbsp;&nbsp;1</p>
+			</div>
+			<div class="pull-left goods-carousel-center">
+				<p>/</p>
+			</div>
+			<div class="pull-left goods-carousel-right">
+				<p>3</p>
+			</div>
+		</div>
+		</div>
+		<div style="background-color:#ffffff" id="id_content">
+			<div class="row" style="margin:0; padding:0; padding-top:5px; margin-left:13px; margin-right:13px;">
+				<span style="font-size:14px; font-weight:500;line-height:22px;letter-spacing:0em" id="id_title"></span>
+				<span style="background-color:#ef2f35; color:#ffffff; display:inline-block; height:20px; line-height:22px; 
+				font-size:10px;font-weight:500;border-radius:5px;">&nbsp;&nbsp;火&nbsp;爆&nbsp;&nbsp;</span>
+			</div>
+			<div class="row" style="margin:0; padding:0; margin-top:5px; margin-left:13px; margin-right:13px;">
+				<a style="text-decoration:underline; color:#ef2f35;font-size:15px; font-weight:500;">火爆热卖，莫失良机，详情点击</a>
+			</div>
+			<div class="row" style="margin:0; padding:0; margin-top:10px; margin-left:13px; margin-right:13px; margin-bottom:5px;">
+				<span class="my-goods-prices-head-span">￥</span><span class="my-goods-prices-content-span" id="id_price"></span>
+			</div>
+		</div>
+		<div class="row" style="margin:0; padding:0;height:54px; margin-top:10px; background-color:#ffffff" id="goods-div-container">
+			<div class="pull-left" style="color:#808080; font-size:14px; line-height:54px; margin-left:13px;">已选</div>
+			<div class="pull-left" style="color:#323232; font-size:14px; line-height:54px; margin-left:15px;" id="id_choose">黑色，1个</div>
+			<div class="pull-right" style="color:#323232; font-size:14px; line-height:54px; margin-left:15px;" id="goods-div-angle-right">
+				<i class="fa fa-angle-right" style="margin-right:14px;color:#e6e6e6; font-size:36px;margin-top:8px;"></i>
+			</div>
+		</div>
+		<div class="row" style="margin:0; padding:0;height:54px; margin-top:10px; background-color:#ffffff">
+			<div class="pull-left" style="color:#808080; font-size:14px; line-height:54px; margin-left:13px;">送达</div>
+			<div class="pull-left" style="color:#323232; font-size:14px; line-height:54px; margin-left:15px;width: 70%;" id="goods-div-content-dizhi">
+				
+			</div>
+			<div class="pull-right" style="color:#323232; font-size:14px; line-height:54px; margin-left:15px;">
+				<i class="fa fa-angle-right" style="margin-right:14px;color:#e6e6e6; font-size:36px;margin-top:8px;"></i>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="navbar navbar-default navbar-fixed-bottom" style="background-color:#ffffff">
+			<div  style="background-color:#fff;width: 45%;height:50px;padding-top:10px;text-align: center;float: left;" id="id_comment">
+				<div><img src="{{STATIC_URL}}square/img/liuyan.png" style="width:21px;height: 18px;"></div>
+				<div style="font-size:12px;color:#808080;" id="id_comment_num">联系我们</div>
+			</div>
+			<div  style="background-color:#fa5c10;width: 55%;height:50px;line-height: 51px;text-align: center;color:#fff;font-size:16px;float: left;" type="button" id="id_buy">
+				立即购买
+			</div>
+		</div>
+	</div>
+	<div id="goods-detail-goodscomment" style="display: none;">
+		<div class="row" style="margin:0; padding:0; height:48px; border-bottom:1px solid #eeeeee; background-color:#ffffff;">
+			<div id="goodscomment-nav-all" class="pull-left detail-goodscomment-nav" style="width: 20%;">
+				<span>全部评价</span>
+				<div>1200</div>
+			</div>
+			<div id="goodscomment-nav-good" class="pull-left detail-goodscomment-nav" style="width: 20%;">
+				<span>好评</span>
+				<div>998</div>
+			</div>
+			<div id="goodscomment-nav-medium" class="pull-left detail-goodscomment-nav" style="width: 20%;">
+				<span>中评</span>
+				<div>102</div>
+			</div>
+			<div id="goodscomment-nav-bad" class="pull-left detail-goodscomment-nav" style="width: 20%;">
+				<span>差评</span>
+				<div>100</div>
+			</div>
+			<div id="goodscomment-nav-pic" class="pull-left detail-goodscomment-nav" style="width: 20%;">
+				<span>有图</span>
+				<div>500</div>
+			</div>
+		</div>
+		<div class="goods-detail-comment-div" style="background-color: #fff;">
+			<div class="goods-detail-comment-div-item">
+				<div class="goods-comment-user-info">
+					<div class="pull-left">
+						<img src="{{STATIC_URL}}square/img/guo.png" class="img-circle goods-comment-avatar-img-info"/>
+					</div>
+					<div class="pull-left goods-comment-nick-info">卡***拉</div>
+					<div class="pull-left goods-comment-evaluate-info">
+						<div class="pull-left">
+							<img src="{{STATIC_URL}}square/img/star.png" class="goods-comment-star-info"/>
+						</div>
+						<div class="pull-left">
+							<img src="{{STATIC_URL}}square/img/star.png" class="goods-comment-star-info"/>
+						</div>
+						<div class="pull-left">
+							<img src="{{STATIC_URL}}square/img/star.png" class="goods-comment-star-info"/>
+						</div>
+						<div class="pull-left">
+							<img src="{{STATIC_URL}}square/img/star.png" class="goods-comment-star-info"/>
+						</div>
+						<div class="pull-left">
+							<img src="{{STATIC_URL}}square/img/star.png" class="goods-comment-star-info"/>
+						</div>
+					</div>
+					<div class="pull-right goods-comment-release-time">
+						2016-08-17
+					</div>
+				</div>
+				<div style="height:1px; width:90%; margin-left:5%;background-color:#e3e3e3;"></div>
+			</div>
+			<div class="goods-comment-comment-info">
+				<p>用了两天感觉有点味道，不过总体还可以！好评！用了两天感觉有点味道，不过总体还可以！好评！用了两天感觉有点味道，不过总体还可以！好评！</p>
+			</div>
+			<div class="row" style="margin:0; padding:0; margin-left:10px; margin-right:5px; font-size:0;" id="img-goods-container">
+				<img src="{{STATIC_URL}}square/img/bg_error.png" class="img-goods-container-img" onerror="this.src='{{STATIC_URL}}square/img/bg_error.png'" />
+				<img src="{{STATIC_URL}}square/img/bg_error.png" class="img-goods-container-img" onerror="this.src='{{STATIC_URL}}square/img/bg_error.png'" />
+				<img src="{{STATIC_URL}}square/img/bg_error.png" class="img-goods-container-img" onerror="this.src='{{STATIC_URL}}square/img/bg_error.png'" />
+				<img src="{{STATIC_URL}}square/img/bg_error.png" class="img-goods-container-img" onerror="this.src='{{STATIC_URL}}square/img/bg_error.png'" />
+			</div>
+			<div style="background-color: #fff;height: 54px;padding-top: 10px;padding-left: 10px;padding-right: 30px;">
+				<div>
+					<span style="font-size: 12px;color: #808080;ma">黑色</span>
+				</div>
+				<div style="padding-top: 0px;">
+					<div class="pull-left">
+						<div style="font-size: 12px;color: #808080;">
+							<span>购买日期： </span><span>2016-08-14</span>
+						</div>
+					</div>
+					<div class="pull-right" >
+						<div class="pull-left" >
+							<img src="{{STATIC_URL}}square/img/com_dianzan1.png" alt="" style="width: 16px;height: 13px;" />
+							<span style="font-size: 12px;color: #323232">1</span>
+						</div>
+						<div class="pull-left" style="margin-left: 29px;">
+							<img src="{{STATIC_URL}}square/img/com.png" alt="" style="width: 14px;height: 12px;" />
+							<span style="font-size: 12px;color: #323232">2</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<div id="id_fade" class="black_over"></div>
+	<div id="id_light" class="white_content">
+		<table style="width: 100%;">
+			<tr>
+				<td>
+					<div>
+						<img src="" alt="" class="img-rounded" style="margin: 13px;width: 83px;height: 83px;float: left;" id="id_choose_img"/>
+						<div style="float: left;padding-top: 40px;">
+							<label style="font-size: 16px;color: red;"><b>￥</b></label><label style="font-size: 20px;color: red;"><b id="id_choose_price"></b></label>
+							<p><span style="font-size: 12px;color: #808080;">商品编号:</span><span style="font-size: 12px;color: #808080;" id="id_choose_num"></span></p>
+						</div>
+						<img src="{{STATIC_URL}}square/img/x.png" alt="" style="width: 20px;height: 20px;margin: 13px;float: right;" id="id_x"/>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div style="background-color: #f3f3ee;height: 1px;width: 100%;"></div>
+					<div style="margin-top: 20px;margin-left: 13px;font-size: 14px;">颜色</div>
+					<div style="margin-top: 17px;margin-left: 13px;">
+						<div style="width: 73px;height: 31px;background-color: #f2f3f0;border-radius:5px;float: left;font-size: 14px;text-align: center;line-height: 32px;" class="cs_color" onclick="mClickColor(0)">黑色</div>
+						<div style="width: 73px;height: 31px;background-color: #f2f3f0;border-radius:5px;float: left;margin-left: 13px;font-size: 14px;text-align: center;line-height: 32px;" class="cs_color" onclick="mClickColor(1)">咖啡色</div>
+						<div style="width: 73px;height: 31px;background-color: #f2f3f0;border-radius:5px;float: left;margin-left: 13px;font-size: 14px;text-align: center;line-height: 32px;" class="cs_color" onclick="mClickColor(2)">红色</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div style="background-color: #f3f3ee;height: 1px;width: 100%;margin-top: 13px;"></div>
+					<div style="margin-top: 20px;margin-left: 13px;font-size: 14px;">大小</div>
+					<div style="margin-top: 17px;margin-left: 13px;margin-bottom: 13px;">
+						<div style="width: 73px;height: 31px;background-color: #f2f3f0;border-radius:5px;float: left;font-size: 14px;text-align: center;line-height: 32px;" class="cs_size" onclick="mClickSize(0)">宽25cm</div>
+						<div style="width: 73px;height: 31px;background-color: #f2f3f0;border-radius:5px;float: left;margin-left: 13px;font-size: 14px;text-align: center;line-height: 32px;" class="cs_size" onclick="mClickSize(1)">宽35cm</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div style="background-color: #f3f3ee;height: 1px;width: 100%;margin-top: 13px;"></div>
+					<div style="margin-top: 20px;margin-left: 13px;font-size: 14px;float: left;">购买数量</div>
+					<div style="margin-top: 13px;float: right;">
+						<img src="{{STATIC_URL}}square/img/reduce.png" alt="" style="width: 30px;height: 30px;float: left;" onclick="mReduce()"/>
+						<div style="width: 30px;height: 30px;background-color:#E6E6E3;border-radius:3px;font-size: 14px;float: left;margin-left: 1px;text-align: center;line-height: 31px;" id="id_count">1</div>
+						<img src="{{STATIC_URL}}square/img/add.png" alt="" style="width: 30px;height: 30px;float: left;margin-left: 1px;margin-right: 13px;" onclick="mAdd()"/>
+					</div>
+					<div style="background-color: #f3f3ee;height: 1px;width: 100%;float: left;margin-top: 13px;"></div>
+				</td>
+			</tr>
+		</table>
+		<div style="height: 56px;width: 100%;font-size: 16px;color: #fff;line-height: 57px;text-align: center;position: absolute;bottom: 0%;background-color: #fa5c10;" id="id_select_ok">确认选择</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+//sessionStorage
+//if(localStorage.mCount){
+//	localStorage.mCount=Number(localStorage.mCount)+1;
+//}else{
+//	localStorage.mCount=1;
+//}
+//alert(localStorage.mCount);
+var userId={{res_data.userId}};
+var sgId={{res_data.sgId}};
+var mColor,mSize,mCount,mPrice;
+var initColor,initSize,initCount,initChoose;
+var addressId=0;
+var imgArray=new Array();
+var addrDetail,addrName,addrPhone;
+$(function(){
+	FastClick.attach(document.body);
+	$('#goods-div-container').click(function(){
+		$('#id_light').css("display","block");
+		$('#id_fade').css("display","block");
+		for(var i=0;i<$('.cs_color').length;i++){
+			if(mColor==$('.cs_color').eq(i).html()){
+				$('.cs_color').eq(i).css("background-color","#fa5c10");
+				$('.cs_color').eq(i).css("color","#fff");
+			}else{
+				$('.cs_color').eq(i).css("background-color","#f2f3f0");
+				$('.cs_color').eq(i).css("color","#323232");
+			}
+		}
+		for(var j=0;j<$('.cs_size').length;j++){
+			if(mSize==$('.cs_size').eq(j).html()){
+				$('.cs_size').eq(j).css("background-color","#fa5c10");
+				$('.cs_size').eq(j).css("color","#fff");
+			}else{
+				$('.cs_size').eq(j).css("background-color","#f2f3f0");
+				$('.cs_size').eq(j).css("color","#323232");
+			}
+		}
+	});
+	$('#id_x').click(function(){
+		$('#id_light').css("display","none");
+		$('#id_fade').css("display","none");
+		$("#id_choose").html(initChoose);
+		mColor=initColor;
+		mSize=initSize;
+		mCount=initCount;
+	});
+	$('#id_fade').click(function(){
+		$('#id_light').css("display","none");
+		$('#id_fade').css("display","none");
+		$("#id_choose").html(initChoose);
+		mColor=initColor;
+		mSize=initSize;
+		mCount=initCount;
+	});
+	//点击导航栏=>商品
+	$('#goods-detail-div-goods').click(function(){
+		$('#goods-detail-div-detail').css('border-bottom','none');
+		$('#goods-detail-div-detail p').css('color','#ffffff');
+		$('#goods-detail-div-evaluate').css('border-bottom','none');
+		$('#goods-detail-div-evaluate p').css('color','#ffffff');
+		$('#goods-detail-div-goods').css('border-bottom','4px solid #805f00');
+		$('#goods-detail-div-goods p').css('color','#805f00');
+		$('#goods-detail-goodscontent').show();
+		$('#goods-detail-goodscomment').hide();
+	});
+	//点击导航栏=>详情
+	$('#goods-detail-div-detail').click(function(){
+		$('#goods-detail-div-goods').css('border-bottom','none');
+		$('#goods-detail-div-goods p').css('color','#ffffff');
+		$('#goods-detail-div-evaluate').css('border-bottom','none');
+		$('#goods-detail-div-evaluate p').css('color','#ffffff');
+		$('#goods-detail-div-detail').css('border-bottom','4px solid #805f00');
+		$('#goods-detail-div-detail p').css('color','#805f00');
+		$('#goods-detail-goodscontent').hide();
+		$('#goods-detail-goodscomment').hide();
+	});
+	//点击导航栏=>评价
+	$('#goods-detail-div-evaluate').click(function(){
+		$('#goods-detail-div-goods').css('border-bottom','none');
+		$('#goods-detail-div-goods p').css('color','#ffffff');
+		$('#goods-detail-div-detail').css('border-bottom','none');
+		$('#goods-detail-div-detail p').css('color','#ffffff');
+		$('#goods-detail-div-evaluate').css('border-bottom','4px solid #805f00');
+		$('#goods-detail-div-evaluate p').css('color','#805f00');
+		$('#goods-detail-goodscontent').hide();
+		$('#goods-detail-goodscomment').show();
+	});
+	
+	//点击评价=>全部评价
+	$('#goodscomment-nav-all').click(function(){
+		$('#goodscomment-nav-good span').css('color','#323232');
+		$('#goodscomment-nav-good div').css('color','#323232');
+		$('#goodscomment-nav-bad span').css('color','#323232');
+		$('#goodscomment-nav-bad div').css('color','#323232');
+		$('#goodscomment-nav-pic span').css('color','#323232');
+		$('#goodscomment-nav-pic div').css('color','#323232');
+		$('#goodscomment-nav-medium span').css('color','#323232');
+		$('#goodscomment-nav-medium div').css('color','#323232');
+		$('#goodscomment-nav-all span').css('color','#ef2f35');
+		$('#goodscomment-nav-all div').css('color','#ef2f35');
+	});
+	//点击评价=>好评
+	$('#goodscomment-nav-good').click(function(){
+		$('#goodscomment-nav-all span').css('color','#323232');
+		$('#goodscomment-nav-all div').css('color','#323232');
+		$('#goodscomment-nav-bad span').css('color','#323232');
+		$('#goodscomment-nav-bad div').css('color','#323232');
+		$('#goodscomment-nav-pic span').css('color','#323232');
+		$('#goodscomment-nav-pic div').css('color','#323232');
+		$('#goodscomment-nav-medium span').css('color','#323232');
+		$('#goodscomment-nav-medium div').css('color','#323232');
+		$('#goodscomment-nav-good span').css('color','#ef2f35');
+		$('#goodscomment-nav-good div').css('color','#ef2f35');
+	});
+	//点击评价=>中评
+	$('#goodscomment-nav-medium').click(function(){
+		$('#goodscomment-nav-all span').css('color','#323232');
+		$('#goodscomment-nav-all div').css('color','#323232');
+		$('#goodscomment-nav-bad span').css('color','#323232');
+		$('#goodscomment-nav-bad div').css('color','#323232');
+		$('#goodscomment-nav-pic span').css('color','#323232');
+		$('#goodscomment-nav-pic div').css('color','#323232');
+		$('#goodscomment-nav-good span').css('color','#323232');
+		$('#goodscomment-nav-good div').css('color','#323232');
+		$('#goodscomment-nav-medium span').css('color','#ef2f35');
+		$('#goodscomment-nav-medium div').css('color','#ef2f35');
+	});
+	//点击评价=>差评
+	$('#goodscomment-nav-bad').click(function(){
+		$('#goodscomment-nav-all span').css('color','#323232');
+		$('#goodscomment-nav-all div').css('color','#323232');
+		$('#goodscomment-nav-medium span').css('color','#323232');
+		$('#goodscomment-nav-medium div').css('color','#323232');
+		$('#goodscomment-nav-pic span').css('color','#323232');
+		$('#goodscomment-nav-pic div').css('color','#323232');
+		$('#goodscomment-nav-good span').css('color','#323232');
+		$('#goodscomment-nav-good div').css('color','#323232');
+		$('#goodscomment-nav-bad span').css('color','#ef2f35');
+		$('#goodscomment-nav-bad div').css('color','#ef2f35');
+	});
+	//点击评价=>晒图
+	$('#goodscomment-nav-pic').click(function(){
+		$('#goodscomment-nav-all span').css('color','#323232');
+		$('#goodscomment-nav-all div').css('color','#323232');
+		$('#goodscomment-nav-medium span').css('color','#323232');
+		$('#goodscomment-nav-medium div').css('color','#323232');
+		$('#goodscomment-nav-bad span').css('color','#323232');
+		$('#goodscomment-nav-bad div').css('color','#323232');
+		$('#goodscomment-nav-good span').css('color','#323232');
+		$('#goodscomment-nav-good div').css('color','#323232');
+		$('#goodscomment-nav-pic span').css('color','#ef2f35');
+		$('#goodscomment-nav-pci div').css('color','#ef2f35');
+	});
+	
+		//初始化页面
+		//$('.goods-detail-content').css('height',parseInt($('#goods-detail-carousel').css('width'))/3*2+'px');
+		//$('#goods-detail-carousel').css('height',parseInt($('#goods-detail-carousel').css('width'))/3*2+'px');
+		//第一次进入时全部评价颜色
+		$('#goodscomment-nav-all span').css('color','#ef2f35');
+		$('#goodscomment-nav-all div').css('color','#ef2f35');
+		requestContent();
+});
+function requestContent(){
+	$.ajax({
+		type:"GET",
+		url:"https://www.youlinzj.cn/youlin/api1.0/",
+		cache:false,
+		data:{
+			apitype:"h5",
+			tag:"intogdpage",
+			user_id:userId,
+			sg_id:sgId,
+			access:"9527"
+		},
+		dataType:"json",
+		success:function(data){
+			for (var i = 0; i < data.goodsInfo.goods_imgs.length; i++) {
+				if(i==0){
+					$('#id_img_ol').append("<li data-target='#goods-detail-carousel' data-slide-to="+"0"+" class='active'></li>");
+				}else{
+					$('#id_img_ol').append("<li data-target='#goods-detail-carousel' data-slide-to="+i+"></li>");
+				}
+			}
+			for (var i = 0; i < data.goodsInfo.goods_imgs.length; i++) {
+				if(i==0){
+					$('#id_img_div').append("<div class='item active' onclick='clickImg("+i+")'>"
+												+"<img src='"+data.goodsInfo.goods_imgs[i]+"' style='width:100%; height:260px;' onerror='this.src="+'"{{STATIC_URL}}square/img/bg_error.png"'+"'/>"
+												+"</div>"
+											);
+				}else{
+					$('#id_img_div').append("<div class='item' onclick='clickImg("+i+")'>"
+							+"<img src='"+data.goodsInfo.goods_imgs[i]+"' style='width:100%; height:260px;' onerror='this.src="+'"{{STATIC_URL}}square/img/bg_error.png"'+"'/>"
+							+"</div>"
+						);
+				}
+				imgArray.push(data.goodsInfo.goods_imgs[i]);
+			}
+			//轮播插件
+			var carouselIndicatorsLength = $('.carousel-indicators li').length;
+			$('.goods-carousel-right').html('<p>'+carouselIndicatorsLength+'</p>');
+			$('.goods-carousel-index').css('margin-left',parseInt($('.goods-detail-content').width())-53+'px');
+			$('.goods-carousel-index').css('line-height',parseInt($('.goods-carousel-index').css('height'))+2+'px');
+			$('#goods-detail-carousel').carousel({
+				interval : 4000,
+				pause : 'hover',
+			});
+			$('#goods-detail-carousel').on('slide.bs.carousel',function(e){
+				for(var i=0;i<carouselIndicatorsLength;i++){
+					if($('.carousel-indicators li').eq(i).attr('class')=='active'){
+						var tmpIndex = i+2;
+						if(tmpIndex==carouselIndicatorsLength+1){
+							tmpIndex =1 
+						}
+						$('.goods-carousel-left').html('<p>&nbsp;&nbsp;'+tmpIndex+'</p>');
+					}
+				}	
+			});
+			var goodsDetailTouch = document.getElementById('goods-detail-carousel');
+			var hm = new Hammer(goodsDetailTouch);
+			hm.on("swipeleft",function(){
+				$('#goods-detail-carousel').carousel('next')
+				for(var i=0;i<carouselIndicatorsLength;i++){
+					if($('.carousel-indicators li').eq(i).attr('class')=='active'){
+						var tmpIndex = i+1;
+						if(tmpIndex==carouselIndicatorsLength+1){
+							tmpIndex = 1; 
+						}
+						$('.goods-carousel-left').html('<p>&nbsp;&nbsp;'+tmpIndex+'</p>');
+					}
+				}	
+			});
+			hm.on("swiperight",function(){
+				$('#goods-detail-carousel').carousel('prev')
+				for(var i=0;i<carouselIndicatorsLength;i++){
+					if($('.carousel-indicators li').eq(i).attr('class')=='active'){
+						var tmpIndex = i+1;
+						if(tmpIndex==carouselIndicatorsLength){
+							tmpIndex = carouselIndicatorsLength; 
+						}
+						$('.goods-carousel-left').html('<p>&nbsp;&nbsp;'+tmpIndex+'</p>');
+					}
+				}	
+			});
+			$("#id_title").html(data.goodsInfo.goods_deital+' '+data.goodsInfo.goods_name);
+			$("#id_price").html(data.goodsInfo.goods_price);
+			//$("#id_choose").html(data.goodsInfo.goods_choose.goods_detail);
+			mColor=data.goodsInfo.goods_choose.goods_attribute;
+			mSize="宽25cm";
+			mCount=data.goodsInfo.goods_choose.goods_count;
+			mCount=mCount.substring(0,1);
+			initColor=mColor;
+			initSize=mSize;
+			initCount=mCount;
+			initChoose=mColor+","+mSize+","+mCount;
+			$("#id_choose").html(initChoose);
+			for(var i=0;i<$('.cs_color').length;i++){
+				if(mColor==$('.cs_color').eq(i).html()){
+					$('.cs_color').eq(i).css("background-color","#fa5c10");
+					$('.cs_color').eq(i).css("color","#fff");
+				}
+			}
+			for(var j=0;j<$('.cs_size').length;j++){
+				if(mSize==$('.cs_size').eq(j).html()){
+					$('.cs_size').eq(j).css("background-color","#fa5c10");
+					$('.cs_size').eq(j).css("color","#fff");
+				}
+			}
+			addressId=data.goodsInfo.default_address.addr_id;
+			addrDetail=data.goodsInfo.default_address.addr_info.detail;
+			addrName=data.goodsInfo.default_address.addr_info.consignee;
+			addrPhone=data.goodsInfo.default_address.addr_info.contactinfo;
+			mPrice=data.goodsInfo.goods_price;
+			$('#id_count').html(mCount);
+			$('#id_choose_img').attr('src','{{STATIC_URL}}square/img/guo.png');
+			$('#id_choose_price').html(data.goodsInfo.goods_price);
+			$('#id_choose_num').html(data.goodsInfo.goods_number);
+			$('#goods-div-content-dizhi').html(data.goodsInfo.default_address.addr_detail);
+			$('#id_buy').click(function(){
+				location.href="https://www.youlinzj.cn/yl/web/submitOrder?address_id="+addressId+"&addr_detail="+addrDetail+"&addr_name="+addrName+"&addr_phone="+addrPhone+"&title="
+						+data.goodsInfo.goods_describe+"&color="+mColor+"&size="+mSize+"&price="+mPrice+"&count="+mCount
+						;
+			});
+		},
+		error:function(xhr,type){
+			alert("222222222");
+		}
+	});
+}
+$('#goods-div-content-dizhi').click(function(){
+	myObj.mStartActivity(addressId);
+});
+
+function mBack(){
+	myObj.mFinish();
+}
+function setAddress(addrId){
+	addressId=addrId;
+	$.ajax({
+		type: 'GET',
+		url: "https://www.youlinzj.cn/youlin/api1.0/",
+		cache: false,
+        data:{	
+        		addr_id      : addrId,
+        		tag          : 'sinra',
+        		apitype      : 'h5',
+        		access       : '9527'
+        },
+		dataType: 'json',
+		success: function(data){
+			addrDetail=data.info.detailaddr;
+			addrName=data.info.consignee;
+			addrPhone=data.info.contactinfo;
+			$('#goods-div-content-dizhi').html(data.info.detailstreet);
+		},
+		error:function(xhr,data){
+			
+		}
+	});
+}
+function mReduce(){
+	var count=$('#id_count').html();
+	if(parseInt(count)>1){
+		$('#id_count').html(parseInt(count)-1);
+		mCount=parseInt(count)-1;
+		$('#id_choose_price').html(mCount*mPrice);
+	}
+}
+function mAdd(){
+	var count=$('#id_count').html();
+	$('#id_count').html(parseInt(count)+1);
+	mCount=parseInt(count)+1;
+	$('#id_choose_price').html(mCount*mPrice);
+}
+function mClickColor(temp){
+	mColor=$('.cs_color').eq(temp).html();
+	//alert(mColor);
+	for(var i=0;i<$('.cs_color').length;i++){
+		if(temp==i){
+			$('.cs_color').eq(i).css("background-color","#fa5c10");
+			$('.cs_color').eq(i).css("color","#fff");
+		}else{
+			$('.cs_color').eq(i).css("background-color","#f2f3f0");
+			$('.cs_color').eq(i).css("color","#323232");
+		}
+	}
+}
+function mClickSize(temp){
+	mSize=$('.cs_size').eq(temp).html();
+	//alert(mSize);
+	for(var j=0;j<$('.cs_size').length;j++){
+		if(temp==j){
+			$('.cs_size').eq(j).css("background-color","#fa5c10");
+			$('.cs_size').eq(j).css("color","#fff");
+		}else{
+			$('.cs_size').eq(j).css("background-color","#f2f3f0");
+			$('.cs_size').eq(j).css("color","#323232");
+		}
+	}
+}
+$('.img-goods-container-img').css('height',(parseInt($(window).width())-30)/3+'px');
+$('.img-goods-container-img').css('width',(parseInt($(window).width())-30)/3+'px');
+for(var i=0;i<=$('.img-goods-container-img').length;i++){
+	$('.img-goods-container-img').eq(i).css('margin-right','5px');
+	$('.img-goods-container-img').eq(i).css('margin-bottom','5px');
+}
+
+function clickImg(a){
+	if(imgArray.length!=0){
+		//myObj.browseImg(a,imgArray);
+	}
+}
+$('#id_select_ok').on("click",function(){
+	$('#id_light').css("display","none");
+	$('#id_fade').css("display","none");
+	initColor=mColor;
+	initSize=mSize;
+	initCount=mCount;
+	initChoose=mColor+","+mSize+","+mCount;
+	$("#id_choose").html(initChoose);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+﻿<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+	</script>
+
+	<ul class="breadcrumb">
+		<li>
+			<i class="icon-home home-icon"></i>
+			<a href="#">用户管理</a>
+		</li>
+		<li class="active">用户管理</li>
+	</ul><!-- .breadcrumb -->
+</div>
+<div class="page-content">
+
+	<div class="page-header"><h1>新建<small>用户</small></h1></div>
+                                   <form class="form-horizontal">
+
+<div class="form-group">
+	<label class="col-sm-1 control-label" for="name">用户名</label>
+	<div class="controls">
+		<input type="text" class="input-xlarge" id="name" />
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-1 control-label" for="email">邮箱</label>
+	<div class="controls">
+		<input type="text" class="input-xlarge" id="email" />
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-1 control-label" for="pnohe">手机号码</label>
+	<div class="controls">
+		<input type="text" class="input-xlarge" id="phone" />
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-1 control-label"  for="city">所在城市</label>
+	<div class="controls">
+		<input type="text" class="input-xlarge" id="city" />
+	</div>
+</div>	
+<div class="form-group">
+	<label class="col-sm-1 control-label"  for="community">所在小区</label>
+	<div class="controls">
+		<input type="text" class="input-xlarge" id="community" />
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-1 control-label"  for="role">设置角色</label>
+	<div class="controls">
+		<select id="role">
+			<option value="admin">超级管理员</option>
+			<option value="mod">物业管理员</option>
+			<option value="user" selected>普通用户</option>
+		</select>
+	</div>
+</div>	
+<div class="form-group">
+	<label class="col-sm-1 control-label"  for="active">激活用户?</label>
+	<div class="controls">
+		<input type="checkbox" id="active" value="1" />
+	</div>
+</div>
+<div class="form-actions">
+	<a class="btn btn-success btn-large" href="user.html">保存用户信息</a> <a class="btn" href="#">取消</a>
+</div>					
+
+</form>
+
+</div><!-- /.page-content -->
+
+

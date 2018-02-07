@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>报名</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+<meta name="description" content="报名">
+
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylweui.min.css">
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/yljquery-weui.css">
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylfont-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}assets/css/yldemo.css" />
+  </head>
+
+  <body ontouchstart>
+    <header class='demos-header'>
+        <h1 id="h1_style">中科创客少儿编程.2016秋季班</h1>
+        <img src="{{STATIC_URL}}square/img/baoming.png" id="img_style">
+    </header>
+    <div class="weui_cells weui_cells_form" id="common_fs">
+        <form action="" method="POST">
+            <div id="login">
+                 <div class="weui_cell" id="weui_cell_bottom">
+                    <div class="weui_cell_hd pic_color"><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;</div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input id='name' class="weui_input" type="text" placeholder="姓名 " name="name"/>
+                    </div>
+                  </div>
+                  <div class="weui_cell" id="weui_cell_bottom">
+                    <div class="weui_cell_hd pic_color"><i class="fa  fa-cog"></i>&nbsp;&nbsp;&nbsp;</div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input id='age' class="weui_input" type="text" placeholder="年龄" name="age"/>
+                    </div>
+                  </div>
+                  <div class="weui_cell" id="weui_cell_bottom">
+                    <div class="weui_cell_hd pic_color"><i class="fa fa-life-ring"></i>&nbsp;&nbsp;&nbsp;</div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input id='grade' class="weui_input" type="text" placeholder="年级" name="grade"/>
+                    </div>
+                  </div>
+                  <div class="weui_cell" id="weui_cell_bottom">
+                    <div class="weui_cell_hd pic_color"><i class="fa fa-phone"></i>&nbsp;&nbsp;&nbsp;</div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                      <input id='tel' class="weui_input" type="tel" placeholder="联系方式">
+                    </div>
+                  </div>
+
+                  <div class="weui_btn_area">
+                    <a class="weui_btn weui_btn_primary" href="javascript:" id="showTooltips" style="background: #1FA6EC;color: #FFF; font-size: 15px;">完成</a>
+                  </div>
+            </div>
+        </form>
+    </div>
+   
+<!--     <footer>
+  <a href="#">中科方德版权所有</a>
+</footer> -->
+<script src="{{STATIC_URL}}assets/js/yljquery-2.1.4.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylfastclick.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+</script>
+<script src="{{STATIC_URL}}assets/js/yljquery-weui.js"></script>
+
+
+    <script>
+      $("#showTooltips").click(function() {
+
+        var name = $('#name').val();
+        var age = $('#age').val();
+        var grade = $('#grade').val();
+        var tel = $('#tel').val();
+        if(!name) $.toptip('请输入姓名');
+        else if(!age) $.toptip('请输入年龄');
+        else if(!grade) $.toptip('请输入年级');
+        else if(!tel || !/1[3|4|5|7|8]\d{9}/.test(tel)){
+            $.toptip('请输入正确的手机号');
+            $('#tel').parent().parent('.weui_cell').addClass("weui_cell_warn");
+        } 
+        else {
+            $('#tel').parent().parent('.weui_cell').removeClass("weui_cell_warn");
+            $.toptip('提交成功', 'success');
+        }
+      });
+    </script>
+  </body>
+</html>

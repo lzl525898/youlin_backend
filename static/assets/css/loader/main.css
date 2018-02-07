@@ -1,0 +1,86 @@
+ .load-message{
+  margin-bottom:12px;
+ font-size: 18px;
+}
+.load-wrapper{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); 
+    z-index: 100000000;
+    position: absolute;
+    left: 0;
+    right: 0;
+        top:0;
+        bottom: 0;
+        
+}
+.load-container {
+  font-family:"Microsoft YaHei" !important;     
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+ /* width: 20%;
+  height: 20%;*/
+  
+  position: absolute;
+   
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+ /*  left: 50%;
+  top: 50%;*/
+}
+.load-container a:link,
+.load-container a:visited {
+
+  position: absolute;
+   bottom: 3px;
+ /*  font-size: 1.15em;  */ 
+  text-align: center;
+  left: 0;
+  right: 0;
+  text-decoration: none;
+  color: #FFF;
+}
+.load-container a:link:hover,
+.load-container a:visited:hover {
+  text-decoration: underline;
+}
+.loader {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+} 
+.no-cssanimations .load-container .loader {
+  text-indent: 0;
+  text-align: center;
+  color: #FFF;
+  font-size: 17px;
+  background: none;
+  border: 0 none;
+  width: auto;
+  height: auto;
+  margin: 1em auto;
+  overflow: visible;
+  box-shadow: none;
+  -webkit-animation: none;
+  animation: none;
+}
+.no-cssanimations .load-container .loader:before,
+.no-cssanimations .load-container .loader:after {
+  display: none;
+}
+@media (max-width: 960px) {
+  .inner {
+    width: 480px;
+  }
+}
+@media (max-width: 500px) {
+  .inner {
+    width: 100%;
+  }
+  .load-container {
+    width: 100%;
+  }
+}

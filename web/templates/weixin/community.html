@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>优邻~只为方便您的生活</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+	<link href="{{STATIC_URL}}assets/css/jquery.mobile-1.4.5.min.css" rel="stylesheet">
+	<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+	<script>
+	$(function(){
+		$(":jqmData(role='page')").attr("data-title", document.title);
+	})
+	</script>
+	<script src="{{STATIC_URL}}assets/js/jquery.mobile-1.4.5.min.js"></script>
+	
+</head>
+<body>
+	<div data-role="page" id="search">
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}assets/css/search.css">
+		<div data-role="header" id="header">
+			<a href="#" data-role="button" data-icon="back" class="ui-btn-left"onclick="r_city()">返回</a>
+			<h1>选择小区</h1>
+		</div>
+		
+		<div data-role="main" >
+			<!--  <form method="post" id="searchform"onsubmit = "return checkContent(); "> -->
+			 <!-- <form method="post" id="searchform"> -->
+			 <div id="searchform">
+			 	<input type="hidden" name="city_id" value='{{res_data.city_id}}' id="city_id"/>
+		        <input type="search" name="search" id="searchContent" placeholder="搜索小区" class="searchInput">
+		      	<input type="button"  value="搜索" style="color: #ccc" class="search"onclick="search_com()">
+		      	<small><p id="tip_content"><font color="red"> {{res_data.reason}}</font></p></small>
+		     </div>
+		    <!-- </form>  -->
+		    <ul id="result">
+		    {% if res_data.com_list %}
+		    	{%for a in res_data.com_list%}
+		    	<li><a href="/yl/wx/categType?type = 0&community_id = {{a.com_id}}" data-ajax="false"><h5>{{a.com_name}}</h5>
+					<p>{{a.city_name}}</p></a>
+		    	</li>
+		    	{% endfor %}
+		    {% endif %}
+		    </ul>
+		</div>
+	</div>
+	
+	 <script type="text/javascript">
+	 function r_city(){
+			window.location.href="/yl/wx/cv/";	
+		}
+	 
+	 function search_com(){
+		 var obj = document.getElementById("searchContent");
+		 var str = obj.value;
+		 obj.value = str.replace(/\s/g, "");
+		 if(!obj.value){
+			 $("#tip_content").children("font").text("查找内容不能为空");
+			 return false;
+			 }
+		 else{
+				$("#tip_content").children("font").text("");
+				$.ajax({
+					 url:'/yl/wx/search',
+					 type:'GET',
+					 data:{city_id:$("#city_id").val(), search:$("#searchContent").val()},
+					 dataType: "json",
+					 success:function(data){
+						 if(data.code==1){
+							 $("#tip_content").children("font").text(data.desc); 
+						 }
+						 else{
+							 var list=data.data.com_list
+							 $("#tip_content").children("font").text(""); 
+							 $("#result li").remove();
+							 for(var j = 0 ; j <list.length;j++){
+								 var temp=$("<li></li>");
+								 temp='<li>';
+								 temp+='<a href="/yl/wx/categType?type = 0&community_id = '+list[j].com_id+'" data-ajax="false"><h5>'+ list[j].com_name+'</h5><p>'+ data.data.city_name+'</p></a>';
+								 temp+='</li>';
+								 $("#result").append(temp);
+							 }
+						 }
+					 },
+					 
+				 });		
+			}//else-end		
+		}
+	 </script>
+</body>
+</html>

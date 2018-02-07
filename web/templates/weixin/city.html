@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>优邻~只为方便您的生活</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+	<link href="{{STATIC_URL}}assets/css/jquery.mobile-1.4.5.min.css" rel="stylesheet">
+	<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+	<script>
+	$(function(){
+		$(":jqmData(role='page')").attr("data-title", document.title);
+	})
+	</script>
+	<script src="{{STATIC_URL}}assets/js/jquery.mobile-1.4.5.min.js"></script>
+	
+</head>
+<body>
+	<div data-role="page" id="selectecity">
+	    <link rel="stylesheet" href="{{STATIC_URL}}assets/css/search.css"> 
+	
+		<div data-role="header" id="header">
+			<h1>选择城市</h1>
+		</div>
+		<div role="main">
+			<table id="currentcity">
+				<caption>当前定位城市：<small>定位不准时，请在城市列表选择</small></caption>
+				<tr>
+					<td ><a href="#" id="select_city"onclick="select_city()"><span>></span></a></td>
+					
+				</tr>
+			</table>
+			<table id="hotcity">
+				<caption>热门城市：</caption>
+				<tr>
+					<td><a href="#"onclick="Chang_City('哈尔滨',1)">哈尔滨</a></td>
+				</tr>
+			</table>
+			<table id="name">
+				<caption>全部城市：</caption>
+				<tr>
+					<td><a href="#A" target="_blank" >A</a></td>
+					<td><a href="#B"  target="_blank">B</a></td>
+					<td><a href="#C" target="_blank">C</a></td>
+					<td><a href="#D" target="_blank">D</a></td>
+					<td><a href="#E" target="_blank">E</a></td>
+				</tr>
+				<tr>
+					<td><a href="#F" target="_blank">F</a></td>
+					<td><a href="#G" target="_blank">G</a></td>
+					<td><a href="#H" target="_blank">H</a></td>
+					<td><a href="#I" target="_blank">H</a></td>
+					<td><a href="#J" target="_blank">J</a></td>
+				</tr>
+				<tr>
+					<td><a href="#K" target="_blank">K</a></td>
+					<td><a href="#L" target="_blank">L</a></td>
+					<td><a href="#M" target="_blank">M</a></td>
+					<td><a href="#N" target="_blank">N</a></td>
+					<td><a href="#O" target="_blank">N</a></td>
+				</tr>
+				<tr>
+					<td><a href="#P"target="_blank" >P</a></td>
+					<td><a href="#Q" target="_blank">Q</a></td>
+					<td><a href="#R" target="_blank">R</a></td>
+					<td><a href="#S" target="_blank">S</a></td>
+					<td><a href="#T" target="_blank">T</a></td>
+				</tr>
+				<tr>
+					<td><a href="#U" target="_blank">N</a></td>
+					<td><a href="#V" target="_blank">N</a></td>
+					<td><a href="#W"target="_blank" >W</a></td>
+					<td><a href="#X" target="_blank">X</a></td>
+					<td><a href="#Y" target="_blank">Y</a></td>
+				</tr>
+				<tr>
+					<td><a href="#Z" target="_blank">Z</a></td>
+				</tr>
+			</table>
+			<div class="city">
+			
+				<table id="A"><tbody></tbody></table>
+				<table id="B"><tbody></tbody></table>
+				<table id="C"><tbody></tbody></table>
+				<table id="D"><tbody></tbody></table>
+				<table id="E"><tbody></tbody></table>
+				<table id="F"><tbody></tbody></table>
+				<table id="G"><tbody></tbody></table>
+				<table id="H"><tbody></tbody></table>
+				<table id="I"><tbody></tbody></table>
+				<table id="J"><tbody></tbody></table>
+				<table id="K"><tbody></tbody></table>
+				<table id="L"><tbody></tbody></table>
+				<table id="M"><tbody></tbody></table>
+				<table id="N"><tbody></tbody></table>
+				<table id="O"><tbody></tbody></table>
+				<table id="P"><tbody></tbody></table>
+				<table id="Q"><tbody></tbody></table>
+				<table id="R"><tbody></tbody></table>
+				<table id="S"><tbody></tbody></table>
+				<table id="T"><tbody></tbody></table>
+				<table id="U"><tbody></tbody></table>
+				<table id="V"><tbody></tbody></table>
+				<table id="W"><tbody></tbody></table>
+				<table id="X"><tbody></tbody></table>
+				<table id="Y"><tbody></tbody></table>
+				<table id="Z"><tbody></tbody></table>
+				
+			</div>
+			<div id="back">
+				<style>
+					#back {display: none}
+					#back .ui-btn-icon-left:after,#back  .ui-btn-icon-right:after,#back  .ui-btn-icon-top:after, .ui-btn-icon-bottom:after,#back  .ui-btn-icon-notext:after{position: static;width: 50px;height: 50px;border-radius:100%;background-size: 40%;}
+					#back .ui-btn{padding-left:0;padding-right: 0;padding-bottom: 0;margin: 0;border:0;position: absolute;top:50%;-webkit-transform:translate3d(0,-50%,0);background: transparent;}
+				</style>
+				 <button class="ui-btn ui-icon-arrow-u ui-btn-icon-left"></button>
+			</div>
+		<script>
+			$(document).on("pageinit", "#selectecity", function () {
+	           $(document).on("scrollstart", function () {
+	           		var scrollTop = $(this).scrollTop();
+	           		if(scrollTop>50){
+	           			$("#back").show();
+	           		}else{
+	           			$("#back").hide();
+	           		}
+	           });
+	       });
+	       $(document).on("pageinit", "#selectecity", function () {
+	           $(document).on("scrollstop", function () {
+	           		var scrollTop = $(this).scrollTop();
+	           		if(scrollTop>50){
+	           			$("#back").show();
+	           		}else{
+	           			$("#back").hide();
+	           		}
+	           });
+	       });
+	       
+	       $("#back").on("click",function(){
+	       		$(document).scrollTop(0);
+	       })
+	       
+	       //生成城市下拉菜单
+	        $(document).ready(function(){
+	    	   $.ajax({
+					type: "GET",   
+					url: "/yl/wx/cv/ajax_wxcity_data?random=" + Math.random(),
+					dataType:   "json", 
+					success: function(data){ 
+						show_common_data('A', data.data.a_list);
+						show_common_data('B', data.data.b_list);
+						show_common_data('C', data.data.c_list);
+						show_common_data('D', data.data.d_list);
+						show_common_data('E', data.data.e_list);
+						show_common_data('F', data.data.f_list);
+						show_common_data('G', data.data.g_list);
+						show_common_data('H', data.data.h_list);
+						show_common_data('I', data.data.i_list);
+						show_common_data('J', data.data.j_list);
+						show_common_data('K', data.data.k_list);
+						show_common_data('L', data.data.l_list);
+						show_common_data('M', data.data.m_list);
+						show_common_data('N', data.data.n_list);
+						show_common_data('O', data.data.o_list);
+						show_common_data('P', data.data.p_list);
+						show_common_data('Q', data.data.q_list);
+						show_common_data('R', data.data.r_list);
+						show_common_data('S', data.data.s_list);
+						show_common_data('T', data.data.t_list);
+						show_common_data('U', data.data.u_list);
+						show_common_data('V', data.data.v_list);
+						show_common_data('W', data.data.w_list);
+						show_common_data('X', data.data.x_list);
+						show_common_data('Y', data.data.y_list);
+						show_common_data('Z', data.data.z_list);
+					}
+				})
+	    	   
+	       });
+	       
+	       
+ //渲染界面
+   function show_common_data(id,list){
+	 var tbody =  $("#"+id+" tbody")
+	 tbody.empty();
+	 var len=list.length
+	 
+	 if(len>8){
+		 tbody.append(
+				 '<tr><td rowspan="2">'+id+'</td>'
+				 +'<td  id="' +list[0].label+ '"onclick="Chang_City(this.id,' +list[0].text+ ' )"><a href="#search">'+list[0].label+'</td>'
+   				+'<td  id="' +list[1].label+ '"onclick="Chang_City(this.id,' +list[1].text+ ' )"><a href="#search">'+list[1].label+'</td>'
+   				+'<td  id="' +list[2].label+ '"onclick="Chang_City(this.id,' +list[2].text+ ' )"><a href="#search">'+list[2].label+'</td>'
+   				+'<td  id="' +list[3].label+ '"onclick="Chang_City(this.id,' +list[3].text+ ' )"><a href="#search">'+list[3].label+'</td></tr>'
+   				+'<tr><td  id="' +list[4].label+ '"onclick="Chang_City(this.id,' +list[4].text+ ' )"><a href="#search">'+list[4].label+'</td>'
+   				+'<td  id="' +list[5].label+ '"onclick="Chang_City(this.id,' +list[5].text+ ' )"><a href="#search">'+list[5].label+'</td>'
+   				+'<td  id="' +list[6].label+ '"onclick="Chang_City(this.id,' +list[6].text+ ' )"><a href="#search">'+list[6].label+'</td>'
+   				+'<td  id="' +list[7].label+ '"onclick="Chang_City(this.id,' +list[7].text+ ' )"><a href="#search">'+list[7].label+'</td></tr>');
+		 var a=parseInt((len-8)/5);
+		 var b=len-8-(a*5);
+		 
+		 for(var j = 8 ; j <5*a+8;j=j+5){
+			 var tr =  $("<tr></tr>");
+			 tr='<tr>';
+			 tr+="<td id='"+list[j].label+"' onclick='Chang_City(this.id,"+list[j].text+")'><a href='#search'>"+list[j].label+"</a></td>";
+			 tr+="<td id='"+list[j+1].label+"' onclick='Chang_City(this.id,"+list[j+1].text+")'><a href='#search'>"+list[j+1].label+"</a></td>";
+			 tr+="<td id='"+list[j+2].label+"' onclick='Chang_City(this.id,"+list[j+2].text+")'><a href='#search'>"+list[j+2].label+"</a></td>";
+			 tr+="<td id='"+list[j+3].label+"' onclick='Chang_City(this.id,"+list[j+3].text+")'><a href='#search'>"+list[j+3].label+"</a></td>";
+			 tr+="<td id='"+list[j+4].label+"' onclick='Chang_City(this.id,"+list[j+4].text+")'><a href='#search'>"+list[j+4].label+"</a></td>";
+			 tr+='</tr>';
+			 tbody.append(tr)
+			 }//for end  
+			 
+			 
+     		if (b!=0){
+     			var tr =  $("<tr></tr>");
+         		tr='<tr>';
+         		for(i= 5*a+8 ; i <len;i++){
+         			tr+="<td id='"+list[i].label+"' onclick='Chang_City(this.id,"+list[i].text+")'><a href='#search'>"+list[i].label+"</a></td>";
+         			} 
+         		for(k= 0 ; k <(5-b);k++){
+         			tr+="<td></td>";
+         			}
+         		tr+='</tr>';
+         		tbody.append(tr)	
+         		}
+			 
+			 }//if (len>8)end
+   		  
+   		  else{
+   			  if(len<4){
+   				  var tr =  $("<tr></tr>");
+   				  tr='<tr><td>'+id+'</td>';
+   				  for(i= 0 ; i <len;i++){
+   					  tr+="<td id='"+list[i].label+"' onclick='Chang_City(this.id,"+list[i].text+")'><a href='#search'>"+list[i].label+"</a></td>";
+   					  } 
+   				  for(k= 0 ; k <4-len;k++){
+   					  tr+="<td></td>";
+   					  } 
+   				  tr+='</tr>';
+   				  tbody.append(tr)  
+   				   }
+   			  
+   			  else{
+   				  tbody.append('<tr><td rowspan="2">'+id+'</td>'
+   	   				  +'<td id="' +list[0].label+ '"onclick="Chang_City(this.id,' +list[0].text+ ' )"><a href="#search">'+list[0].label+'</td>'
+   	   				  +'<td id="' +list[1].label+ '"onclick="Chang_City(this.id,' +list[1].text+ ' )"><a href="#search">'+list[1].label+'</td>'
+   	   				  +'<td id="' +list[2].label+ '"onclick="Chang_City(this.id,' +list[2].text+ ' )"><a href="#search">'+list[2].label+'</td>'
+   	   				  +'<td id="' +list[3].label+ '"onclick="Chang_City(this.id,' +list[3].text+ ' )"><a href="#search">'+list[3].label+'</td></tr>');
+   				  var tr =  $("<tr></tr>");
+   				  tr='<tr>';
+   				  for(i= 4 ; i <len;i++){
+   					  tr+="<td id='"+list[i].label+"' onclick='Chang_City(this.id,"+list[i].text+")'><a href='#search'>"+list[i].label+"</a></td>";
+   					  } 
+   				  for(k= 0 ; k <8-len;k++){
+   					  tr+="<td></td>";
+   					  }
+   				  tr+='</tr>';
+   				  tbody.append(tr)
+   				  }		//8>len>4end  
+   		  }//len<8
+   	 }//渲染结束
+   	 
+   	function Chang_City(name,id){
+   		 var city_name=name;
+   		 var city_id=id;
+   		 $.ajax({
+			type: "GET",   
+			url: "verify_city?city_id=" +city_id +"&city_name=" + city_name+ "&random=" + Math.random(),
+			dataType:   "json", 
+			success: function(data){ 
+				if(data.code==1){
+					alert(data.desc)
+				}
+				else{
+					document.getElementById("select_city").innerHTML = data.data.city_name+"<span>></span>";
+					$(document).scrollTop(0);
+				}
+			}
+		})
+   	}
+   	 
+   	function select_city(){
+   		var city_name=document.getElementById("select_city").innerHTML;
+   		if (city_name.length<=17){
+   			return false;
+   		}
+   		else{
+   		 window.location.href="/yl/wx/sc/";
+   		}		
+	}
+		</script>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+﻿			<script src="../../static/web/js/admin/address_audit.js" ></script>
+			<div class="top-bar">
+				<h1>当前位置</h1>
+				<div class="breadcrumbs"><span>地址审核</span> - <span>审核列表</span> - <span id="title">审核</span></div>
+			</div>
+			<div class="table">
+				<img src="../../static/web/images/bg-th-left.gif" alt="" class="left" height="7" width="8" />
+				<img src="../../static/web/images/bg-th-right.gif" alt="" class="right" height="7" width="7" />
+				<table class="listing form" cellpadding="0" cellspacing="0"><tbody>
+					<tr>
+						<th class="full" colspan="2">输入信息</th>
+					</tr>
+					<tr class="bg">
+						<td class="first"><strong>具体地址</strong></td>
+						<td class="last">
+							<p id="family_address"></p>
+						</td>
+					</tr>
+					<tr>
+						<td class="first"><strong>审核状态</strong></td>
+						<td class="last">
+							<input type="radio" name="status" id="status" value="1" checked>通过
+							<input type="radio" name="status"  id="status" value="0">未通过
+						</td>
+					</tr>
+					<tr class="bg">
+						<td class="first"><strong>城市</strong></td>
+						<td class="last">
+							<input type="text" name="city" id="city" value="" disabled >
+<!-- 							<input type="hidden" name="city_code" id="city_code"  value="" />
+							<input type="hidden" name="city_id" id="city_id"  value="" /> -->
+							<input type="hidden" name="fr_id" id="fr_id"  value="" />
+						</td>
+					</tr>
+					<tr>
+						<td class="first"><strong>小区</strong></td>
+						<td class="last">
+							<input type="text" name="community" id="community" value="" disabled >
+							<input type="hidden" name="community_id" id="community_id"  value="" />
+						</td>
+					</tr>
+					<tr class="bg">
+						<td class="first"><strong>区域</strong></td>
+						<td class="last">
+							<select name="block_id" id="block_id">
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="first"><strong>楼栋</strong></td>
+						<td class="last">
+							<select name="buildnum_id" id="buildnum_id" onChange="getAptOptions(this.value);">
+							</select>
+						</td>
+					</tr>
+					<tr class="bg">
+						<td class="first"><strong>门牌</strong></td>
+						<td class="last">
+							<select name="apt_id" id="apt_id">
+								
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="full" colspan="2">
+							<input type="button" value="审核" id="btn_submit" onclick="audit_submit();"/>
+						</td>
+					</tr>
+				</tbody></table>
+				<p>&nbsp;</p>
+		    </div>

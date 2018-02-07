@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="{{STATIC_URL}}assets/js/online.js"></script>
+<title>设备支付</title>
+</head>
+
+<style type="text/css">
+.main_dv{
+	border:1px solid red;
+}
+.pay_dv{
+	border:1px solid green;
+	margin:auto;
+}
+.pay_btn{
+	margin:auto;
+	width:100px;
+	height:40px;
+}
+</style>
+
+<body>
+	<div>
+		<input id="amount" type="text" placeholder="金 额"/>
+	</div>
+	<div>
+		<div class="pay_dv"><input class="pay_btn" type="image" onclick="device_pay('upacp')" value="银联"/></div>
+		<div class="pay_dv"><input class="pay_btn" type="image" onclick="device_pay('alipay')" value="支付宝"/></div>
+		<div class="pay_dv"><input class="pay_btn" type="image" onclick="device_pay('wx')" value="微信"/></div>
+	</div>
+</body>
+</html>
+
+<script>
+	var a = onlinenetwork({
+		"time":1000,
+		"url":"http://www.youlinzj.cn/ping/"
+	})
+	
+	a.onLineHandler(function(){
+		console.log("连上了！")
+	})
+	
+	a.offLineHandler(function(){
+		console.log("断开网络！")
+	})
+
+	function device_pay(channel) {
+		var amount = document.getElementById('amount').value * 100;
+		alert("channel=>"+channel+"\namount:"+amount);
+		PINGPP_ANDROID_SDK.callPay(channel, amount);
+	}
+</script>

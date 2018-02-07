@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>订单详情</title>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylbootstrap.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylfont-awesome.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylweui.min.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/yljquery-weui.css" />
+<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yldevice-toucher.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylhammer.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yljquery-weui.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylfastclick.js"></script>
+<style type="text/css">
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft YaheiUI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+	background-color:#f3f3ee;
+	padding-top:48px;
+}
+</style>
+</head>
+<body>
+	<div class="navbar-fixed-top" style="background-color: #ffba02;height: 48px;">
+		<div class="row" style="margin:0; padding:0; height:48px;" onclick="javascript:history.go(-1)">
+			<a href="javascript:;" class="pull-left">
+				<i class="fa fa-angle-left" style="margin-left:10px;color:#ffffff;font-size:32px; margin-top:7px;"></i>
+			</a>
+			<div class="pull-left" style="height:48px;">
+				<span style="margin-left:7px;height: 48px;line-height:49px;font-size: 16px;color: #fff;">订单详情</span>
+			</div>
+		</div>
+	</div>
+	<div style="width: 100%;background-image: url('{{STATIC_URL}}square/img/submit_order_bg.png');background-size:contain; height: 87px;padding-top: 10px;padding-bottom: 13px;padding-right: 13px;">
+		<div style="padding-left: 33px;">
+			<label style="font-size: 14px;color: #323232;" id="id_addr_name"></label>&nbsp;&nbsp;&nbsp;
+			<label style="font-size: 14px;color: #323232;" id="id_addr_phone"></label>
+		</div>
+		<div style="padding-left: 13px;padding-top: 0px;" id="id_address_div">
+			<img src="{{STATIC_URL}}square/img/submit_order_address.png" alt="" style="width: 14px;height: 17px;float: left;" id="id_address_img"/>
+			<div style="margin-left: 18px;"><span style="font-size: 12px;color: #323232;" id="id_address"></span></div>
+		</div>
+	</div>
+	<div style="height:107px; background-color: #fff;margin-top: 10px;padding-top: 13px;padding-left: 13px;padding-right: 13px;padding-bottom: 10px;">
+		<img src="{{STATIC_URL}}square/img/guo.png" alt="" style="width: 81px;height: 81px;float: left;" />
+		<div style="margin-left: 90px;padding-top: 5px;">
+			<div style="font-size: 14px;color: #323232;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;margin: 0px;padding: 0px;" id="id_title"></div>
+			<div style="font-size: 12px;color: #808080;margin: 0px;padding: 0px;margin-top: 3px;"><span>颜色</span>&nbsp;<span id="id_color"></span>&nbsp;&nbsp;<span>大小</span>&nbsp;<span id="id_size"></span></div>
+			<div style="margin-top: 8px;">
+				<div style="font-size: 16px;color: red;float: left;"><label>￥</label><label id="id_price"></label></div>
+				<div style="float: right;font-size: 12px;color: #323232;padding-top: 6px;"><span>x</span><span id="id_count"></span></div>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top: 1px;padding-left: 13px;padding-right: 13px;height: 50px;line-height:51px; background-color: #fff;">
+		<div style="float: left;font-size: 14px;color: #323232;">购买数量</div>
+		<div style="float: right;margin-top: 12px;">
+			<img src="{{STATIC_URL}}square/img/reduce.png" alt="" style="width: 27px;height: 27px;float: left;" onclick="mReduce()"/>
+			<div style="width: 27px;height: 27px;background-color:#E6E6E3;border-radius:3px;font-size: 14px;float: left;margin-left: 1px;text-align: center;line-height: 31px;" id="id_count_down"></div>
+			<img src="{{STATIC_URL}}square/img/add.png" alt="" style="width: 27px;height: 27px;float: left;margin-left: 1px;" onclick="mAdd()"/>
+		</div>
+	</div>
+	<div style="margin-top: 1px;padding-left: 13px;padding-right: 13px;height: 50px;line-height:51px; background-color: #fff;">
+		<div style="float: left;font-size: 14px;color: #323232;">配送方式</div>
+		<div style="float: right;font-size: 14px;color: #323232;">
+			<span>快递&nbsp;免邮&nbsp;</span>
+			<img src="{{STATIC_URL}}square/img/submit_order_jiantou.png" alt="" style="width: 8px;height: 14px;"/>
+		</div>
+	</div>
+	<div style="margin-top: 10px;padding-left: 13px;padding-right: 13px;padding-top:13px; height: 70px; background-color: #fff;">
+		<div style="float: left;font-size: 14px;color: #323232;">
+			<div>商品金额</div>
+			<div>运费</div>
+		</div>
+		<div style="float: right;font-size: 14px;color: red;">
+			<div style="text-align: right;"><span>￥</span><span class="id_price_total"></span></div>
+			<div style="text-align: right;"><span>￥</span><span>0</span></div>
+		</div>
+	</div>
+	<div style="height: 55px;width:100%; position: fixed;bottom: 0%;z-index: 1030;background-color: #fff;">
+		<div style="height: 55px;line-height: 55px;width: 60%;text-align: center;float: left;">
+			<span style="font-size: 14px;color: #323232;">合计:</span><span style="font-size: 16px;color: #fa5c10;">&nbsp;￥</span><span style="font-size: 16px;color: #fa5c10;" class="id_price_total"></span>
+		</div>
+		<div style="height: 55px;line-height: 55px;width: 40%;text-align: center;background-color: #fa5c10;float: left;" id="id_pay">
+			<span style="font-size: 16px;color: #fff;">提交订单</span>
+		</div>
+	</div>
+<script type="text/javascript">
+$(function() {
+    FastClick.attach(document.body);
+});
+var addressId={{res_data.addressId}};
+var addrDetail='{{res_data.addrDetail}}';
+var addrName='{{res_data.addrName}}';
+var addrPhone='{{res_data.addrPhone}}';
+var title='{{res_data.title}}';
+var color='{{res_data.color}}';
+var size='{{res_data.size}}';
+var price='{{res_data.price}}';
+var mCount='{{res_data.count}}';
+$('#id_address').html(addrDetail);
+$('#id_addr_name').html(addrName);
+$('#id_addr_phone').html(addrPhone);
+$('#id_title').html(title);
+$('#id_color').html(color);
+$('#id_size').html(size);
+$('#id_price').html(price);
+$('#id_count').html(mCount);
+$('#id_count_down').html(mCount);
+$('.id_price_total').html(price*mCount);
+$('#id_address_img').css("margin-top",parseInt($('#id_address_div').css('height'))/2-9+'px');
+function mAjax(){
+	$.ajax({
+		type: 'GET',
+		url: "https://www.youlinzj.cn/youlin/api1.0/",
+		cache: false,
+        data:{	
+        		addr_id      : addressId,
+        		tag          : 'sinra',
+        		apitype      : 'h5',
+        		access       : '9527'
+        },
+		dataType: 'json',
+		success: function(data){
+			data.info.detailaddr;
+		},
+		error:function(xhr,data){
+			
+		}
+	});
+}
+function mReduce(){
+	var count=$('#id_count').html();
+	if(parseInt(count)>1){
+		$('#id_count').html(parseInt(count)-1);
+		$('#id_count_down').html(parseInt(count)-1);
+		mCount=parseInt(count)-1;
+		$('.id_price_total').html(price*mCount);
+	}
+}
+function mAdd(){
+	var count=$('#id_count').html();
+	$('#id_count').html(parseInt(count)+1);
+	$('#id_count_down').html(parseInt(count)+1);
+	mCount=parseInt(count)+1;
+	$('.id_price_total').html(price*mCount);
+}
+$('#id_pay').click(function(){
+	var totalPrice=$('.id_price_total').html();
+	location.href="https://www.youlinzj.cn/yl/web/youlinPay?price="+totalPrice;
+});
+</script>
+</body>
+</html>

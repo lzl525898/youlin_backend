@@ -1,0 +1,644 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>物品置换详情</title>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylbootstrap.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylfont-awesome.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylactionBar.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylweui.min.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/yljquery-weui.css" />
+<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yldevice-toucher.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylhammer.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yljquery-weui.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylfastclick.js"></script>
+<style type="text/css">
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft YaheiUI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+	background-color:#fff;
+	padding-top:50px;
+}
+.vertical-center{
+	display: table;
+	margin-top:6px;
+	margin-bottom:12px;
+	padding-left:12px;
+}
+#nav-btn-wupin{
+	padding:1px 10px;
+	font-size:16px;
+	border:1px solid #FFFFFF;
+}
+#nav-btn-wode{
+	padding:1px 10px;
+	font-size:16px;
+	border:1px solid #FFFFFF;
+}
+#nav-btn-group{
+	 margin-top:11px;
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;          
+}
+.img-avatar-setting{
+	margin-left:10px;
+	margin-top:10px;
+}
+
+.media-heading-h4{
+	padding-top:14px;
+	font-weight:600;
+	font-size:16px;
+	color:#323232;
+	text-overflow:ellipsis; 
+	white-space:nowrap; 
+	overflow:hidden;
+}
+
+.media-heading-p{
+	font-size:12px;
+	color:#808080;
+	text-overflow: ellipsis;
+	white-space:nowrap; 
+	overflow:hidden;
+}
+
+.media-heading-time-p{
+	font-size:12px;
+	color:#808080;
+	padding-top:12px;
+	margin-right:10px;
+}
+
+.media-body-content-p{
+	font-size:14px;
+	overflow : hidden;
+	color:#323232;
+	font-weight:500;
+	display: -webkit-box;
+	-webkit-line-clamp:4; 
+	-webkit-box-orient:vertical;
+}
+
+.my-good-single-item{
+	-webkit-box-shadow:0px 2px 5px -2px #999999;  
+  	-moz-box-shadow:0px 2px 5px -2px #999999;  
+  	box-shadow:0px 2px 5px -2px #999999;
+}
+
+.my-goods-neworold-level-span{
+	margin-left:10px;
+	background-color:#e6e6e6;
+	font-size:14px;
+	color:#999999;
+	font-weight:600;
+	border-radius: 15px; 
+	padding:6px 15px; 
+}
+
+.my-goods-prices-head-span{
+	font-weight:800;
+	font-size:16px;
+	color:#fa5b11;
+}
+
+.my-goods-prices-content-span{
+	margin-left:2px;
+	margin-right:10px;
+	font-size:24px;
+	font-weight:800;
+	color:#fa5b11;
+}
+
+.my-goods-browse-span{
+	margin-left:10px;
+	color:#999999;
+	font-size:14px;
+}
+
+.my-goods-praise-img{
+	width:15px;
+	height:15px;
+}
+
+.my-goods-praise-span{
+	color:#999999;
+	font-size:14px;
+}
+
+.my-goods-comment-img{
+	width:15px;
+	height:15px;
+}
+
+.my-goods-comment-span{
+	color:#999999;
+	font-size:14px;
+}
+
+.my-goods-browse-div{
+	margin-top:6px; 
+	margin-bottom:6px;
+}
+
+.my-goods-praise-div{
+	width:30%;
+	margin-top:6px;
+}
+
+.my-goods-comment-div{
+	margin-right:10px;
+}
+
+.opacity{
+	-webkit-animation: opacity 0.3s linear;
+	animation: opacity 0.3s linear;
+}
+@-webkit-keyframes opacity {
+	0% {
+		opacity:0;
+	}
+	100% {
+		opacity:1;
+	}
+}
+@keyframes opacity {
+	0% {
+		opacity:0;
+	}
+	100% {
+		opacity:1;
+	}
+}
+
+@media (min-width: 768px) {
+	.vertical-center p{
+		font-size:16px;
+	}
+}
+
+@media (min-width: 992px) {
+	.vertical-center p{
+		font-size:17px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.vertical-center p{
+		font-size:18px;
+	}
+}
+</style>
+</head>
+<body>
+	<div class="container-fluid">
+	<div class="actionbar navbar-fixed-top" style="border:none;">
+		<div class="row" id="id_mypush">
+			<div class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
+			<i onclick="javascript:history.go(-1)" class="fa fa-angle-left" style="margin-left:10px;color:#ffffff;font-size:32px; margin-top:7px;"></i>
+			</div>
+			<div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" style="padding:0; margin:0;">
+				<div class="vertical-center center-block" style="padding-left:0; margin-top:11px;">
+					<div class="btn-group" id="id_btn_group">
+						<button type="button" class="btn btn-default" id="nav-btn-wupin">在卖的</button>
+						<button type="button" class="btn btn-default" id="nav-btn-wode">收摊的</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-lg-3 col-sm-3 col-xs-3" style="padding-right:0px;">
+			</div>
+		</div>
+		<div class="row" id="id_search">
+			<div style="float:left;">
+				<i onclick="javascript:history.go(-1)" class="fa fa-angle-left" style="margin-left:26px;color:#ffffff;font-size:32px;margin-top:7px;"></i>
+		    </div>
+		    <div id="id_input_div" style="width:75%;height:28px;line-height:28px;border-radius:5px;background-color:#fff;text-align:center;margin-top:11px;">
+		    	<img src="{{STATIC_URL}}square/img/sousuo.png" style="height:15px; width:15px;"/>
+				<a id="id_search_href" style="color:#999999; font-size:12px;text-decoration:none;">&nbsp;&nbsp;输入您需要物品的关键字</a>
+		    </div>
+		</div>
+	</div>
+	<div id="square-my-goods">
+		<div class="row" id="id_my_scroll" style="background-color:#ffffff;">
+			<div class="my-goods-item">
+				<div class="lists"></div>
+				<div class="weui-infinite-scroll" style="height: 45px">
+     				<div class="infinite-preloader" id="id_scroll"></div>
+     				<span id="id_load_status" style="color: #323232;font-size: 12px;">正在加载</span>
+    			</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$('#nav-btn-wode').css('background-color','#ffba02');
+$('#nav-btn-wupin').css('background-color','#ffffff');
+$('#nav-btn-wode').css('color','#ffffff');
+$('#nav-btn-wupin').css('color','#ffba02');
+$('#id_input_div').css('margin-left',(parseInt($('#id_search').css('width'))*0.25)/2);
+$('#id_search').hide();
+
+var userId = {{res_data.userId}};
+var communityId = {{res_data.communityId}};
+var userType = {{res_data.userType}};
+var type = {{res_data.type}};
+var topicType = {{res_data.topicType}};
+if(type==2){
+	$('#nav-btn-wupin').text("我买的");
+	$('#nav-btn-wode').text("我卖的");
+}else if(type==3){
+	$('#id_btn_group').empty();
+	$('#id_btn_group').html('<div style="font-size:16px;color:#fff;margin-top:4px" onclick="javascript:history.go(-1)">我卖出的</div>');
+}else if(type==4){
+	$('#id_btn_group').empty();
+	$('#id_btn_group').html('<div style="font-size:16px;color:#fff;margin-top:4px" onclick="javascript:history.go(-1)">我买到的</div>');
+}else if(type==5){
+	$('#id_mypush').hide();
+	$('#id_search').show();
+	//type=0 点击分类进入搜索
+	$("#id_search_href").attr('href',"https://www.youlinzj.cn/yl/web/mySearch?user_id="+userId+"&community_id="+communityId+"&user_type="+userType+"&topic_type="+topicType+"&type="+0);
+}
+//下拉刷新的topicID  上拉刷新的topicID
+var pullDownTopic = 0,pullUpTopic = 0,senderId = 0,wantType = 0,mType = 0;
+var loading = false;
+	//点击在卖的
+	function mAjax(type){
+		var mTag;
+		//type:
+		//1->我发布的 在卖的
+		//2->我发布的 收摊的
+		//3->洽谈中的 我买的
+		//4->洽谈中的 我卖的
+		//5->我卖出的
+		//6->我买到的
+		if(type==1){
+			mTag='myoldreplace';
+		}else if(type==2){
+			mTag='myoldtakeback';
+		}else if(type==3){
+			mTag='getbuywithtalk';
+		}else if(type==4){
+			mTag='getsellwithtalk';
+		}else if(type==5){
+			mTag='getsellwithfinish';
+		}else if(type==6){
+			mTag='getbuywithfinish';
+		}
+		var wantImgSrc;
+		if($('#id_load_status').text()!="暂无数据"){
+				$.ajax({
+					type: 'GET',
+					url: "https://www.youlinzj.cn/youlin/api1.0/",
+					cache: false,
+		            data:{	
+		            		community_id : communityId,
+		            		topic_id     : pullUpTopic,
+		            		user_id      : userId,
+		            		type         : userType,
+		            		tag          : mTag,
+		            		apitype      : 'h5',
+		            		access       : '9527'
+		            },
+					dataType: 'json',
+					success: function(data){
+						var result = '';			
+						for(var i = 0; i < data.lists.length; i++){
+							pullUpTopic = data.lists[i].topicInfo.topicId;
+							senderId = data.lists[i].topicInfo.senderId;
+							wantType = data.lists[i].likeType;
+							if(wantType==0){
+								wantImgSrc="{{STATIC_URL}}square/img/dianzan2.png";
+							}else{
+								wantImgSrc="{{STATIC_URL}}square/img/dianzan1.png";
+							}
+							result += '<div class="container opacity" style="margin:0; padding:0;" onClick="myClick('+pullUpTopic+','+senderId+')" id="'+pullUpTopic+'">' 
+							             +'<div class="col-md-10 col-lg-10 col-sm-10 col-xs-10" style="margin:0; padding:0; " id="my-goods-item-media-left">'
+										     +'<div class="media pull-left">'
+											     +'<div class="media-left">'
+										 		     +'<img src="'+data.lists[i].senderPortrait+'" alt="" class="media-object img-circle img-avatar-size img-avatar-setting"/>'
+												 +'</div>'
+												 +'<div class="media-body">'
+												       +'<h4 class="media-heading media-heading-h4">'+data.lists[i].topicTitle+'</h4>'
+													   +'<p class="media-heading-p">'+data.lists[i].displayName+'</p>'
+												  +'</div>'
+											 +'</div>'
+									    +'</div>'
+										+'<div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" style="margin:0; padding:0; margin-top:-4px;">'
+										+'<div class="pull-right">'
+											+'<p class="media-heading-time-p">'+data.lists[i].sendData+'</p>'
+										+'</div>'
+										+'</div>'
+										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">'
+											+'<p class="media-body-content-p">'+data.lists[i].topicContent+'</p>'
+										+'</div>'
+										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding:0; margin:0;">'
+											+'<div class="row" style="margin:0; padding:0; margin-left:10px; margin-right:5px; font-size:0;" id="img-goods-container">';
+							for(var j = 0; j < data.lists[i].mediaList.length; j++){
+								result += '<img src="'+data.lists[i].mediaList[j].resPath+'" class="img-goods-container-img" onerror="this.src='+"'{{STATIC_URL}}square/img/bg_error.png'"+'"/>';
+							}
+							result +=   '</div>'
+										+'</div>'
+										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding:0; margin:0;">'
+											+'<div class="pull-left" style="margin-top:6px;">'
+												+'<span class="my-goods-neworold-level-span">'+data.lists[i].qualityGrade+'</span>'
+											+'</div>'
+											+'<div class="pull-right">'
+												+'<span class="my-goods-prices-head-span">￥</span><span class="my-goods-prices-content-span">'+data.lists[i].price+'</span>'
+											+'</div>'
+										+'</div>'
+										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 my-good-single-item" style="padding:0; margin:0;">'
+											+'<div class="pull-left my-goods-browse-div">'
+												+'<span class="my-goods-browse-span">浏览&nbsp;'+data.lists[i].viewNum+'&nbsp;次</span>'
+											+'</div>'
+											+'<div class="pull-right my-goods-praise-div">'
+												+'<div class="pull-left">'
+												+'<img src="'+wantImgSrc+'"'+'class="my-goods-praise-img"/>'
+													+'<span class="my-goods-praise-span">&nbsp;'+data.lists[i].likeNum+'</span>'
+												+'</div>'
+												+'<div class="pull-right my-goods-comment-div">'
+													+'<img src="{{STATIC_URL}}square/img/pinglun.png" class="my-goods-comment-img"/>'
+													+'<span class="my-goods-comment-span">&nbsp;'+data.lists[i].commentNum+'</span>'
+												+'</div>'
+											+'</div>'
+										+'</div>'
+										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 " style="margin:0; padding:0;background-color:#f3f3ee; height:5px; margin-top:2px;"></div></div>';	
+						}
+						
+						$('.lists').append(result);	
+						$('.img-avatar-size').css('height','44px');
+						$('.img-avatar-size').css('width','44px');
+						$('.media-heading-h4').css('width',parseInt($('#my-goods-item-media-left').width()-10-10-44)+'px');
+						$('.media-heading-p').css('width',parseInt($('#my-goods-item-media-left').width()-10-10-44)+'px');
+						$('.img-goods-container-img').css('height',(parseInt($('#img-goods-container').css('width'))-15)/3+'px');
+						$('.img-goods-container-img').css('width',(parseInt($('#img-goods-container').css('width'))-15)/3+'px');
+						for(var i=0;i<=$('.img-goods-container-img').length;i++){
+							$('.img-goods-container-img').eq(i).css('margin-right','5px');
+							$('.img-goods-container-img').eq(i).css('margin-bottom','5px');
+						}
+						if(data.lists.length == 0 || data.lists.length == 1){
+							$('#id_scroll').hide();
+							$('#id_load_status').show();
+							$('#id_load_status').text("暂无数据");
+						}
+						loading = false;
+					},
+					error: function(xhr, type){
+						console.log(xhr);
+						loading = false;
+					}
+				}); //ajax-end
+		}
+	}
+	//分类搜索
+	function mAjaxType(mTag,mTopicType){
+		// 下拉刷新的topicID  上拉刷新的topicID
+		var wantImgSrc;
+		if($('#id_load_status').text()!="暂无数据"){
+				$.ajax({
+					type: 'GET',
+					url: "https://www.youlinzj.cn/youlin/api1.0/",
+					cache: false,
+		            data:{	
+		            		community_id : communityId,
+		            		topic_id     : pullUpTopic,
+		            		user_id      : userId,
+		            		type         : userType,
+		            		tag          : mTag,
+		            		apitype      : 'h5',
+		            		topic_type   : mTopicType,
+		            		access       : '9527'
+		            },
+					dataType: 'json',
+					success: function(data){
+						var result = '';			
+						for(var i = 0; i < data.lists.length; i++){
+							pullUpTopic = data.lists[i].topicInfo.topicId;
+							senderId = data.lists[i].topicInfo.senderId;
+							wantType = data.lists[i].likeType;
+							if(wantType==0){
+								wantImgSrc="{{STATIC_URL}}square/img/dianzan2.png";
+							}else{
+								wantImgSrc="{{STATIC_URL}}square/img/dianzan1.png";
+							}
+							result += '<div class="container opacity" style="margin:0; padding:0;" onClick="myClick('+pullUpTopic+','+senderId+')" id="'+pullUpTopic+'">' 
+							             +'<div class="col-md-10 col-lg-10 col-sm-10 col-xs-10" style="margin:0; padding:0; " id="my-goods-item-media-left">'
+										     +'<div class="media pull-left">'
+											     +'<div class="media-left">'
+										 		     +'<img src="'+data.lists[i].senderPortrait+'" alt="" class="media-object img-circle img-avatar-size img-avatar-setting"/>'
+												 +'</div>'
+												 +'<div class="media-body">'
+												       +'<h4 class="media-heading media-heading-h4">'+data.lists[i].topicTitle+'</h4>'
+													   +'<p class="media-heading-p">'+data.lists[i].displayName+'</p>'
+												  +'</div>'
+											 +'</div>'
+									    +'</div>'
+										+'<div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" style="margin:0; padding:0; margin-top:-4px;">'
+										+'<div class="pull-right">'
+											+'<p class="media-heading-time-p">'+data.lists[i].sendData+'</p>'
+										+'</div>'
+										+'</div>'
+										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">'
+											+'<p class="media-body-content-p">'+data.lists[i].topicContent+'</p>'
+										+'</div>'
+										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding:0; margin:0;">'
+											+'<div class="row" style="margin:0; padding:0; margin-left:10px; margin-right:5px; font-size:0;" id="img-goods-container">';
+							for(var j = 0; j < data.lists[i].mediaList.length; j++){
+								result += '<img src="'+data.lists[i].mediaList[j].resPath+'" class="img-goods-container-img" onerror="this.src='+"'{{STATIC_URL}}square/img/bg_error.png'"+'"/>';
+							}
+							result +=   '</div>'
+										+'</div>'
+										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding:0; margin:0;">'
+											+'<div class="pull-left" style="margin-top:6px;">'
+												+'<span class="my-goods-neworold-level-span">'+data.lists[i].qualityGrade+'</span>'
+											+'</div>'
+											+'<div class="pull-right">'
+												+'<span class="my-goods-prices-head-span">￥</span><span class="my-goods-prices-content-span">'+data.lists[i].price+'</span>'
+											+'</div>'
+										+'</div>'
+										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 my-good-single-item" style="padding:0; margin:0;">'
+											+'<div class="pull-left my-goods-browse-div">'
+												+'<span class="my-goods-browse-span">浏览&nbsp;'+data.lists[i].viewNum+'&nbsp;次</span>'
+											+'</div>'
+											+'<div class="pull-right my-goods-praise-div">'
+												+'<div class="pull-left">'
+												+'<img src="'+wantImgSrc+'"'+'class="my-goods-praise-img"/>'
+													+'<span class="my-goods-praise-span">&nbsp;'+data.lists[i].likeNum+'</span>'
+												+'</div>'
+												+'<div class="pull-right my-goods-comment-div">'
+													+'<img src="{{STATIC_URL}}square/img/pinglun.png" class="my-goods-comment-img"/>'
+													+'<span class="my-goods-comment-span">&nbsp;'+data.lists[i].commentNum+'</span>'
+												+'</div>'
+											+'</div>'
+										+'</div>'
+										+'<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 " style="margin:0; padding:0;background-color:#f3f3ee; height:5px; margin-top:2px;"></div></div>';	
+						}
+						
+						$('.lists').append(result);	
+						$('.img-avatar-size').css('height','44px');
+						$('.img-avatar-size').css('width','44px');
+						$('.media-heading-h4').css('width',parseInt($('#my-goods-item-media-left').width()-10-10-44)+'px');
+						$('.media-heading-p').css('width',parseInt($('#my-goods-item-media-left').width()-10-10-44)+'px');
+						$('.img-goods-container-img').css('height',(parseInt($('#img-goods-container').css('width'))-15)/3+'px');
+						$('.img-goods-container-img').css('width',(parseInt($('#img-goods-container').css('width'))-15)/3+'px');
+						for(var i=0;i<=$('.img-goods-container-img').length;i++){
+							$('.img-goods-container-img').eq(i).css('margin-right','5px');
+							$('.img-goods-container-img').eq(i).css('margin-bottom','5px');
+						}
+						if(data.lists.length == 0 || data.lists.length == 1){
+							$('#id_scroll').hide();
+							$('#id_load_status').show();
+							$('#id_load_status').text("暂无数据");
+						}
+						loading = false;
+					},
+					error: function(xhr, type){
+						loading = false;
+					}
+				}); //ajax-end
+		}
+	}
+	if(type==1){
+		mAjax(1);
+		mType=1;
+	}else if(type==2){
+		mAjax(3);
+		mType=3;
+	}else if(type==3){
+		mAjax(5);
+		mType=5;
+	}else if(type==4){
+		mAjax(6);
+		mType=6;
+	}else if(type==5){
+		mAjaxType("typeofreplace",topicType);
+	}
+	$(document.body).infinite().on("infinite", function() {
+    	if($('#id_load_status').text()!="暂无数据"){
+    		if(loading) return;
+   			loading = true;
+   			if(type==5){
+   				mAjaxType("typeofreplace",topicType);
+   			}else{
+   				mAjax(mType);
+   			}
+    	}
+  	});
+	$(function(){
+		FastClick.attach(document.body);
+		$('#nav-btn-wupin').click(function(){
+			$('#nav-btn-wupin').css('background-color','#ffffff');
+			$('#nav-btn-wode').css('background-color','#ffba02');
+			$('#nav-btn-wode').css('color','#ffffff');
+			$('#nav-btn-wupin').css('color','#ffba02');
+			$('.lists').empty();
+			$('#id_scroll').show();
+			$('#id_load_status').show();
+			$('#id_load_status').text("正在加载");
+			pullDownTopic = 0;
+			pullUpTopic = 0;
+			senderId = 0;
+			wantType = 0;
+			if(type==1){
+				mAjax(1);
+				mType=1;
+			}else if(type==2){
+				mAjax(3);
+				mType=3;
+			}
+		});
+		
+		$('#nav-btn-wode').click(function(){
+			$('#nav-btn-wode').css('background-color','#ffffff');
+			$('#nav-btn-wupin').css('background-color','#ffba02');
+			$('#nav-btn-wode').css('color','#ffba02');
+			$('#nav-btn-wupin').css('color','#ffffff');
+			$('.lists').empty();
+			$('#id_scroll').show();
+			$('#id_load_status').show();
+			$('#id_load_status').text("正在加载");
+			pullDownTopic = 0;
+			pullUpTopic = 0;
+			senderId = 0;
+			wantType = 0;
+			if(type==1){
+				mAjax(2);
+				mType=2;
+			}else if(type==2){
+				mAjax(4);
+				mType=4;
+			}
+		});
+		
+	});
+	function myClick(topicId,senderId){
+		//alert(topicId);
+		if(userId!=senderId){
+			$.ajax({
+				type: 'GET',
+				url: "https://www.youlinzj.cn/youlin/api1.0/",
+				cache: false,
+		        data:{	
+		        		topic_id     : topicId,
+		        		tag          : 'checksecond',
+		        		apitype      : 'h5',
+		        		access       : '9527'
+		        },
+				dataType: 'json',
+				success: function(data){
+					var mFlag=data.flag;
+					if(mFlag=="down"){
+						$.toast("该商品已下架", "text");
+						$("#"+topicId).remove();
+						searchHelper.droploader.unlock();
+					    searchHelper.droploader.noData(false);
+					    searchHelper.droploader.resetload();
+					}else if(mFlag=="finish"){
+						$.toast("该商品已经卖出去了", "text");
+						$("#"+topicId).remove();
+						searchHelper.droploader.unlock();
+					    searchHelper.droploader.noData(false);
+					    searchHelper.droploader.resetload();
+					}else{
+						myObj.startDetailWebview(topicId,senderId);
+					}
+					
+				},
+				error:function(xhr,data){
+					
+				}
+			});
+			}else{
+				myObj.startDetailWebview(topicId,senderId);
+			}
+	}
+	function myRemove(topicId){
+		$("#"+topicId).remove();
+	}
+	function mBack(){
+		myObj.mBack();
+	}
+	function updateTopic(topicId,browserNum,likeType,likeNum,commentNum){
+		var $browserClass=$('.my-goods-browse-span');
+		var $likeTypeClass=$('.my-goods-praise-img');
+		var $likeNumClass=$('.my-goods-praise-span');
+		var $commentNumClass=$('.my-goods-comment-span');
+		$("#"+topicId).find($browserClass).html("浏览&nbsp;"+browserNum+"&nbsp;次");
+		if(likeType==0){
+			$("#"+topicId).find($likeTypeClass).attr('src','{{STATIC_URL}}square/img/dianzan2.png');
+		}else if(likeType==1){
+			$("#"+topicId).find($likeTypeClass).attr('src','{{STATIC_URL}}square/img/dianzan1.png');
+		}
+		$("#"+topicId).find($likeNumClass).html("&nbsp;"+likeNum);
+		$("#"+topicId).find($commentNumClass).html("&nbsp;"+commentNum);
+	}
+</script>
+</body>
+</html>

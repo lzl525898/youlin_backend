@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>想要的人</title>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylbootstrap.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylfont-awesome.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylactionBar.css"/>
+<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yldevice-toucher.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylhammer.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylfastclick.js"></script>
+<style type="text/css">
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft YaheiUI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+	background-color:#fff;
+  	padding-top: 50px;/*有顶部固定导航条时设置*/
+  	
+}
+#mymodal-data{
+	top:300px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="actionbar navbar-fixed-top">
+	<div style="float: left;" onclick="javascript:history.back(-1)">
+		<i class="fa fa-angle-left" style="margin-left:10px;color:#ffffff;font-size:32px; margin-top:7px;"></i>
+	</div>
+	<div style="float: left;padding-top: 15px;padding-left: 7px;" onclick="javascript:history.back(-1)">
+		<span  onclick="" style="font-size: 16px;color: #fff;">买家列表</span>
+	</div>
+</div>
+<div id="id_all">
+
+</div>
+<div class="modal" id="mymodal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-header" id="id_chat" data-dismiss="modal">
+	<h4 class="modal-title" style="color:#ffba01">联系买家</h4>
+	</div>
+	<div class="modal-body" id="id_success" data-dismiss="modal">
+	<h4 class="modal-title" style="color:red">确认交易</h4>
+	</div>
+	
+	</div>
+	</div>
+</div>
+<script type="text/javascript">
+var senderId=0;
+var userNick,senderPortrait;
+var userId={{res_data.userId}};
+var topicId={{res_data.topicId}};
+	$(function(){
+		FastClick.attach(document.body);
+		$.ajax({
+			type:'GET',
+			url:'https://www.youlinzj.cn/youlin/api1.0/',
+			cache:false,
+			data:{
+				user_id:userId,
+				topic_id:topicId,
+				tag:'dealuserlist',
+				apitype:'h5',
+				access:9527
+			},
+			success:function(data){
+				var num=data.lists.length;
+				for(var i=0;i<num;i++){
+					$('#id_all').append('<div style="height: 60px;" onclick="myClick('+data.lists[i].user_id+')" id="'+data.lists[i].user_id+'">'
+						+'<img class="userPortrait" style="width: 33px;height: 33px;float: left;margin: 13px;" src="'+data.lists[i].user_avatar+'">'
+						+'<div style="float: left;padding-top:11px;")>'
+						+'<div style="font-size: 14px;color: #323232;" class="userNick">'+data.lists[i].user_nick+'</div>'
+						+'<div><i class="fa fa-map-marker"></i><span style="font-size: 12px;color: #b3b3b3;">&nbsp'+data.lists[i].user_address+'</span></div></div>'
+						+'<div style="float: left;width:100%;height:0px;border-bottom: 1px solid #f3f3ee"></div>'
+						+'</div>');
+				}
+			},
+			error:function(xhr,type){
+				alert("网络有问题");
+			}
+		});
+	});
+	//$('#mymodal-data').css('top',($(window).height()-$('#mymodal-data').height())/2);
+	function myClick(userId){
+		senderId=userId;
+		userNick=$('#'+senderId).find('.userNick').html();
+		senderPortrait=$('#'+senderId).find('.userPortrait').attr('src');
+		$('#mymodal-data').modal('toggle');
+		//alert(senderId+" "+topicId);
+	}
+	$('#id_chat').click(function(){
+		myObj.chatBuyers(userNick,senderPortrait,senderId);
+	});
+	
+	$('#id_success').click(function(){
+		//alert(senderId+" "+topicId);
+		$.ajax({
+			type:'GET',
+			url:'https://www.youlinzj.cn/youlin/api1.0/',
+			cache:false,
+			data:{
+				buy_user:senderId,
+				topic_id:topicId,
+				tag:'dealdone',
+				apitype:'h5',
+				access:9527
+			},
+			success:function(data){
+				window.history.go(-1);
+			},
+			error:function(xhr,type){
+				alert("网络有问题");
+			}
+		});
+	});
+</script>
+</body>
+</html>

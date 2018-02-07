@@ -1,0 +1,114 @@
+<script type="text/javascript" src="../../static/ckeditor/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="../../static/ckeditor/ckeditor-init.js"></script>
+<script src="../../static/assets/js/admin/add_new.js" ></script>
+<div class="top-bar">				
+	<h1>当前位置</h1>
+	<div class="breadcrumbs"><span>新闻管理</span> - <span>添加新闻</span></div>
+</div>
+<div class="table">
+	<img src="../../static/web/images/bg-th-left.gif" alt="" class="left" height="7" width="8" />
+	<img src="../../static/web/images/bg-th-right.gif" alt="" class="right" height="7" width="7" />
+	<form action="" enctype="multipart/form-data" method="post" id="myform">
+	 <input type="hidden" name="csrfmiddlewaretoken" value="" id="csrftoken">
+	<table class="listing form" cellpadding="0" cellspacing="0"><tbody>
+		<tr>
+			<th class="full" colspan="2">新闻信息</th>
+		</tr>
+		<tr>
+			<td class="first" width="80"><strong>标题</strong></td>
+			<td class="last"><input class="text" type="text" id="title" name="title" /></td>
+		</tr>
+		<tr class="bg">
+			<td class="first"><strong>来源</strong></td>
+			<td class="last"><input class="text" type="text" name="source" id="source"/></td>
+		</tr>
+		<tr>
+			<td class="first"><strong>摘要</strong></td>
+			<td class="last"><textarea name="introduce" id="introduce" cols="60" rows="2"></textarea></td>
+		</tr>
+		<tr class="bg">
+			<td class="first"><strong>正文</strong></td>
+			<td class="last"><textarea name="content" id="content" cols="20" rows="2" class="ckeditor"></textarea></td>
+		</tr>
+		<tr>
+			<td class="first"><strong>新闻小图</strong></td>
+			<td class="last"><input type="file" name="small_pic" id="small_pic"/></td>
+		</tr>
+		<tr class="bg">
+			<td class="first"><strong>是否为主新闻</strong></td>
+			<td class="last"><label><input type="radio" value="1" name="pri_flag" id="pri_flag"/>是 </label> &nbsp;&nbsp;&nbsp;&nbsp;<label> <input type="radio" value="0" name="pri_flag" id="pri_flag" checked />否</label> </td>
+		</tr>
+		<tr>
+			<td class="first"><strong>城市</strong></td>
+			<td class="last">
+				<select name="city_id" id="city_id" onChange="getCommunityOptions(this.value);">
+					
+				</select>
+			</td>
+		</tr>
+		<tr class="bg">
+			<td class="first"><strong>所属小区</strong></td>
+			<td class="last">
+				<select name="community_id" id="community_id">
+								<option value="0">请选择小区</option>
+				</select></td>
+		</tr>
+		<tr >
+			<td class="first">&nbsp;</td>
+			<td class="last">
+				<input type="submit" value="添加" id="btn_submit" />
+			</td>
+		</tr>
+	</tbody></table>
+	</form>
+	<p>&nbsp;</p>
+   </div>
+<script type="text/javascript">
+　　CKEDITOR.replace('content',{
+    language: 'zh-cn',
+    //uiColor: '#9AB8F3',
+    toolbar :
+        [
+　　　　  //加粗     斜体，     下划线      穿过线      下标字        上标字
+           ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
+　　　　  //数字列表          实体列表            减小缩进    增大缩进
+           ['NumberedList','BulletedList','-','Outdent','Indent'],
+　　　　  //左对齐             居中对齐          右对齐          两端对齐
+           ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+　　　　  //超链接 取消超链接 锚点
+           ['Link','Unlink','Anchor'],
+　　　　  //图片   flash    表格       水平线            表情       特殊字符        分页符
+           ['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+'/',
+　　　　　//样式       格式      字体    字体大小
+           ['Styles','Format','Font','FontSize'],
+　　　　  //文本颜色     背景颜色
+           ['TextColor','BGColor'],
+　　　　　//全屏           显示区块
+           ['Maximize', 'ShowBlocks','-']
+         ],
+      filebrowserImageUploadUrl:'ajax_upload',   //图片上传
+      image_previewText:' ',//预览区域显示内容
+});
+function getContext(){	
+	return content = CKEDITOR.instances.content.getData();
+}
+
+/* CKEDITOR.on('dialogDefinition', function (ev) {
+	  var dialogName = ev.data.name;
+	  var dialogDefinition = ev.data.definition;
+	  if (dialogName == 'image') {
+	    dialogDefinition.removeContents('Upload');
+	    dialogDefinition.addContents({
+	      title: "上传",
+	      id: "upload",
+	      label: "上传",
+	      elements: [{
+	        type: "html",
+	        html: '<form action="ajax_upload" enctype="multipart/form-data" method="post"><input id="imageupload" type="file" name="files[]" /><input value="提交" type="submit" /></form>'
+	      }]
+	    });
+	   }
+	});  */
+
+</script> 

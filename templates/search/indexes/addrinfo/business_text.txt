@@ -1,0 +1,2 @@
+<h2>{{ object.bc_name }}</h2>
+<p>{{ object.bc_describe }}</p>

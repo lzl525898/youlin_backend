@@ -1,0 +1,10 @@
+.actionbar{
+	background-color:#ffba02;
+	height:48px;
+}
+.actionbarText{
+	height: 48px;
+	line-height: 48px;
+	font-size: 16px;
+	color: #fff;
+}

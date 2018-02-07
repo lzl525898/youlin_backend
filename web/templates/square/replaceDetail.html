@@ -1,0 +1,602 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<title>物品置换详情</title>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylbootstrap.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylfont-awesome.min.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylactionBar.css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/ylweui.min.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}assets/css/yljquery-weui.css" />
+<script src="{{STATIC_URL}}assets/js/jquery-2.0.3.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yl-bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yldevice-toucher.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylhammer.min.js"></script>
+<script src="{{STATIC_URL}}assets/js/yljquery-weui.js"></script>
+<script src="{{STATIC_URL}}assets/js/ylfastclick.js"></script>
+<style type="text/css">
+
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft YaheiUI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;
+	background-color:#fff;
+  	padding-bottom: 50px;/*有底部固定导航条时设置*/
+}
+
+.goods-seller-avatar{
+	margin-top:14px;
+	border-radius:120px;
+	background:rgba(0,0,0,0.6);
+	height:40px; 
+	width:110px;
+	position:absolute;
+	z-index:3;
+}
+
+.goods-seller-name{
+	height:40px;
+	width:60px;
+}
+
+.goods-seller-name p{
+	margin-left:5px;
+	line-height:40px;
+	font-size:16px;
+	color:#FFFFFF;
+	font-weight:600;
+	text-overflow:ellipsis; 
+	white-space:nowrap; 
+	overflow:hidden;
+}
+
+.goods-seller-avatar img{
+	height:36px; 
+	width:36px; 
+	margin:2px;
+}
+
+.goods-detail-content{
+	margin:48px 0 0 0;
+	background-color:#FFFFFF;
+	height:280px;
+	position:relative;
+}
+
+.goods-carousel-index{
+	position:absolute;
+	z-index:5;
+	width:40px;
+	height:24px;
+	border-radius:120px;
+	background:rgba(0,0,0,0.4);
+	margin-top:245px;
+}
+
+.goods-carousel-left{
+	font-size:16px;
+	font-weight:600;
+	color:#fa5b11;
+}
+
+.goods-carousel-center{
+	font-size:16px;
+	font-weight:600;
+	color:#ffffff;
+}
+
+.goods-carousel-right{
+	font-size:16px;
+	font-weight:600;
+	color:#ffffff;
+}
+
+#mymodal-data2{
+	top:300px;
+	text-align: center;
+}
+#nav-btn-wode{
+	padding:1px 10px;
+	font-size:16px;
+	border:1px solid #FFFFFF;
+}
+</style>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="actionbar navbar-fixed-top">
+		<div style="float: left;" onclick="myBack(0)">
+			<i class="fa fa-angle-left" style="margin-left:10px;color:#ffffff;font-size:32px; margin-top:7px;"></i>
+		</div>
+		<div style="float: left;padding-top: 15px;padding-left: 7px;" onclick="myBack(0)">
+			<span  onclick="" style="font-size: 16px;color: #fff;">详情</span>
+		</div>
+	</div>
+	<div class="goods-detail-content">
+	<!--
+		<div class="goods-seller-avatar">
+			<div class="pull-left">
+				<img class="img-circle img-avatar-size img-avatar-setting" id="id_head" src="https://123.57.9.62/media/youlin/res/96/avatars/072015548211.jpg"/>
+			</div>
+			<div class="pull-left goods-seller-name">
+				<p id="id_name"></p>
+			</div>
+		</div>
+	  -->
+		<div style="position:absolute;z-index:2; width:100%; border:none; padding:0px; margin:0px;">
+			<div class="row" id="goods-detail-carousel">
+				<div class="carousel slide">
+					<ol class="carousel-indicators hide" id="id_img_ol"></ol>
+					<div class="carousel-inner" id="id_img_div">
+					<!-- 	<div class='item active'><img src='111111' style='width:100%; height:280px;' onerror='this.src="myreplace/bg_error.png"'/></div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="goods-carousel-index">
+			<div class="pull-left goods-carousel-left">
+				<p>&nbsp;&nbsp;1</p>
+			</div>
+			<div class="pull-left goods-carousel-center">
+				<p>/</p>
+			</div>
+			<div class="pull-left goods-carousel-right">
+				<p>5</p>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top:10px">
+		<span style="font-size:14px;color:#323232;" id="id_title"></span>
+	</div>
+	<div>
+		<div style="float: left;">
+			<span style="font-size:16px;color:#fa5b11;font-weight:600">￥</span><span style="font-size:20px;color:#fa5b11;font-weight:600;" id="id_price">4000</span>
+			<!-- <span style="font-size:12px;color:#cbcbcb;vertical-align: middle;" id="id_view_num"></span> -->
+		</div>
+		<div style="float:right;">
+			<span id="id_level" style="background-color:#e6e6e6;border-radius:15px;padding:4px 12px;color:#808080;font-size:14px;" id="id_level"></span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="margin-top:10px;margin-bottom: 10px">
+			<span style="font-size:14px;color:#686868;" id="id_content"></span>
+		</div>
+		<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="background-color:#f3f2f0;width:100%;height:13px;"></div>
+		<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"  id="id_buyer_div_up" style="padding-top: 5px;padding-bottom: 5px;">卖给了：</div>
+		<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="height: 50px;" id="id_buyer_div">
+			<img style="width: 33px;height: 33px;float: left;margin-right: 5px;" id="id_buyer_head">
+			<div style="float: left;">
+				<div style="font-size: 14px;color: #323232;" id="id_buyer_user_nick"></div>
+				<div>
+					<i class="fa fa-map-marker"></i><span style="font-size: 12px;color: #b3b3b3;" id="id_buyer_user_address"></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="height:40px;line-height:40px;" onclick="wantListClick()" id="id_want_num">
+		</div>
+		<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="width:100%;height:0px;border-bottom: 1px solid #f3f3ee"></div>
+		<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="height:40px;line-height:40px;" id="id_map">
+			<i class="fa fa-map-marker"></i>
+			<span style="font-size:14px;color:#323232;" id="id_address"></span>
+			<i style="float: right;margin-top:12px;margin-left:20px;" class="fa fa-angle-right"></i>
+			<span style="font-size:14px;color:#686868;float: right;">查看地图位置</span>
+		</div>
+		<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="background-color:#f3f2f0;width:100%;height:13px;"></div>
+		<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="height: 40px;line-height: 40px;text-align: center;font-size:14px;color:#323232" id="id_report">举报商品
+		</div>
+		<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="width:100%;height:13px;background-color:#f3f2f0" id="id_report_down"></div>
+	</div>
+	
+	<div class="row navbar-fixed-bottom" style="height:50px;">
+	<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="width:100%;height:0px;border-bottom: 1px solid #f3f3ee"></div>
+		<div  style="background-color:#fff;width: 50%;height:50px;padding-top:10px;text-align: center;float: left;" id="id_comment">
+			<div><img src="{{STATIC_URL}}square/img/liuyan.png" style="width:21px;height: 18px;"></div>
+			<div style="font-size:12px;color:#686868;" id="id_comment_num">留言</div>
+		</div>
+		<div  style="background-color:#fa5c10;width: 50%;height:50px;line-height: 50px;text-align: center;color:#fff;font-size:16px;float: left;" id="id_iwant_to" type="button" data-toggle="modal"></div>
+	</div>
+		<table style="width: 100%; height: 100%;">
+			<tr>
+				<td>
+					<div class="modal" id="mymodal-data" tabindex="-1" role="dialog"
+						aria-labelledby="mySmallModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title" style="color: #ffba01">确定想要此商品吗？</h4>
+								</div>
+								<div class="modal-body">
+									<p>点击“确定”后，优邻将通知卖家尽快和您取得联系，您可以和卖家商量具体的见面时间和地点。</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">取消</button>
+									<button id="id_ok" type="button" class="btn btn-default"
+										data-dismiss="modal" style="background-color: #ffba01">确定</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+	<div class="modal" id="mymodal-data2" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-header" id="id_chat" data-dismiss="modal">
+	<h4 class="modal-title" style="color:#ffba01">联系物主</h4>
+	</div>
+	<div class="modal-body" id="id_cancel_change" data-dismiss="modal">
+	<h4 class="modal-title" style="color:red">取消交易</h4>
+	</div>
+	
+	</div>
+	</div>
+	</div>
+</div>
+<script type="text/javascript">
+function setName(){
+	$('#id_iwant_to').html("洽谈中");
+}
+var imgArray=new Array();
+var lng=0,lag=0;
+var topicId=0;
+var communityId=0;
+var userId=0;
+var senderId=0;
+var userNick;
+var senderPortrait;
+var userType;
+var buyerNick,buyerPortrait,buyerId;
+$(function(){
+	FastClick.attach(document.body);
+	//初始化界面
+	topicId = {{res_data.topicId}};
+	communityId = {{res_data.communityId}};
+	userId = {{res_data.userId}};
+	userType = {{res_data.userType}};	
+	senderId = {{res_data.senderId}};
+	$('#id_buyer_div_up').hide();
+	$('#id_buyer_div').hide();
+	if(userId==senderId){
+		$('#id_report').hide();
+		$('#id_report_down').hide();
+	}else{
+		$('#id_want_num').hide();
+	}
+	
+	$.ajax({
+			type:"GET",
+			url:"https://www.youlinzj.cn/youlin/api1.0/",
+			cache:false,
+			data:{
+				access : "9527",
+				apitype : "h5",
+				tag : "singlereplace",
+				community_id : communityId,
+				topic_id : topicId,
+				user_id : userId,
+				type : userType
+			},
+			dataType : "json",
+			success:function(data){
+				userNick=data.lists[0].userNick;
+				senderPortrait=data.lists[0].senderPortrait;
+				for (var i = 0; i < data.lists[0].mediaList.length; i++) {
+					if(i==0){
+						$('#id_img_ol').append("<li data-target='#goods-detail-carousel' data-slide-to="+"0"+" class='active'></li>");
+					}else{
+						$('#id_img_ol').append("<li data-target='#goods-detail-carousel' data-slide-to="+i+"></li>");
+					}
+				}
+				for (var i = 0; i < data.lists[0].mediaList.length; i++) {
+					if(i==0){
+						$('#id_img_div').append("<div class='item active' onclick='clickImg("+i+")'>"
+													+"<img src='"+data.lists[0].mediaList[0].resPath+"' style='width:100%; height:280px;' onerror='this.src="+'"{{STATIC_URL}}square/img/bg_error.png"'+"'/>"
+													+"</div>"
+												);
+					}else{
+						$('#id_img_div').append("<div class='item' onclick='clickImg("+i+")'>"
+								+"<img src='"+data.lists[0].mediaList[i].resPath+"' style='width:100%; height:280px;' onerror='this.src="+'"{{STATIC_URL}}square/img/bg_error.png"'+"'/>"
+								+"</div>"
+							);
+					}
+					imgArray.push(data.lists[0].mediaList[i].resPath);
+				}
+				var carouselIndicatorsLength = $('.carousel-indicators li').length;
+				$('.goods-carousel-right').html('<p>'+carouselIndicatorsLength+'</p>');
+				$('.goods-carousel-index').css('margin-left',parseInt($('.goods-detail-content').width())-37+'px');
+				$('.goods-carousel-index').css('line-height',parseInt($('.goods-carousel-index').css('height'))+2+'px');
+
+				$('#goods-detail-carousel').carousel({
+					interval : 4000,
+					pause : 'hover',
+				});
+				
+				$('#goods-detail-carousel').on('slide.bs.carousel',function(e){
+					for(var i=0;i<carouselIndicatorsLength;i++){
+						if($('.carousel-indicators li').eq(i).attr('class')=='active'){
+							var tmpIndex = i+2;
+							if(tmpIndex==carouselIndicatorsLength+1){
+								tmpIndex =1 
+							}
+							$('.goods-carousel-left').html('<p>&nbsp;&nbsp;'+tmpIndex+'</p>');
+						}
+					}	
+				});
+				
+				var goodsDetailTouch = document.getElementById('goods-detail-carousel');
+				var hm = new Hammer(goodsDetailTouch);
+				hm.on("swipeleft",function(){
+					$('#goods-detail-carousel').carousel('next')
+					for(var i=0;i<carouselIndicatorsLength;i++){
+						if($('.carousel-indicators li').eq(i).attr('class')=='active'){
+							var tmpIndex = i+1;
+							if(tmpIndex==carouselIndicatorsLength+1){
+								tmpIndex = 1; 
+							}
+							$('.goods-carousel-left').html('<p>&nbsp;&nbsp;'+tmpIndex+'</p>');
+						}
+					}	
+				});
+				hm.on("swiperight",function(){
+					$('#goods-detail-carousel').carousel('prev')
+					for(var i=0;i<carouselIndicatorsLength;i++){
+						if($('.carousel-indicators li').eq(i).attr('class')=='active'){
+							var tmpIndex = i+1;
+							if(tmpIndex==carouselIndicatorsLength){
+								tmpIndex = carouselIndicatorsLength; 
+							}
+							$('.goods-carousel-left').html('<p>&nbsp;&nbsp;'+tmpIndex+'</p>');
+						}
+					}	
+				});
+				if(userId==senderId){
+				var buyerInfoLength=data.lists[0].buyerInfo.length;
+				if(buyerInfoLength==0){
+					var num=data.lists[0].favouriteInfo.length;
+					if(num==0){
+						$('#id_want_num').hide();
+					}else{
+						if(num>3){
+							for(var i=0;i<3;i++){
+								$('#id_want_num').append('<img style="width:28px;height:28px;" src="'+data.lists[0].favouriteInfo[i].userPortrait+'">');
+							}
+						}else{
+							for(var i=0;i<num;i++){
+								$('#id_want_num').append('<img style="width:28px;height:28px;" src="'+data.lists[0].favouriteInfo[i].userPortrait+'">');
+							}
+						}
+						$('#id_want_num').append('<span style="font-size:14px;color:#323232;margin-left:10px;" id="id_want_num2"></span>'+num+'人想要'
+										+'<i style="float: right;margin-top:12px;margin-left:20px;" class="fa fa-angle-right"></i>');
+					}
+				}else{
+					$('#id_want_num').hide();
+					$('#id_buyer_div_up').show();
+					$('#id_buyer_div').show();
+					$('#id_buyer_head').attr('src',data.lists[0].buyerInfo[0].userPortrait);
+					$('#id_buyer_user_nick').html(data.lists[0].buyerInfo[0].userNick);
+					$('#id_buyer_user_address').html('&nbsp;'+data.lists[0].buyerInfo[0].userAddress);
+					buyerNick=data.lists[0].buyerInfo[0].userNick;
+					buyerPortrait=data.lists[0].buyerInfo[0].userPortrait;
+					buyerId=data.lists[0].buyerInfo[0].userId;
+				}
+				}
+				$('#id_title').text(data.lists[0].topicTitle);
+				$('#id_price').text(data.lists[0].price);
+				//$('#id_view_num').html(data.lists[0].viewNum+"人浏览");
+				$('#id_level').text(data.lists[0].qualityGrade);
+				$('#id_content').text(data.lists[0].topicContent);
+				$('#id_address').text(data.lists[0].communityName);
+				$('#id_comment_num').text("留言"+data.lists[0].commentNum);
+				$('#id_iwant_to').html(data.lists[0].tradeStatus);
+				lng=data.lists[0].topicInfo.communityLng;
+				lag=data.lists[0].topicInfo.communityLag;
+			},
+			error:function(xhr,type){
+				console.log(xhr);
+			}
+	});
+	$.ajax({
+		type:"GET",
+		url:"https://www.youlinzj.cn/youlin/api1.0/",
+		cache:false,
+		data:{
+			tag:"intotopic",
+			apitype:"comm",
+			user_id:userId,
+			topic_id:topicId,
+			community_id:communityId,
+			access:"9527"
+		},
+		dataType:"json",
+		success:function(data){
+			//alert(data);
+		},
+		error:function(xhr,type){
+			alert(xhr);
+		}
+	});
+});
+$('#id_iwant_to').click(function(){
+	var name=$('#id_iwant_to').html();
+	if(userId==senderId){
+		if(name=="下架商品"){
+			alert("确定下架该商品吗？");
+		}else if(name=="重新发布"){
+			shangjia();
+		}else if(name=="联系买家"){
+			myObj.chatBuyers(buyerNick,buyerPortrait,buyerId);
+		}
+	}else{
+		var temp1="我想要";
+		var temp2="洽谈中";
+		var temp3="联系物主";
+		if(name.trim()==temp1.trim()){
+			 $.confirm("点击“确定”后，优邻将通知卖家尽快和您取得联系，您可以和卖家商量具体的见面时间和地点.", "确定想要此商品吗?", function() {
+				 $.ajax({
+						type:"GET",
+						url:"https://www.youlinzj.cn/youlin/api1.0/",
+						cache:false,
+						data:{
+							apitype:"h5",
+							tag:"favourite",
+							favour_status:1,
+							user_id:userId,
+							topic_id:topicId,
+							sender_id:senderId,
+							user_type:userType,
+							community_id:communityId,
+							access:"9527"
+						},
+						dataType:"json",
+						success:function(data){
+							//alert(data);
+							myObj.chat(userNick,senderPortrait);
+						},
+						error:function(xhr,type){
+							myObj.showToast("网络有问题"+xhr);
+						}
+					});
+		        }, function() {
+		          //取消操作
+		        });
+		}else if(name.trim()==temp2.trim()){
+			$('#mymodal-data2').modal('toggle');
+		}else if(name.trim()==temp3.trim()){
+			myObj.chat(userNick,senderPortrait);
+		}
+	}
+});
+$('#id_ok').click(function(){
+	$.ajax({
+		type:"GET",
+		url:"https://www.youlinzj.cn/youlin/api1.0/",
+		cache:false,
+		data:{
+			apitype:"h5",
+			tag:"favourite",
+			favour_status:1,
+			user_id:userId,
+			topic_id:topicId,
+			sender_id:senderId,
+			user_type:userType,
+			community_id:communityId,
+			access:"9527"
+		},
+		dataType:"json",
+		success:function(data){
+			//alert(data);
+			myObj.chat(userNick,senderPortrait);
+		},
+		error:function(xhr,type){
+			myObj.showToast("网络有问题"+xhr);
+		}
+	});
+});
+$('#id_cancel_change').click(function(){
+	$.ajax({
+		type:"GET",
+		url:"https://www.youlinzj.cn/youlin/api1.0/",
+		cache:false,
+		data:{
+			apitype:"h5",
+			tag:"favourite",
+			favour_status:2,
+			user_id:userId,
+			topic_id:topicId,
+			sender_id:senderId,
+			user_type:userType,
+			community_id:communityId,
+			access:"9527"
+		},
+		dataType:"json",
+		success:function(data){
+			//alert(data);
+			$('#id_iwant_to').html("我想要");
+		},
+		error:function(xhr,type){
+			myObj.showToast("网络有问题"+xhr);
+		}
+	});
+});
+$('#id_chat').click(function(){
+	myObj.chat(userNick,senderPortrait);
+});
+function clickImg(a){
+	if(imgArray.length!=0){
+		myObj.browseImg(a,imgArray);
+	}
+}
+$('#id_comment').click(function(){
+	myObj.comment(topicId);
+});
+
+$('#id_map').click(function(){
+	if(lng!=0 && lag!=0){
+		myObj.baiduMap(lng,lag);
+	}
+});
+$('#id_report').click(function(){
+	myObj.report(topicId,communityId,senderId);
+	aler(senderId);
+});
+function wantListClick(){
+	window.location.href='https://www.youlinzj.cn/yl/web/wantPersonList?topic_id='+topicId+'&user_id='+userId;
+}
+function setCommentNum(a){
+	$('#id_comment_num').text("留言"+a);
+}
+function myBack(type){
+	myObj.mFinish(type);
+}
+function xiajia(){
+	$.ajax({
+		type:"GET",
+		url:"https://www.youlinzj.cn/youlin/api1.0/",
+		cache:false,
+		data:{
+			apitype:"h5",
+			tag:"favourite",
+			favour_status:3,
+			user_id:userId,
+			topic_id:topicId,
+			sender_id:senderId,
+			user_type:userType,
+			community_id:communityId,
+			access:"9527"
+		},
+		dataType:"json",
+		success:function(data){
+			//alert(data);
+			myBack(1);
+		},
+		error:function(xhr,type){
+			myObj.showToast("网络有问题"+xhr);
+		}
+	});
+}
+function shangjia(){
+	$.ajax({
+		type:"GET",
+		url:"https://www.youlinzj.cn/youlin/api1.0/",
+		cache:false,
+		data:{
+			apitype:"h5",
+			tag:"shelves",
+			topic_id:topicId,
+			access:"9527"
+		},
+		dataType:"json",
+		success:function(data){
+			//alert(data);
+			myBack(1);
+		},
+		error:function(xhr,type){
+			myObj.showToast("网络有问题"+xhr);
+		}
+	});
+}
+</script>
+</body>
+</html>

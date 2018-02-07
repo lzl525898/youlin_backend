@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<title>积分规则</title>
+<script type="text/javascript" src="{{STATIC_URL}}web/js/Chart.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+
+</head>
+
+<style type="text/css">
+.title_dv{
+	font-size:14px;
+	font-weight:bold;
+	line-height:50px;
+	margin-left:15px;
+}
+.content_dv{
+	font-size:12px;
+	color:#333333;
+	font-weight:300;
+	line-height:30px;
+	margin-left:35px;
+	margin-right:15px
+}
+.content_detail_dv{
+	font-size:12px;
+	color:#333333;
+	font-weight:300;
+	line-height:30px;
+	margin-left:50px;
+	margin-right:5px
+}
+.integral_dv{
+	font-size:12px;
+	color:#333333;
+	font-weight:300;
+	line-height:30px;
+	margin-left:35px;
+	margin-right:15px
+}
+
+.integral_img{
+	width:20px;
+	height:20px;
+	margin-left:3px;
+	margin-right:4px;
+	margin-bottom:-4px;
+}
+
+</style>
+
+<script src="{{STATIC_URL}}assets/js/bootstrap.min.js"></script>
+
+<body style="background-color:#EFEFEF">
+<div align="center" style="font-size:14px;font-weight:800;line-height:50px;">积分规则</div>
+<div class="main_dv">
+	<div class="one_dv">
+		<div class="title_dv">{{res_data.question_list.first}}</div>
+		<div class="content_dv">{{res_data.content_list.first.detail1}}</div>
+		<div style="font-size:10px;color:#333333;font-weight:300;margin-left:35px;">{{res_data.content_list.first.detail2}}</div>
+		<div align="center" style="margin:auto;margin-top:15px;margin-bottom:15px;">
+			<canvas id="canvas" height="180" width="320"></canvas>
+		</div>
+		{%for i in res_data.info_list%}
+		<div class="integral_dv">{{i.info}}<img class="integral_img" src="{{STATIC_URL}}web/images/ico_integral.png">{{i.integral}}</div>
+		{% endfor %}
+	</div>
+	<div class="two_dv">
+		<div class="title_dv">{{res_data.question_list.second}}</div>
+		<div class="content_dv">{{res_data.content_list.second.title1}}</div>
+		<div class="content_detail_dv">{{res_data.content_list.second.detail1}}</div>
+		<div class="content_dv">{{res_data.content_list.second.title2}}</div>
+		<div class="content_detail_dv">{{res_data.content_list.second.detail2}}</div>
+		<div class="content_dv">{{res_data.content_list.second.title3}}</div>
+		<div class="content_detail_dv">{{res_data.content_list.second.detail3}}</div>
+	</div>
+	<div class="three_dv">
+		<div class="title_dv">{{res_data.question_list.third}}</div>
+		<div class="content_dv">{{res_data.content_list.third}}</div>
+	</div>
+</div>
+</body>
+</html>
+
+<script>
+	var lineChartData = {
+		labels : ["第一天","第二天","第三天","第四天","第五天","第六天","・・・"],
+		datasets : [
+			{
+				fillColor : "rgba(255,186,2,0.5)",
+				strokeColor : "rgba(255,186,2,1)",
+				pointColor : "rgba(255,255,255,1)",
+				pointStrokeColor : "rgba(255,186,2,1)",
+				data : [5,7,10,13,15,15,15]
+			}
+		]
+		
+	}
+	var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
+</script>
+

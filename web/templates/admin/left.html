@@ -1,0 +1,125 @@
+<a class="menu-toggler" id="menu-toggler" href="#">
+        <span class="menu-text"></span>
+      </a>
+      <div class="sidebar" id="sidebar">
+        <script type="text/javascript">
+            try {
+                ace.settings.check('sidebar', 'fixed')
+            } catch (e) {
+            }
+                        
+        </script>
+
+        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+          <!-- 菜单功能色块 -->
+
+          <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+            <span class="btn btn-success"></span>
+
+            <span class="btn btn-info"></span>
+
+            <span class="btn btn-warning"></span>
+
+            <span class="btn btn-danger"></span>
+          </div>
+        </div><!-- #sidebar-shortcuts -->
+
+        <ul id="menulist" class="nav nav-list">
+             <script>
+                            GenrateMenu = {
+                              init:function(){
+                                 var menulist = document.getElementById('menulist');
+                                 var menu = [
+                                          {name:"优邻控制台" ,link:"#",icon:"icon-dashboard",id:'control'}
+                                          ,{name:"审核管理" ,link:"#",icon:"icon-th-large",id:'audit',sunMenu:[{name:"物业管理员",link:"#",icon:"icon-list-alt",id:'property_admin'},{name:"管理员审核" ,link:"#",icon:"icon-desktop",id:'admin_audit'},{name:"地址审核",link:"#",icon:"icon-tag",id:'address_audit'}]}
+                                          ,{name:"新闻管理",link:"#",icon:"icon-edit",id:'newList'}
+                                          ,{name:"APK版本管理",link:"#",icon:"icon-star",id:'apk'}
+                                          ,{name:"物业信息管理",link:"#",icon:"icon-info-sign",id:'property_info'}
+                                          ,{name:"意见统计",link:"#",icon:"icon-list",id:'suggest'}
+
+                                          ,{name:"礼品管理",link:"#",icon:"icon-gift",id:'gift',sunMenu:[{name:"礼品设置",link:"#",icon:"icon-cog",id:'gift'},{name:"兑换管理",link:"#",icon:"icon-th-list",id:'exchange'}]}
+                                          ,{name:"公众号",link:"#",icon:"icon-pushpin",id:'subscription'}
+                                         /* ,{name:"角色管理",link:"#",icon:"icon-user",id:'roles'}  */
+
+                                          ,{name:"优邻生活",link:"#",icon:"icon-home",id:'life'}
+                                          ,{name:"用户管理",link:"#",icon:"icon-user",id:'user1'}
+
+                                            ];
+                                var emptyNode =  document.createDocumentFragment();
+                                for(var i = 0; i < menu.length ;i++){
+                                  var l1_node = this.createElement(menu[i]);
+                                  if(menu[i].sunMenu){
+                                     var l2_ul = document.createElement("ul");
+                                     l2_ul.className = "submenu";
+                                     if( "${menuName}"== menu[i].name )
+                                     {
+                                        l2_ul.style.display="block";
+                                     }
+
+                                     for(var j = 0; j < menu[i].sunMenu.length ;j++){
+                                       var l2_node = this.createElement(menu[i].sunMenu[j]);
+                                       l2_ul.appendChild(l2_node);
+                                     }
+                                     l1_node.appendChild(l2_ul);
+                                  }
+                               emptyNode.appendChild(l1_node);
+                               menulist.appendChild(emptyNode);
+                            }
+                              },
+                              createElement:function(data){
+                                var li = document.createElement("li");
+                                var a = document.createElement("a");
+                                a.id = data.id;
+                                   if (data.id == 'control'){
+                                       li.className = "active";
+                                   }
+                                   if(data.link){
+
+                                     a.href = data.link;
+                                   }else{
+                                      a.href = "#";
+                                   }
+                                   if(data.sunMenu){
+                                     a.className = "dropdown-toggle";
+                                     if( "${menuName}"== data.name )
+                                     {
+                                         li.className = "open";
+                                     }
+                                   }
+                                   if(data.icon){
+                                       var i = document.createElement("i");
+                                       i.className = data.icon;
+                                       a.appendChild(i);
+                                   }
+                                var span = document.createElement("span");
+                                span.className = "menu-text";
+                                span.innerHTML = data.name;
+                                a.appendChild(span);
+                                if(data.sunMenu){
+                                     a.className = "dropdown-toggle";
+                                      var b = document.createElement("b");
+                                      b.className = "arrow icon-angle-down";
+                                      a.appendChild(b);
+                                }
+                                li.appendChild(a);
+                                return li;
+                               }
+                            }
+
+                           GenrateMenu.init();
+
+                </script>
+
+		  </ul><!-- /.nav-list -->
+          <div class="sidebar-collapse" id="sidebar-collapse">
+            <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+          </div>
+
+          <script type="text/javascript">
+              try {
+                  ace.settings.check('sidebar', 'collapsed')
+              } catch (e) {
+              }
+          </script>
+      </div>
+      <!--end menu-->

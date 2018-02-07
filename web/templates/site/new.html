@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+<title>新闻</title>
+
+<link href="../../../static/web/css/main.min.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="../../../static/web/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../../static/web/js/trimpath-template-1.0.38.min.js"></script>
+<script type="text/javascript" src="../../../static/web/js/common.min.js"></script>
+	<script type="text/javascript">
+	function html_decode(){   
+	 
+	  var str= document.getElementById("new_content").value;
+	  document.getElementById("content").innerHTML=str;
+	  return;   
+	} 
+	</script>
+</head>
+
+<body onload="html_decode();">
+<input type="hidden" id="new_content" value="{{ newDict.new_content}}"/>
+<div class="box">
+	<div class="news_t" style="word-break:break-all;work-wrap:break-word;">{{ newDict.new_title }}</div>
+	<div class="news_t1" style="word-break:break-all;work-wrap:break-word;"> <span>发布时间:{{ newDict.new_add_time }}</span>
+
+  
+	</div>
+	<div id="content" class="news" style="word-break:break-all;work-wrap:break-word;"></div>
+	<script type="text/javascript">
+		if (getCookie("fontsize") != null) setFontSize(getCookie("fontsize"));
+		else setFontSize(18);
+
+	</script>
+
+</div>
+</body>
+
+</html>

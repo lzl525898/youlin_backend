@@ -1,0 +1,47 @@
+	<div class="nav navbar-default" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" 
+         data-target="#nav">
+				<span class="sr-only">切换导航</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<img  class="navbar-brand img-responsive"src="../../../static/assets/css/images/logo.png" alt=""></div>
+		<div class="collapse navbar-collapse" id="nav">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="/yl">首页</a>
+				</li>
+				<li >
+					<a href="/yl/yllife">友邻生活</a>
+				</li>
+				<li >
+					<a href="/yl/contact">联系我们</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	 <script type="text/javascript">
+	 $(document).ready(function(){
+		 
+		    links = $(".nav ul li a");
+	        index = 0,//默认第一个菜单项
+	        str = location.href.split('yl/')[1];//取当前URL中 yl/ 后面的文件名
+	        url = str.substring(0,str.length-1);
+		    if(url){//如果有取到, 则进行匹配, 否则默认为首页(即index的值所指向的那个)
+		        for (var i=links.length; i--;) {//遍历menu 的中连接地址
+		        	
+		            if(links[i].href.indexOf(url) !== -1){
+		                index = i;
+		                break;
+		            }
+		        }
+		        if (url.indexOf("?") !== -1){
+		        	index = 1;
+		        }
+		    }
+		    links[index].parentNode.className = 'active';
+	 });
+
+</script>
